@@ -1,18 +1,27 @@
+"use client";
+
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { SnowflakeMark } from "@/components/Icons";
+import { useI18n } from "@/components/LanguageProvider";
 
 export default function NotFound() {
+  const { content } = useI18n();
+
   return (
-    <main className="grid min-h-[70vh] place-items-center px-6 py-24">
-      <div className="max-w-md text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-ice-400">
-          404
+    <main className="flex min-h-screen items-center justify-center px-6 py-24">
+      <div className="enter w-full max-w-lg text-center">
+        <SnowflakeMark className="mx-auto h-14 w-14" />
+        <p className="mt-7 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+          {content.notFound.code}
         </p>
-        <h1 className="heading-display mt-3 text-3xl">This route is off the campus map.</h1>
-        <p className="mt-3 text-sm text-slate-400">
-          The page you requested does not exist. Return to the Tahseen Jaber Cold Storage homepage.
-        </p>
-        <Link href="/" className="btn-primary mt-8 inline-flex">
-          Back to homepage
+        <h1 className="mt-4 text-balance font-display text-[28px] font-bold leading-tight text-ink-900 sm:text-[36px]">
+          {content.notFound.title}
+        </h1>
+        <p className="mt-4 text-[15px] leading-relaxed text-slate-600">{content.notFound.body}</p>
+        <Link href="/" className="btn-primary mt-8">
+          <ArrowLeft className="h-4 w-4 rtl:rotate-180" />
+          {content.notFound.back}
         </Link>
       </div>
     </main>

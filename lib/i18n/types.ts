@@ -1,0 +1,153 @@
+import type { ChainKey, GalleryKey, HeroKey, IndustryKey, PageSlug, ServiceKey, ZoneKey } from "@/lib/media";
+
+export type LocaleCode = "en" | "ur" | "ar";
+
+export type Dict = {
+  brand: { wordmark: string; wordmarkSub: string; legalName: string };
+  meta: { tagline: string; description: string };
+  ui: {
+    skip: string;
+    home: string;
+    menu: string;
+    closeMenu: string;
+    language: string;
+    requestQuote: string;
+    bookVisit: string;
+    call: string;
+    email: string;
+    whatsapp: string;
+    allSections: string;
+    continueHeading: string;
+    accepting: string;
+    open24: string;
+    siteVisits: string;
+    discuss: string;
+    arrangeVisit: string;
+    checkAvailability: string;
+    requestAccess: string;
+    sendEnquiry: string;
+    backHome: string;
+    previous: string;
+    next: string;
+    hello: string;
+    hideHands: string;
+    slideOf: string;
+    live: string;
+    withinRange: string;
+    setPoint: string;
+    band: string;
+    verified: string;
+    current: string;
+    min24: string;
+    max24: string;
+    samples: string;
+    cargo: string;
+    specs: string;
+  };
+  nav: { slug: PageSlug; label: string }[];
+  pages: Record<PageSlug, { label: string; eyebrow: string; title: string; blurb: string }>;
+  hero: {
+    eyebrow: string;
+    headline: [string, string];
+    sub: string;
+    phoneLabel: string;
+    slides: Record<HeroKey, { label: string; temp: string; detail: string; alt: string }>;
+  };
+  compliance: { heading: string; items: { name: string; detail: string }[] };
+  gallery: { eyebrow: string; title: string; items: Record<GalleryKey, { caption: string; detail: string; alt: string }> };
+  chain: { eyebrow: string; title: string; stages: string; stagesLabel: { key: ChainKey; title: string; body: string; temp: string; duration: string }[] };
+  services: { eyebrow: string; title: string; items: { key: ServiceKey; title: string; body: string; meta: string }[] };
+  zones: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    scaleTitle: string;
+    scaleHint: string;
+    cargoHeading: string;
+    items: { key: ZoneKey; label: string; temp: string; body: string; uses: string[]; specs: { label: string; value: string }[] }[];
+  };
+  facility: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    stats: { value: string; label: string; detail: string }[];
+    capabilities: { title: string; stat: string }[];
+    captions: { dockTitle: string; dockDetail: string; corridor: string; plant: string; docks: string };
+    images: { dock: string; corridor: string; plant: string };
+  };
+  monitoring: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    chartTitle: string;
+    chartHint: string;
+    rooms: { name: string; regime: string }[];
+    eventsTitle: string;
+    streaming: string;
+    events: { time: string; room: string; event: string; detail: string }[];
+    logNote: string;
+    accessEyebrow: string;
+    accessTitle: string;
+    accessBody: string;
+    accessCta: string;
+    readout: string;
+  };
+  industries: { heading: string; items: Record<IndustryKey, string> };
+  testimonials: { eyebrow: string; title: string; body: string; items: { quote: string; name: string; role: string }[] };
+  faqs: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    helpTitle: string;
+    helpBody: string;
+    items: { q: string; a: string }[];
+  };
+  contact: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    channels: { label: string; value: string }[];
+    form: {
+      title: string;
+      required: string;
+      reply: string;
+      name: string;
+      company: string;
+      email: string;
+      phone: string;
+      cargo: string;
+      regime: string;
+      volume: string;
+      message: string;
+      submit: string;
+      note: string;
+      placeholders: { name: string; company: string; email: string; phone: string; volume: string; message: string };
+      cargoOptions: string[];
+      regimeOptions: string[];
+    };
+    success: { title: string; body: string; again: string };
+  };
+  footer: {
+    blurb: string;
+    columns: { heading: string; links: { label: string; href: string }[] }[];
+    updatesTitle: string;
+    updatesBody: string;
+    subscribe: string;
+    subscribed: string;
+    placeholder: string;
+    rights: string;
+    legal: { label: string; href: string }[];
+    since: string;
+  };
+  widget: { title: string; body: string; whatsapp: string; call: string };
+  notFound: { code: string; title: string; body: string; back: string };
+  error: { title: string; body: string; retry: string };
+};
+
+export type LocaleMeta = {
+  code: LocaleCode;
+  label: string;
+  native: string;
+  dir: "ltr" | "rtl";
+  htmlLang: string;
+};

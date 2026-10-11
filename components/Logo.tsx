@@ -1,56 +1,101 @@
-export function Logo({ compact = false, markId = "iceGrad" }: { compact?: boolean; markId?: string }) {
-  const gid = markId;
+import type { SVGProps } from "react";
+import { site } from "@/lib/site";
+
+/**
+ * Brand mark: warehouse slats under a mountain ridge — navy outline, rust fill.
+ * Rebuilt as vector art so it stays sharp at every size.
+ */
+export function BrandMark({ className = "", ...props }: SVGProps<SVGSVGElement>) {
   return (
-    <a href="#top" className="group flex items-center gap-3" aria-label="Tahseen Jaber Cold Storage home">
-      <svg
-        viewBox="0 0 64 64"
-        className="h-10 w-10 shrink-0 drop-shadow-[0_0_12px_rgba(34,211,238,0.45)]"
-        aria-hidden
-      >
-        <defs>
-          <linearGradient id={gid} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#e0f2fe" />
-            <stop offset="55%" stopColor="#67e8f9" />
-            <stop offset="100%" stopColor="#22d3ee" />
-          </linearGradient>
-        </defs>
-        <polygon
-          points="32,4 56,18 56,46 32,60 8,46 8,18"
-          fill="none"
-          stroke={`url(#${gid})`}
-          strokeWidth="1.6"
-        />
-        <polygon
-          points="32,12 48,21 48,43 32,52 16,43 16,21"
-          fill="none"
-          stroke={`url(#${gid})`}
-          strokeWidth="1"
-          opacity="0.55"
-        />
-        <path
-          d="M24 38 V26 h6 a6 6 0 0 1 0 12 H24 Z"
-          fill="none"
-          stroke={`url(#${gid})`}
-          strokeWidth="2.2"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M32 4 L32 12 M56 18 L48 21 M56 46 L48 43 M32 60 L32 52 M8 46 L16 43 M8 18 L16 21"
-          stroke={`url(#${gid})`}
-          strokeWidth="1"
-          opacity="0.7"
-        />
-      </svg>
-      {!compact && (
-        <span className="flex flex-col leading-tight">
-          <span className="font-display text-[13px] font-semibold tracking-[0.18em] text-white group-hover:text-ice-200 transition">
-            TAHSEEN JABER
-          </span>
-          <span className="text-[10px] font-medium tracking-[0.32em] text-ice-400">
-            COLD STORAGE
-          </span>
+    <svg viewBox="0 0 132 80" fill="none" className={className} {...props}>
+      <defs>
+        <linearGradient id="slatFill" x1="10" y1="20" x2="52" y2="60" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#C4683F" />
+          <stop offset="55%" stopColor="#A8481E" />
+          <stop offset="100%" stopColor="#8A3413" />
+        </linearGradient>
+        <linearGradient id="peakFill" x1="50" y1="18" x2="112" y2="52" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#C4683F" />
+          <stop offset="60%" stopColor="#A8481E" />
+          <stop offset="100%" stopColor="#8A3413" />
+        </linearGradient>
+      </defs>
+
+      {/* warehouse: vertical slats, roof edge stepping down to the right */}
+      <g fill="url(#slatFill)">
+        <rect x="8" y="20" width="5" height="40" />
+        <rect x="15" y="16" width="5" height="44" />
+        <rect x="22" y="13" width="5" height="47" />
+        <rect x="29" y="15" width="5" height="45" />
+        <rect x="36" y="19" width="5" height="41" />
+        <rect x="43" y="24" width="5" height="36" />
+      </g>
+
+      {/* ground line + left column foot */}
+      <g fill="#A8481E">
+        <rect x="2" y="62" width="54" height="4" rx="1" />
+        <rect x="8" y="52" width="5" height="10" />
+      </g>
+
+      {/* mountain ridge, navy outline */}
+      <path
+        d="M40 60 L72 24 L88 40 L104 22 L128 52"
+        stroke="#1B3A63"
+        strokeWidth="4.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* inner ridge line, thinner, warmer */}
+      <path
+        d="M62 60 L84 34 L96 46 L110 32"
+        stroke="#A8481E"
+        strokeWidth="2.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* filled peaks sitting inside the ridge */}
+      <path d="M56 60 L78 34 L100 60 Z" fill="url(#peakFill)" />
+      <path d="M92 60 L110 40 L126 60 Z" fill="url(#peakFill)" opacity="0.95" />
+    </svg>
+  );
+}
+
+type LogoProps = {
+  className?: string;
+  /** wordmark colour treatment */
+  tone?: "dark" | "light";
+  /** mark only on phones, full lockup from `sm` up */
+  compact?: boolean;
+};
+
+/**
+ * Full brand lockup: mark + "TAHSEEN JABER" wordmark with the routed
+ * "COLD STORAGE" line beneath, as in the supplied logo.
+ */
+export function Logo({ className = "", tone = "dark", compact = false }: LogoProps) {
+  const navy = tone === "dark" ? "text-ink-900" : "text-white";
+  const rust = tone === "dark" ? "text-ember-600" : "text-ember-400";
+
+  return (
+    <span className={`flex items-center gap-2.5 ${className}`}>
+      <BrandMark className="h-full w-auto shrink-0" />
+      <span className={`${compact ? "hidden sm:flex" : "flex"} flex-col justify-center leading-none`}>
+        <span
+          className={`font-display text-[13px] font-extrabold uppercase leading-none tracking-[0.02em] sm:text-[15.5px] ${navy}`}
+        >
+          {site.wordmark}
         </span>
-      )}
-    </a>
+        <span className="mt-[5px] flex items-center gap-1.5">
+          <span className={`h-px w-2.5 ${tone === "dark" ? "bg-ember-500" : "bg-ember-400"}`} />
+          <span
+            className={`text-[8px] font-semibold uppercase leading-none tracking-[0.3em] sm:text-[8.5px] ${rust}`}
+          >
+            {site.wordmarkSub}
+          </span>
+          <span className={`h-px w-2.5 ${tone === "dark" ? "bg-ember-500" : "bg-ember-400"}`} />
+        </span>
+      </span>
+    </span>
   );
 }

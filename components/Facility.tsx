@@ -1,141 +1,113 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import { MapPin, Phone, Mail, Clock, Navigation } from "lucide-react";
-import { COMPANY } from "@/lib/constants";
-
-const PINS = [
-  {
-    id: "hq",
-    label: "Headquarters Campus",
-    x: "62%",
-    y: "46%",
-    detail: "Uuayrij Industrial Area — 24 chambers, blast tunnels, GDP suite.",
-  },
-  {
-    id: "docks",
-    label: "Reefer Dock Complex",
-    x: "54%",
-    y: "58%",
-    detail: "12 temperature-segregated docks · calibrated trailer checks.",
-  },
-  {
-    id: "gate",
-    label: "Secure Gatehouse",
-    x: "44%",
-    y: "38%",
-    detail: "Biometric mantrap · 24/7 security command.",
-  },
-];
+import { PanelSmoke, SmokeTexture } from "@/components/Smoke";
+import { SectionHeading } from "@/components/SectionHeading";
+import { useI18n } from "@/components/LanguageProvider";
 
 export function Facility() {
-  const [active, setActive] = useState(PINS[0].id);
-  const pin = PINS.find((p) => p.id === active) ?? PINS[0];
+  const { content } = useI18n();
+  const { facility } = content;
 
   return (
-    <section id="facilities" className="relative py-24 sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl">
-          <p className="section-kicker">Global Facility Map</p>
-          <h2 className="heading-display mt-4 text-3xl sm:text-4xl lg:text-5xl">
-            Uuayrij Industrial Area, Baghdad.
-          </h2>
-          <p className="mt-4 text-slate-400">
-            A purpose-built cold chain campus positioned on Baghdad&apos;s southern industrial corridor — minutes from national highway access, engineered for 24/7 inbound and export flows.
-          </p>
+    <section id="facility" className="section border-y border-slate-200 bg-slate-50/70">
+      <div className="shell">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-16">
+          <div>
+            <SectionHeading
+              eyebrow={facility.eyebrow}
+              title={facility.title}
+              body={facility.body}
+            />
+
+            <div className="mt-9 border-t border-slate-200">
+              {facility.capabilities.map((item, i) => (
+                <div
+                  key={item.title}
+                  data-reveal
+                  style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}
+                  className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-slate-200 py-4"
+                >
+                  <p className="font-display text-[15px] font-semibold text-ink-900">
+                    {item.title}
+                  </p>
+                  <p className="numeric text-[12.5px] font-semibold uppercase tracking-[0.1em] text-ember-700">
+                    {item.stat}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2" data-reveal="right">
+            <div className="relative overflow-hidden rounded-xl border border-slate-200 shadow-card sm:col-span-2">
+              <div className="relative aspect-[16/9] w-full">
+                <Image
+                  src="/images/loading-dock.jpg"
+                  alt={facility.images.dock}
+                  fill
+                  sizes="(min-width: 1024px) 52vw, 100vw"
+                  className="object-cover"
+                />
+                <SmokeTexture opacity={0.34} seed={5} />
+                <PanelSmoke variant="floor" intensity={0.8} className="bottom-0 top-auto h-1/2" />
+                <span className="absolute start-4 top-4 rounded-md bg-white/92 px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-800 backdrop-blur">
+                  {facility.captions.docks}
+                </span>
+              </div>
+              <p className="border-t border-slate-100 px-5 py-4 text-[13.5px] font-semibold text-ink-900">
+                {facility.captions.dockTitle}
+              </p>
+            </div>
+
+            <div className="relative overflow-hidden rounded-xl border border-slate-200 shadow-card">
+              <div className="relative aspect-[4/3] w-full">
+                <Image
+                  src="/images/cold-corridor.jpg"
+                  alt={facility.images.corridor}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, 100vw"
+                  className="object-cover"
+                />
+                <SmokeTexture opacity={0.38} seed={8} />
+              </div>
+              <p className="px-4 py-3.5 text-[12.5px] font-medium text-slate-500">
+                {facility.captions.corridor}
+              </p>
+            </div>
+
+            <div className="relative overflow-hidden rounded-xl border border-slate-200 shadow-card">
+              <div className="relative aspect-[4/3] w-full">
+                <Image
+                  src="/images/technician-panel.jpg"
+                  alt={facility.images.plant}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <p className="px-4 py-3.5 text-[12.5px] font-medium text-slate-500">
+                {facility.captions.plant}
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-12">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 lg:col-span-7">
-            <Image
-              src="/images/map-baghdad.jpg"
-              alt="Stylized operational map of Baghdad highlighting the Uuayrij industrial campus"
-              width={1600}
-              height={1000}
-              className="h-[420px] w-full object-cover sm:h-[520px]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-navy-950/20" />
-            {PINS.map((p) => (
-              <button
-                key={p.id}
-                type="button"
-                onClick={() => setActive(p.id)}
-                style={{ left: p.x, top: p.y }}
-                className="absolute -translate-x-1/2 -translate-y-1/2"
-                aria-label={p.label}
-                aria-pressed={active === p.id}
-              >
-                <span className="relative flex h-5 w-5 items-center justify-center">
-                  {active === p.id && (
-                    <span className="absolute h-10 w-10 rounded-full border border-ice-400/50 animate-pulseRing" />
-                  )}
-                  <span
-                    className={`h-3.5 w-3.5 rounded-full border-2 border-navy-950 ${
-                      active === p.id ? "bg-ice-300 shadow-glow" : "bg-ice-500"
-                    }`}
-                  />
-                </span>
-              </button>
-            ))}
-            <div className="absolute bottom-4 left-4 right-4 glass rounded-2xl p-4">
-              <p className="text-xs uppercase tracking-[0.2em] text-ice-400">
-                Selected pin
+        <div className="mt-14 grid grid-cols-2 gap-y-8 rounded-xl border border-slate-200 bg-white px-5 py-7 shadow-card sm:px-6 sm:py-8 lg:grid-cols-4">
+          {facility.stats.map((stat, i) => (
+            <div
+              key={stat.label}
+              data-reveal
+              style={{ "--reveal-delay": `${i * 60}ms` } as React.CSSProperties}
+              className={i > 0 ? "lg:border-s lg:border-slate-200 lg:ps-8" : ""}
+            >
+              <p className="numeric font-display text-[22px] font-bold leading-none tracking-tight text-ink-900 sm:text-[24px]">
+                {stat.value}
               </p>
-              <p className="mt-1 font-display text-lg text-white">{pin.label}</p>
-              <p className="mt-1 text-sm text-slate-300">{pin.detail}</p>
+              <p className="mt-2 text-[13px] font-semibold text-ink-800">{stat.label}</p>
+              <p className="mt-1 text-[12px] text-slate-400">{stat.detail}</p>
             </div>
-          </div>
-
-          <div className="flex flex-col gap-4 lg:col-span-5">
-            <div className="relative overflow-hidden rounded-3xl border border-white/10">
-              <Image
-                src="/images/facility-exterior.jpg"
-                alt="Tahseen Jaber Cold Storage campus exterior at dusk"
-                width={1200}
-                height={800}
-                className="h-48 w-full object-cover"
-              />
-            </div>
-            <div className="glass-strong flex-1 rounded-3xl p-6">
-              <h3 className="font-display text-xl text-white">Campus coordinates</h3>
-              <ul className="mt-5 space-y-4 text-sm text-slate-300">
-                <li className="flex gap-3">
-                  <MapPin className="mt-0.5 h-4 w-4 text-ice-400" />
-                  {COMPANY.address}
-                </li>
-                <li className="flex gap-3">
-                  <Phone className="mt-0.5 h-4 w-4 text-ice-400" />
-                  <a href={`tel:${COMPANY.phoneTel}`} className="hover:text-ice-200">
-                    {COMPANY.phoneDisplay}
-                  </a>
-                  <span className="text-slate-600">·</span>
-                  <a href={`tel:${COMPANY.landlineTel}`} className="hover:text-ice-200">
-                    {COMPANY.landlineDisplay}
-                  </a>
-                </li>
-                <li className="flex gap-3">
-                  <Mail className="mt-0.5 h-4 w-4 text-ice-400" />
-                  <a href={`mailto:${COMPANY.email}`} className="hover:text-ice-200">
-                    {COMPANY.email}
-                  </a>
-                </li>
-                <li className="flex gap-3">
-                  <Clock className="mt-0.5 h-4 w-4 text-ice-400" />
-                  {COMPANY.hours}
-                </li>
-              </ul>
-              <a
-                href="https://maps.google.com/?q=Uwairij+Industrial+Area+Baghdad"
-                target="_blank"
-                rel="noreferrer"
-                className="btn-ghost mt-6 w-full"
-              >
-                <Navigation className="h-4 w-4" />
-                Open in maps
-              </a>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

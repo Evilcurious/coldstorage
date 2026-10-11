@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 130" width="600" height="130" role="img" aria-label="Tahseen Jaber Cold Storage">
+  <defs>
+    <linearGradient id="slat" x1="10" y1="20" x2="52" y2="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#C4683F"/>
+      <stop offset="0.55" stop-color="#A8481E"/>
+      <stop offset="1" stop-color="#8A3413"/>
+    </linearGradient>
+    <linearGradient id="peak" x1="50" y1="20" x2="112" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#C4683F"/>
+      <stop offset="0.6" stop-color="#A8481E"/>
+      <stop offset="1" stop-color="#8A3413"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="130" fill="#ffffff"/>
+
+  <!-- mark -->
+  <g transform="translate(10 24)">
+    <!-- filled peaks (behind the ridge lines) -->
+    <path d="M44 62 L68 28 L92 62 Z" fill="url(#peak)"/>
+    <path d="M84 62 L104 36 L124 62 Z" fill="url(#peak)"/>
+
+    <!-- warehouse slats -->
+    <g fill="url(#slat)">
+      <rect x="8" y="22" width="5" height="40"/>
+      <rect x="15" y="18" width="5" height="44"/>
+      <rect x="22" y="14" width="5" height="48"/>
+      <rect x="29" y="16" width="5" height="46"/>
+      <rect x="36" y="20" width="5" height="42"/>
+      <rect x="43" y="26" width="5" height="36"/>
+    </g>
+
+    <!-- ground line and left column foot -->
+    <g fill="#A8481E">
+      <rect x="2" y="62" width="52" height="4" rx="1"/>
+      <rect x="8" y="52" width="5" height="10"/>
+    </g>
+
+    <!-- inner ridge, warm -->
+    <path d="M52 60 L74 36 L86 48 L100 34" stroke="#A8481E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- navy ridge outline, on top -->
+    <path d="M38 60 L66 26 L84 42 L102 22 L128 54" stroke="#1B3A63" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- wordmark -->
+  <text x="170" y="70" font-family="Georgia, 'Times New Roman', 'Bookman Old Style', serif" font-size="40" font-weight="700" fill="#1B3A63" letter-spacing="0.5">TAHSEEN JABER</text>
+
+  <!-- routed sub-line -->
+  <g fill="#A8481E">
+    <rect x="170" y="89" width="48" height="2.6"/>
+    <text x="232" y="96" font-family="Georgia, 'Times New Roman', 'Bookman Old Style', serif" font-size="15.5" font-weight="600" letter-spacing="8">COLD STORAGE</text>
+    <rect x="452" y="89" width="48" height="2.6"/>
+  </g>
+</svg>
