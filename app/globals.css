@@ -436,8 +436,17 @@
   color: #A8481E;
 }
 
+.on-light :is(h1, h2, h3, h4):hover :is(span, strong, em) {
+  color: #A8481E;
+}
+
 /* declared after .on-light so nested dark surfaces win */
 .on-dark :is(h1, h2, h3, h4, p, dt, dd, blockquote, li):hover {
+  color: #C4683F;
+}
+
+/* a coloured word inside a heading (the hero's second line) follows the hover too */
+.on-dark :is(h1, h2, h3, h4):hover :is(span, strong, em) {
   color: #C4683F;
 }
 

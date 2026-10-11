@@ -65,20 +65,22 @@ type LogoProps = {
   className?: string;
   /** wordmark colour treatment */
   tone?: "dark" | "light";
+  /** mark only on phones, full lockup from `sm` up */
+  compact?: boolean;
 };
 
 /**
  * Full brand lockup: mark + "TAHSEEN JABER" wordmark with the routed
  * "COLD STORAGE" line beneath, as in the supplied logo.
  */
-export function Logo({ className = "", tone = "dark" }: LogoProps) {
+export function Logo({ className = "", tone = "dark", compact = false }: LogoProps) {
   const navy = tone === "dark" ? "text-ink-900" : "text-white";
   const rust = tone === "dark" ? "text-ember-600" : "text-ember-400";
 
   return (
     <span className={`flex items-center gap-2.5 ${className}`}>
       <BrandMark className="h-full w-auto shrink-0" />
-      <span className="flex flex-col justify-center leading-none">
+      <span className={`${compact ? "hidden sm:flex" : "flex"} flex-col justify-center leading-none`}>
         <span
           className={`font-display text-[13px] font-extrabold uppercase leading-none tracking-[0.02em] sm:text-[15.5px] ${navy}`}
         >

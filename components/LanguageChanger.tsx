@@ -77,12 +77,12 @@ export function LanguageChanger({ variant = "bar", className = "" }: Props) {
         aria-label={content.ui.language}
         className="inline-flex h-8 items-center gap-1.5 rounded-full border border-white/12 bg-white/5 px-2 text-[11px] font-medium text-ice-200 transition hover:border-ember-500/70 hover:bg-ember-500/10 hover:text-ember-300 sm:h-auto sm:px-2.5 sm:py-1"
       >
-        <svg viewBox="0 0 24 24" aria-hidden="true" className="h-3.5 w-3.5">
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="hidden h-3.5 w-3.5 sm:block">
           <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.7" />
           <path d="M3 12h18M12 3c2.6 3 2.6 15 0 18-2.6-3-2.6-15 0-18Z" fill="none" stroke="currentColor" strokeWidth="1.7" />
         </svg>
-        <span className="hidden sm:inline">{meta.native}</span>
-        <span className="sm:hidden uppercase">{locale}</span>
+        <span className="hidden xl:inline">{meta.native}</span>
+        <span className="uppercase xl:hidden">{locale}</span>
         <svg viewBox="0 0 24 24" aria-hidden="true" className={`hidden h-3 w-3 transition sm:block ${open ? "rotate-180" : ""}`}>
           <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
         </svg>

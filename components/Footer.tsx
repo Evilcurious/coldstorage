@@ -18,9 +18,7 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.1fr_2fr] lg:gap-12">
           <div>
             <Link href="/" aria-label={`${site.name} — ${content.ui.home}`} className="inline-flex">
-              <span className="flex h-12 items-center rounded-lg bg-white/95 pl-2 pr-3.5 shadow-card">
-                <Logo className="h-8" />
-              </span>
+              <Logo className="h-11" tone="light" />
             </Link>
 
             <p className="mt-5 max-w-sm text-[13.5px] leading-relaxed text-slate-400">
@@ -112,6 +110,13 @@ export function Footer() {
               <div className="mt-4">
                 <ContactIconRow />
               </div>
+              <p className="mt-4 inline-flex items-center gap-2 text-[12.5px] text-slate-400">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-pulse-ring absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                </span>
+                {content.ui.accepting}
+              </p>
             </div>
           </div>
         </div>
