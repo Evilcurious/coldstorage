@@ -46,7 +46,14 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3 text-[13.5px] text-slate-300">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-ice-400" />
-                {content.hero.eyebrow}
+                <a
+                  href={site.mapHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition hover:text-ember-300"
+                >
+                  {content.contact.channels[3]?.value ?? site.location}
+                </a>
               </li>
             </ul>
 

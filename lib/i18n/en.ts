@@ -385,7 +385,7 @@ export const en: Dict = {
       { label: "Intake line · 24 hours", value: "+964 770 450 2200" },
       { label: "Commercial desk", value: "commercial@tahseenjaber.com" },
       { label: "WhatsApp", value: "+964 776 867 7775" },
-      { label: "Facility", value: "Uuayrij Industrial Area, Baghdad" },
+      { label: "Facility", value: "Tahseen Jaber Cold Storage, Uuayrij Industrial Area, Baghdad, Iraq" },
     ],
     form: {
       title: "Storage enquiry",

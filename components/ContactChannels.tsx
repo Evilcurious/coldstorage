@@ -40,9 +40,9 @@ export function ContactIconRow({
           <a
             key={channel.id}
             href={channel.href}
-            target={channel.id === "whatsapp" ? "_blank" : undefined}
-            rel={channel.id === "whatsapp" ? "noopener noreferrer" : undefined}
-            aria-label={label}
+            target={channel.external ? "_blank" : undefined}
+            rel={channel.external ? "noopener noreferrer" : undefined}
+            aria-label={`${label} · ${channel.value}`}
             title={`${label} · ${channel.value}`}
             className={`grid h-10 w-10 place-items-center rounded-lg border transition ${shell}`}
           >
@@ -51,7 +51,7 @@ export function ContactIconRow({
         ) : (
           <span
             key={channel.id}
-            aria-label={label}
+            aria-label={`${label} · ${channel.value}`}
             title={`${label} · ${channel.value}`}
             className={`grid h-10 w-10 place-items-center rounded-lg border ${shell}`}
           >

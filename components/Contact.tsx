@@ -40,7 +40,7 @@ export function Contact() {
     { href: site.phoneHref, value: site.phone, external: false },
     { href: `mailto:${site.email}`, value: site.email, external: false },
     { href: site.whatsapp, value: site.whatsappNumber, external: true },
-    { href: undefined, value: site.location, external: false },
+    { href: site.mapHref, value: site.location, external: true },
   ];
 
   return (
@@ -76,7 +76,7 @@ export function Contact() {
                         {channel.label}
                       </dt>
                       <dd className="numeric mt-1.5 break-words text-[14px] font-semibold text-white sm:text-[14.5px]">
-                        {meta?.value ?? channel.value}
+                        {channel.value || meta?.value}
                       </dd>
                     </span>
                   </>

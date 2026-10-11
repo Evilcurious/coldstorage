@@ -74,10 +74,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     openingHours: "Mo-Su 00:00-23:59",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Uuayrij Industrial Area",
+      streetAddress: "Tahseen Jaber Cold Storage, Uuayrij Industrial Area",
       addressLocality: "Baghdad",
+      addressRegion: "Baghdad",
       addressCountry: "IQ",
     },
+    hasMap: site.mapHref,
     amenityFeature: [
       { "@type": "LocationFeatureSpecification", name: "Blast freezing", value: "-25 °C" },
       {

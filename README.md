@@ -22,7 +22,7 @@ Every section has its own page, and the home page presents them as photographs o
 
 | Route | Contents |
 | --- | --- |
-| `/` | Full-bleed hero slideshow, then a six-tile image mosaic and a photograph ribbon — no body copy, labels appear on hover |
+| `/` | Full-bleed hero slideshow, then a six-tile image mosaic — no body copy, labels appear on hover |
 | `/facility` | Facility gallery mosaic, infrastructure, plant metrics |
 | `/capabilities` | Six photographic service cards, four-stage cold chain process |
 | `/regimes` | Interactive −25 °C / 0 °C / 2–8 °C regime selector with spec tables, service list |
@@ -128,14 +128,14 @@ filter is rendered at low resolution and stretched.
 ```
 app/
   layout.tsx      metadata, JSON-LD, locale boot script, header, footer, smoke, reveal runtime
-  page.tsx        home: hero + tile mosaic + photograph ribbon
+  page.tsx        home: hero + tile mosaic
   facility/ capabilities/ regimes/ monitoring/ contact/   section pages
   globals.css     design tokens, component classes (.card, .btn, .field, .label…),
                   text-hover rules, tile states, viewport-height boxes, keyframes
   icon.svg        favicon
 components/
   SiteHeader, Footer, Hero, PageHero, PageOutro, SectionTile, ExploreGrid,
-  ImageRibbon, LiveConditions, Compliance, Chain, Services, Zones, Facility,
+  LiveConditions, Compliance, Chain, Services, Zones, Facility,
   Monitoring, Industries, Testimonials, Faq, Contact, ContactChannels, Gallery,
   SectionHeading, Smoke, SubscribeForm, RevealOnScroll, Icons, WhatsAppWidget,
   LanguageProvider, LanguageChanger, SkipLink

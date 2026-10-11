@@ -9,7 +9,11 @@ export const site = {
   wordmark: "Tahseen Jaber",
   wordmarkSub: "Cold Storage",
   shortName: "Tahseen Jaber",
-  location: "Uuayrij Industrial Area, Baghdad",
+  /** full postal address — shown under the location (map pin) icon */
+  location: "Tahseen Jaber Cold Storage, Uuayrij Industrial Area, Baghdad, Iraq",
+  /** Google Maps link for the address above */
+  mapHref:
+    "https://www.google.com/maps/search/?api=1&query=Tahseen+Jaber+Cold+Storage%2C+Uuayrij+Industrial+Area%2C+Baghdad%2C+Iraq",
   phone: "+964 770 450 2200",
   phoneHref: "tel:+9647704502200",
   whatsapp:
@@ -39,8 +43,8 @@ export const socials = [
 
 /** Contact channels rendered as icon rows on the contact page. */
 export const contactChannels = [
-  { id: "phone" as const, value: site.phone, href: site.phoneHref },
-  { id: "email" as const, value: site.email, href: `mailto:${site.email}` },
-  { id: "whatsapp" as const, value: site.whatsappNumber, href: site.whatsapp },
-  { id: "location" as const, value: site.location, href: undefined },
+  { id: "phone" as const, value: site.phone, href: site.phoneHref, external: false },
+  { id: "email" as const, value: site.email, href: `mailto:${site.email}`, external: false },
+  { id: "whatsapp" as const, value: site.whatsappNumber, href: site.whatsapp, external: true },
+  { id: "location" as const, value: site.location, href: site.mapHref, external: true },
 ];
