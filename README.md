@@ -3,9 +3,9 @@
 Marketing site for a temperature-controlled warehousing and cold-chain logistics facility,
 built with Next.js 15, React 19, Tailwind CSS and lucide icons.
 
-The visual language is deliberately corporate: white and light-blue surfaces, slate
-neutrals, a single restrained accent blue, tight grid alignment and typography-led
-layout. Motion is used only where it communicates something — live temperature data,
+The visual language is deliberately corporate: white and cool navy-tinted surfaces, slate
+neutrals, a rust accent taken from the logo, tight grid alignment and serif-led
+display typography. Motion is used only where it communicates something — live temperature data,
 process state, or section entry.
 
 ## Run it
@@ -27,11 +27,11 @@ Every section has its own page, and the home page presents them as photographs o
 | `/capabilities` | Six photographic service cards, four-stage cold chain process |
 | `/regimes` | Interactive −25 °C / 0 °C / 2–8 °C regime selector with spec tables, service list |
 | `/monitoring` | 24-hour temperature trace, live readout, event log, certifications, FAQ |
-| `/commercial` | Per-pallet / per-tonne pricing, cost estimator, sectors, references |
-| `/contact` | Commercial channels, structured enquiry form, FAQ |
+| `/contact` | Contact channels with icons, structured enquiry form, sectors, FAQ |
 
-`lib/pages.ts` is the registry that drives the navigation, the home tiles, the page
-headers and the "continue through the facility" cross-links on every page.
+`lib/media.ts` holds the locale-independent registry (page slugs, photographs, structural
+keys) and `lib/i18n` holds the words, so navigation, tiles, page headers and the "continue
+through the facility" cross-links all follow the selected language.
 
 ## Brand
 
@@ -48,22 +48,35 @@ The palette is sampled from the logo: `ink` is the wordmark navy (`#1B3A63`) and
 the slat/ridge rust (`#A8481E`). Section labels carry a rust rule, page-header eyebrows a
 rust accent and the header scroll bar a navy-to-rust gradient.
 
+## Languages
+
+The site speaks **English (LTR)**, **Urdu** and **Arabic** (both RTL).
+
+- `lib/i18n/types.ts` types the dictionary; `en.ts`, `ur.ts`, `ar.ts` implement it, so a
+  missing translation is a type error rather than an English string on an Arabic page.
+- `components/LanguageProvider.tsx` sets `<html lang>` / `<html dir>` and remembers the
+  choice in `localStorage`; a pre-paint script in `app/layout.tsx` applies the stored
+  locale before the first frame so RTL never flashes.
+- `components/LanguageChanger.tsx` appears in the header utility bar, in the mobile
+  header bar and as a three-button block in the mobile drawer.
+- Brand names, phone numbers, e-mail addresses and figures stay Latin in every locale;
+  only prose, labels and units are translated.
+
 ## Text behaviour
 
-Text reacts to the pointer. On dark surfaces white type lifts to light blue
-(`#94C9EC`); on light surfaces ink type lifts to the accent blue (`#2A89C8`). The
-rules live in `app/globals.css` and are scoped by `.on-dark` / `.on-light` wrappers,
-so a dark band nested inside a light page still behaves correctly.
+Text reacts to the pointer, always to the brand **rust**: `#A8481E` on light surfaces and
+`#C4683F` on dark ones. The rules live in `app/globals.css` and are scoped by `.on-dark` /
+`.on-light` wrappers, so a dark band nested inside a light page still behaves correctly.
 
-Photographic tiles carry no text at rest — pointing at one fades its label in, in
-light blue, over a gradient scrim.
+Photographic tiles carry no text at rest — pointing at one fades its label in, in rust,
+over a gradient scrim.
 
 ## Hero slideshow
 
 The hero is a full-viewport image slideshow rather than a text block:
 
 - **Five slides** (`hero-facility`, `cold-corridor`, `forklift-cold`, `blast-freezer`,
-  `loading-dock`), auto-advancing every **7 seconds**, with minimal text: a short label, the
+  `loading-dock`), auto-advancing every **4 seconds**, with minimal text: a short label, the
   regime temperature and one detail line.
 - **Alternating travel direction** — slides travel right-to-left, then left-to-right, on
   every automatic change, with a slow Ken Burns drift inside each frame.
@@ -114,28 +127,30 @@ filter is rendered at low resolution and stretched.
 
 ```
 app/
-  layout.tsx      metadata, JSON-LD, header, footer, smoke, reveal runtime
+  layout.tsx      metadata, JSON-LD, locale boot script, header, footer, smoke, reveal runtime
   page.tsx        home: hero + tile mosaic + photograph ribbon
-  facility/ capabilities/ regimes/ monitoring/ commercial/ contact/   section pages
+  facility/ capabilities/ regimes/ monitoring/ contact/   section pages
   globals.css     design tokens, component classes (.card, .btn, .field, .label…),
-                  text-hover rules, tile states, keyframes
+                  text-hover rules, tile states, viewport-height boxes, keyframes
   icon.svg        favicon
 components/
   SiteHeader, Footer, Hero, PageHero, PageOutro, SectionTile, ExploreGrid,
   ImageRibbon, LiveConditions, Compliance, Chain, Services, Zones, Facility,
-  Monitoring, Pricing, Industries, Testimonials, Faq, Contact, Gallery,
-  SectionHeading, Smoke, Snowfall, CountUp, SubscribeForm, RevealOnScroll,
-  Icons, WhatsAppWidget
+  Monitoring, Industries, Testimonials, Faq, Contact, ContactChannels, Gallery,
+  SectionHeading, Smoke, SubscribeForm, RevealOnScroll, Icons, WhatsAppWidget,
+  LanguageProvider, LanguageChanger, SkipLink
 lib/
-  site.ts         all copy, contact details, regimes, plans and FAQs
-  pages.ts        page registry driving navigation, tiles and cross-links
+  i18n/           typed dictionaries (en, ur, ar) and the locale registry
+  site.ts         non-translatable config: brand, numbers, e-mail, socials, contact channels
+  media.ts        locale-independent photographs and structural keys
   rand.ts         deterministic PRNG for snow and temperature series
 public/images/    generated facility photography
 ```
 
 ## Re-branding
 
-Company name, contact details, services, temperature regimes, commercial plans and FAQ
-answers all live in `lib/site.ts`. The palette is defined once in `tailwind.config.ts`
-(`ink` navy, `ice` accent scale) and consumed through the component classes in
+Company name, phone numbers, e-mail address, social links and the contact-channel list live
+in `lib/site.ts`; every word a visitor reads lives in `lib/i18n` — edit `en.ts` and mirror the
+change in `ur.ts` and `ar.ts`. The palette is defined once in `tailwind.config.ts` (`ink`
+navy, `ice` cool ramp, `ember` rust) and consumed through the component classes in
 `app/globals.css`, so a colour change is a single edit.
