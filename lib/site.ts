@@ -5,6 +5,9 @@
 
 export const site = {
   name: "Tahseen Jaber Cold Storage",
+  /** wordmark lines, as set in the logo */
+  wordmark: "Tahseen Jaber",
+  wordmarkSub: "Cold Storage",
   shortName: "Tahseen Jaber",
   tagline: "Precision cold chain infrastructure",
   description:

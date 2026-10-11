@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, Mail, MapPin, Menu, Phone, X } from "lucide-react";
-import { SnowflakeMark } from "@/components/Icons";
+import { Logo } from "@/components/Logo";
 import { pages } from "@/lib/pages";
 import { site } from "@/lib/site";
 
@@ -91,23 +91,14 @@ export function SiteHeader() {
         }`}
       >
         <div className="shell flex h-[68px] items-center justify-between gap-6">
-          <Link href="/" className="flex shrink-0 items-center gap-3">
-            <SnowflakeMark className="h-9 w-9" />
-            <span className="leading-tight">
-              <span
-                className={`block font-display text-[15px] font-bold tracking-tight transition-colors ${
-                  onDark ? "text-white" : "text-ink-900"
-                }`}
-              >
-                {site.shortName}
-              </span>
-              <span
-                className={`block text-[10px] font-semibold uppercase tracking-[0.18em] transition-colors ${
-                  onDark ? "text-white/60" : "text-slate-400"
-                }`}
-              >
-                Cold Storage
-              </span>
+          <Link href="/" aria-label={`${site.name} — home`} className="flex shrink-0 items-center">
+            {/* on the dark hero the navy wordmark sits on a white plate */}
+            <span
+              className={`flex h-11 items-center rounded-lg pr-3 transition-all duration-300 ${
+                onDark ? "bg-white/95 pl-2 shadow-card" : "pl-0"
+              }`}
+            >
+              <Logo className="h-7 sm:h-8" />
             </span>
           </Link>
 
@@ -127,7 +118,7 @@ export function SiteHeader() {
                   <span
                     className={`absolute inset-x-0 -bottom-px h-[2px] origin-left transition-transform duration-300 group-hover:scale-x-100 ${
                       isActive ? "scale-x-100" : "scale-x-0"
-                    } ${onDark ? "bg-white" : "bg-ice-600"}`}
+                    } ${onDark ? "bg-white" : "bg-ember-600"}`}
                   />
                 </Link>
               );
@@ -165,7 +156,7 @@ export function SiteHeader() {
         <div className="relative h-[2px] w-full">
           <span
             className={`absolute left-0 top-0 h-full transition-[width] duration-150 ease-out ${
-              onDark ? "bg-white/70" : "bg-ice-600"
+              onDark ? "bg-white/70" : "bg-gradient-to-r from-ink-900 to-ember-600"
             }`}
             style={{ width: `${progress * 100}%` }}
           />

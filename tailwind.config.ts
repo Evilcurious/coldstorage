@@ -9,13 +9,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        /* deep navy — used for headings and dark bands */
+        /* deep navy — sampled from the logo wordmark */
         ink: {
-          950: "#07182A",
-          900: "#0B1F33",
-          800: "#12304A",
-          700: "#1B4260",
-          600: "#26557A",
+          950: "#0A1B33",
+          900: "#1B3A63",
+          800: "#22456F",
+          700: "#2B537F",
+          600: "#35618F",
+        },
+        /* rust accent — sampled from the logo slats and ridge */
+        ember: {
+          300: "#E0A98A",
+          400: "#C4683F",
+          500: "#B25227",
+          600: "#A8481E",
+          700: "#8A3413",
         },
         /* primary accent: restrained corporate blue */
         ice: {

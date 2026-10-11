@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Linkedin, Mail, MapPin, Phone } from "lucide-react";
-import { SnowflakeMark } from "@/components/Icons";
+import { Logo } from "@/components/Logo";
 import { SubscribeForm } from "@/components/SubscribeForm";
 import { footerLinks, site } from "@/lib/site";
 import { pages } from "@/lib/pages";
@@ -11,15 +11,9 @@ export function Footer() {
       <div className="shell py-14">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_2fr]">
           <div>
-            <Link href="/" className="flex items-center gap-3">
-              <SnowflakeMark className="h-10 w-10" />
-              <span className="leading-tight">
-                <span className="block font-display text-[15px] font-bold tracking-tight text-white">
-                  {site.shortName}
-                </span>
-                <span className="block text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                  Cold Storage
-                </span>
+            <Link href="/" aria-label={`${site.name} — home`} className="inline-flex">
+              <span className="flex h-12 items-center rounded-lg bg-white/95 pl-2 pr-3.5 shadow-card">
+                <Logo className="h-8" />
               </span>
             </Link>
 

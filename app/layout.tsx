@@ -7,6 +7,8 @@ import "@fontsource/plus-jakarta-sans/700.css";
 import "./globals.css";
 import { RevealOnScroll } from "@/components/RevealOnScroll";
 import { SiteSmoke } from "@/components/Smoke";
+import { ScrollSnow } from "@/components/ScrollSnow";
+import { WaveHands } from "@/components/WaveHands";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
 import { TapToChatWidget } from "@/components/WhatsAppWidget";
@@ -57,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "ColdStorageFacility",
     name: site.name,
     description: site.description,
+    logo: new URL("/images/logo-tahseen-jaber.svg", "https://tahseenjabercold.com").href,
     telephone: site.phone,
     email: site.email,
     openingHours: "Mo-Su 00:00-23:59",
@@ -92,10 +95,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
 
         <SiteSmoke />
+        <ScrollSnow />
         <SiteHeader />
         <RevealOnScroll />
         {children}
         <Footer />
+        <WaveHands />
         <TapToChatWidget />
       </body>
     </html>

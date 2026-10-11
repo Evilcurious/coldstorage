@@ -9,7 +9,7 @@ import { PanelSmoke, SmokeTexture } from "@/components/Smoke";
  */
 export function PageHero({ page }: { page: SitePage }) {
   return (
-    <section className="on-dark relative isolate overflow-hidden bg-ink-950">
+    <section data-hero className="on-dark relative isolate overflow-hidden bg-ink-950">
       <div className="relative h-[58svh] min-h-[400px] w-full">
         <Image
           src={page.tile.src}
@@ -27,8 +27,8 @@ export function PageHero({ page }: { page: SitePage }) {
         <SmokeTexture className="top-auto z-[1] h-[55%]" opacity={0.32} seed={90} />
 
         <div className="shell relative z-10 flex h-full flex-col justify-end pb-12 pt-[140px]">
-          <span className="inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-ice-200">
-            <span className="h-px w-8 bg-ice-300/70" />
+          <span className="inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-ice-100">
+            <span className="h-[2px] w-8 rounded-full bg-ember-400" />
             {page.eyebrow}
           </span>
 
@@ -40,9 +40,11 @@ export function PageHero({ page }: { page: SitePage }) {
             {page.blurb}
           </p>
 
+          <span aria-hidden className="brand-rule mt-7" />
+
           <Link
             href="/"
-            className="mt-7 inline-flex w-fit items-center gap-2 text-[13px] font-semibold text-white/80 transition hover:text-white"
+            className="mt-5 inline-flex w-fit items-center gap-2 text-[13px] font-semibold text-white/80 transition hover:text-white"
           >
             ← All sections
           </Link>

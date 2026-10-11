@@ -72,12 +72,18 @@
 
   /* small uppercase label with a leading rule */
   .label {
-    @apply inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-ice-600;
+    @apply inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-ink-900;
   }
 
   .label::before {
     content: "";
-    @apply block h-px w-7 bg-ice-500;
+    @apply block h-[2px] w-7 rounded-full bg-ember-600;
+  }
+
+  /* brand rule used under section headers */
+  .brand-rule {
+    @apply h-[2px] w-10 rounded-full;
+    background: linear-gradient(90deg, #1B3A63, #A8481E);
   }
 
   .label-center::before {
@@ -348,11 +354,11 @@
 }
 
 .kenburns-right {
-  animation: kenburnsRight 9s ease-out forwards;
+  animation: kenburnsRight 3.6s ease-out forwards;
 }
 
 .kenburns-left {
-  animation: kenburnsLeft 9s ease-out forwards;
+  animation: kenburnsLeft 3.6s ease-out forwards;
 }
 
 /* slide indicator fill */
@@ -426,6 +432,76 @@
 .group:hover .tile-image,
 .group:focus-visible .tile-image {
   transform: scale(1.06);
+}
+
+
+/* ------------------------------------------------------------------ *
+ *  Scroll snow (see components/ScrollSnow.tsx)
+ * ------------------------------------------------------------------ */
+.scroll-snow {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 900ms var(--ease-out-soft);
+}
+
+.scroll-snow[data-active="true"] {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------------ *
+ *  Waving hands greeting
+ * ------------------------------------------------------------------ */
+@keyframes waveSwing {
+  0%,
+  60%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  15% {
+    transform: rotate(17deg);
+  }
+  30% {
+    transform: rotate(2deg);
+  }
+  45% {
+    transform: rotate(13deg);
+  }
+}
+
+@keyframes sleeveSway {
+  0%,
+  60%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  20% {
+    transform: rotate(6deg);
+  }
+  40% {
+    transform: rotate(1deg);
+  }
+}
+
+.wave-hand {
+  transform-origin: 50% 100%;
+  animation: waveSwing 4.4s ease-in-out infinite;
+}
+
+.wave-hand--alt {
+  animation-duration: 4.4s;
+  animation-delay: 0.5s;
+}
+
+.wave-sleeve {
+  transform-origin: 50% 100%;
+  animation: sleeveSway 4.4s ease-in-out infinite;
+}
+
+.wave-sleeve--alt {
+  animation-delay: 0.5s;
 }
 
 ::-webkit-scrollbar {

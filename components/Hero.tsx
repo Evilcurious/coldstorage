@@ -6,7 +6,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Phone } from "lucide-react";
 import { PanelSmoke, SmokeTexture } from "@/components/Smoke";
 import { heroSlides, site } from "@/lib/site";
 
-const SLIDE_MS = 7000;
+const SLIDE_MS = 3000;
 
 export function Hero() {
   const [index, setIndex] = useState(0);
@@ -129,7 +129,7 @@ export function Hero() {
         <div className="shell relative z-10 flex h-full flex-col justify-end pb-16 pt-[132px] sm:justify-center sm:pb-24">
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-ice-200">
-              <span className="h-px w-8 bg-ice-300/70" />
+              <span className="h-[2px] w-8 rounded-full bg-ember-400" />
               {site.location}
             </span>
 

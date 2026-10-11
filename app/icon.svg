@@ -1,19 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
-    <linearGradient id="g" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#8ed2f8"/>
-      <stop offset="0.45" stop-color="#2e9be6"/>
-      <stop offset="1" stop-color="#1b7cc4"/>
+    <linearGradient id="slat" x1="8" y1="18" x2="36" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#C4683F"/>
+      <stop offset="0.55" stop-color="#A8481E"/>
+      <stop offset="1" stop-color="#8A3413"/>
+    </linearGradient>
+    <linearGradient id="peak" x1="28" y1="18" x2="58" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#C4683F"/>
+      <stop offset="0.6" stop-color="#A8481E"/>
+      <stop offset="1" stop-color="#8A3413"/>
     </linearGradient>
   </defs>
-  <rect x="1" y="1" width="46" height="46" rx="14" fill="url(#g)"/>
-  <rect x="1" y="1" width="46" height="46" rx="14" fill="none" stroke="#ffffff" stroke-opacity="0.7" stroke-width="1.5"/>
-  <g stroke="#ffffff" stroke-width="2.2" stroke-linecap="round">
-    <path d="M24 11v26"/>
-    <path d="M13 17.5 35 30.5"/>
-    <path d="M35 17.5 13 30.5"/>
-    <path d="M24 11 20.5 15M24 11l3.5 4"/>
-    <path d="M24 37l-3.5-4M24 37l3.5-4"/>
+  <rect width="64" height="64" rx="14" fill="#ffffff"/>
+  <g fill="url(#slat)">
+    <rect x="6" y="22" width="3.4" height="24"/>
+    <rect x="11.4" y="19" width="3.4" height="27"/>
+    <rect x="16.8" y="16.5" width="3.4" height="29.5"/>
+    <rect x="22.2" y="18.5" width="3.4" height="27.5"/>
+    <rect x="27.6" y="21.5" width="3.4" height="24.5"/>
   </g>
-  <circle cx="24" cy="24" r="3.2" fill="#ffffff"/>
+  <g fill="#A8481E">
+    <rect x="4" y="47" width="32" height="3" rx="1"/>
+  </g>
+  <path d="M24 44 L42 20 L52 31 L62 18" stroke="#1B3A63" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none" transform="translate(-6 2) scale(0.92)"/>
+  <path d="M34 46 L46 28 L56 40" stroke="#A8481E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M32 46 L44 28 L56 46 Z" fill="url(#peak)"/>
 </svg>

@@ -33,6 +33,21 @@ Every section has its own page, and the home page presents them as photographs o
 `lib/pages.ts` is the registry that drives the navigation, the home tiles, the page
 headers and the "continue through the facility" cross-links on every page.
 
+## Brand
+
+The logo supplied with the brief is rebuilt as vector art in two forms:
+
+- `components/Logo.tsx` — inline `<BrandMark />` (rust slats, navy ridge, filled peaks) plus
+  the `<Logo />` lockup: "TAHSEEN JABER" wordmark with the routed "COLD STORAGE" sub-line.
+  Used in the header and footer; on the dark hero it sits on a white plate so the navy
+  wordmark stays legible.
+- `public/images/logo-tahseen-jaber.svg` — the full standalone lockup, also referenced by
+  the JSON-LD `logo` property.
+
+The palette is sampled from the logo: `ink` is the wordmark navy (`#1B3A63`) and `ember` is
+the slat/ridge rust (`#A8481E`). Section labels carry a rust rule, page-header eyebrows a
+rust accent and the header scroll bar a navy-to-rust gradient.
+
 ## Text behaviour
 
 Text reacts to the pointer. On dark surfaces white type lifts to light blue
@@ -56,6 +71,19 @@ The hero is a full-viewport image slideshow rather than a text block:
   buttons, arrow-key-free hover pause, and touch swipe on mobile.
 - The header and utility bar are transparent over the slideshow and switch to a white
   bar with dark text once you scroll past the hero.
+
+## Greeting and scroll effects
+
+- **`components/ScrollSnow.tsx`** — snow that begins once the hero is behind you. Flakes
+  stream downward with your scrolling; when the page stops they slow to a halt and a few
+  come to rest on the screen before melting away. Returning to the hero clears the sky.
+  Rendered as three canvas rasters (blurred, then composited) so dense snow stays cheap.
+- **`components/WaveHands.tsx`** — two small gloved hands (cuff in brand rust) that wave
+  hello from the bottom-left corner after the hero, with a brief "Hello" bubble. They are
+  decorative only: dismissed by the close button, remembered for the session, disabled for
+  `prefers-reduced-motion` users, and never focusable.
+
+Both use the same hero threshold (`#top` on the home page, `[data-hero]` on section pages).
 
 ## Smoke system
 
