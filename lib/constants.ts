@@ -11,6 +11,7 @@ export const COMPANY = {
   email: "commercial@tahseenjaber.com",
   opsEmail: "operations@tahseenjaber.com",
   address: "Uuayrij Industrial Area, Baghdad, Iraq",
+  location: "Tahseen Jaber Cold Storage, Uuayrij Industrial area, Baghdad, Iraq",
   hours: "Operations 24/7 · Commercial desk 08:00–20:00 AST",
 };
 

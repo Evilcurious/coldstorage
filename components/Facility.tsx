@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { MapPin, Phone, Mail, Clock, Navigation } from "lucide-react";
 import { COMPANY } from "@/lib/constants";
 
@@ -47,14 +46,9 @@ export function Facility() {
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-12">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 lg:col-span-7">
-            <Image
-              src="/images/map-baghdad.jpg"
-              alt="Stylized operational map of Baghdad highlighting the Uuayrij industrial campus"
-              width={1600}
-              height={1000}
-              className="h-[420px] w-full object-cover sm:h-[520px]"
-            />
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-navy-900 lg:col-span-7">
+            <div className="absolute inset-0 bg-grid opacity-40" />
+            <div className="h-[420px] w-full sm:h-[520px]" />
             <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-navy-950/20" />
             {PINS.map((p) => (
               <button
@@ -88,21 +82,12 @@ export function Facility() {
           </div>
 
           <div className="flex flex-col gap-4 lg:col-span-5">
-            <div className="relative overflow-hidden rounded-3xl border border-white/10">
-              <Image
-                src="/images/facility-exterior.jpg"
-                alt="Tahseen Jaber Cold Storage campus exterior at dusk"
-                width={1200}
-                height={800}
-                className="h-48 w-full object-cover"
-              />
-            </div>
             <div className="glass-strong flex-1 rounded-3xl p-6">
               <h3 className="font-display text-xl text-white">Campus coordinates</h3>
               <ul className="mt-5 space-y-4 text-sm text-slate-300">
                 <li className="flex gap-3">
                   <MapPin className="mt-0.5 h-4 w-4 text-ice-400" />
-                  {COMPANY.address}
+                  {COMPANY.location}
                 </li>
                 <li className="flex gap-3">
                   <Phone className="mt-0.5 h-4 w-4 text-ice-400" />

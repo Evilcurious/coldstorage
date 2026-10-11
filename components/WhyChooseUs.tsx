@@ -123,15 +123,6 @@ export function WhyChooseUs() {
                 <Stat key={s.label} {...s} start={start} />
               ))}
             </div>
-            <div className="relative mt-4 h-56 overflow-hidden rounded-2xl border border-white/10 sm:h-64">
-              <Image
-                src="/images/pharma-storage.jpg"
-                alt="GDP pharmaceutical cold room with monitored shelving"
-                fill
-                className="object-cover"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-              />
-            </div>
           </div>
         </div>
       </div>

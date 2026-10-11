@@ -19,15 +19,15 @@ const SOLUTIONS = [
   {
     title: "Inventory Management",
     copy: "RFID and barcode lot tracking, FEFO/FIFO enforcement, and real-time WMS visibility for every pallet, carton, and serial.",
-    image: "/images/inventory-rfid.jpg",
-    alt: "RFID and barcode inventory scanning",
+    image: null,
+    alt: "",
     meta: "RFID / Barcode WMS",
   },
   {
     title: "Secure Logistics",
     copy: "Refrigerated inbound/outbound, bonded handling, and last-mile coordination with GPS-sealed trailers and calibrated recorders.",
-    image: "/images/logistics-fleet.jpg",
-    alt: "Refrigerated truck fleet at loading docks",
+    image: null,
+    alt: "",
     meta: "Dock-to-destination",
   },
 ];
@@ -52,20 +52,29 @@ export function Solutions() {
               key={s.title}
               className="group relative overflow-hidden rounded-3xl border border-white/10 bg-navy-900"
             >
-              <div className="relative h-64 overflow-hidden sm:h-72">
-                <Image
-                  src={s.image}
-                  alt={s.alt}
-                  fill
-                  className="object-cover transition duration-700 ease-out group-hover:scale-110"
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/30 to-transparent" />
-                <span className="absolute left-5 top-5 rounded-full border border-ice-400/30 bg-navy-950/50 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-ice-200 backdrop-blur">
-                  {s.meta}
-                </span>
-              </div>
-              <div className="relative -mt-10 px-6 pb-7">
+              {s.image ? (
+                <div className="relative h-64 overflow-hidden sm:h-72">
+                  <Image
+                    src={s.image}
+                    alt={s.alt}
+                    fill
+                    className="object-cover transition duration-700 ease-out group-hover:scale-110"
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/30 to-transparent" />
+                  <span className="absolute left-5 top-5 rounded-full border border-ice-400/30 bg-navy-950/50 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-ice-200 backdrop-blur">
+                    {s.meta}
+                  </span>
+                </div>
+              ) : (
+                <div className="relative h-24 overflow-hidden bg-gradient-to-br from-ice-500/20 via-navy-900 to-navy-950 sm:h-28">
+                  <div className="absolute inset-0 bg-grid opacity-40" />
+                  <span className="absolute left-5 top-5 rounded-full border border-ice-400/30 bg-navy-950/50 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-ice-200 backdrop-blur">
+                    {s.meta}
+                  </span>
+                </div>
+              )}
+              <div className={`relative px-6 pb-7 ${s.image ? "-mt-10" : "pt-6"}`}>
                 <div className="glass rounded-2xl p-5">
                   <div className="flex items-start justify-between gap-3">
                     <h3 className="font-display text-xl text-white">{s.title}</h3>
