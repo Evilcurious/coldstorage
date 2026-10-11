@@ -40,10 +40,16 @@ function applyToDocument(code: LocaleCode) {
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<LocaleCode>(DEFAULT_LOCALE);
 
-  /* the inline boot script already set <html lang|dir>; mirror it in state */
+  /* the inline boot script already set <html lang|dir>; mirror it in state.
+     Storage can throw inside sandboxed frames, so a failed read just keeps English. */
   useEffect(() => {
-    const stored = window.localStorage.getItem(STORAGE_KEY) ?? DEFAULT_LOCALE;
-    const initial = isLocale(stored) ? stored : DEFAULT_LOCALE;
+    let initial: LocaleCode = DEFAULT_LOCALE;
+    try {
+      const stored = window.localStorage.getItem(STORAGE_KEY) ?? DEFAULT_LOCALE;
+      if (isLocale(stored)) initial = stored;
+    } catch {
+      /* no storage: stay on the default locale */
+    }
     setLocaleState(initial);
     applyToDocument(initial);
   }, []);

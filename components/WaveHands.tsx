@@ -51,7 +51,12 @@ export function WaveHands() {
   /* decorative: stay out of the way of reduced-motion users and past dismissals */
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const hidden = window.sessionStorage.getItem("tj-hands-hidden") === "1";
+    let hidden = false;
+    try {
+      hidden = window.sessionStorage.getItem("tj-hands-hidden") === "1";
+    } catch {
+      /* storage unavailable: treat as not dismissed */
+    }
     setDismissed(reduce || hidden);
   }, []);
 
@@ -111,7 +116,11 @@ export function WaveHands() {
         <button
           type="button"
           onClick={() => {
-            window.sessionStorage.setItem("tj-hands-hidden", "1");
+            try {
+              window.sessionStorage.setItem("tj-hands-hidden", "1");
+            } catch {
+              /* storage unavailable: dismiss for this view only */
+            }
             setDismissed(true);
           }}
           aria-label={content.ui.hideHands}

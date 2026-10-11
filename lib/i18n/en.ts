@@ -475,6 +475,11 @@ export const en: Dict = {
     whatsapp: "Message on WhatsApp",
     call: "Call the intake line",
   },
+  error: {
+    title: "Something interrupted this page",
+    body: "Part of the page stopped responding. Your language choice is remembered — reloading or retrying brings everything back.",
+    retry: "Try again",
+  },
   notFound: {
     code: "Error 404",
     title: "This page is not in storage",

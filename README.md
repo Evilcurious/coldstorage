@@ -133,6 +133,8 @@ app/
   globals.css     design tokens, component classes (.card, .btn, .field, .label…),
                   text-hover rules, tile states, viewport-height boxes, keyframes
   icon.svg        favicon
+  error.tsx       route error boundary (translated, with retry)
+  global-error.tsx  last-resort boundary with self-contained styles
 components/
   SiteHeader, Footer, Hero, PageHero, PageOutro, SectionTile, ExploreGrid,
   ImageRibbon, LiveConditions, Compliance, Chain, Services, Zones, Facility,

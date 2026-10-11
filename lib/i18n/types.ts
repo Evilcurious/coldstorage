@@ -141,6 +141,7 @@ export type Dict = {
   };
   widget: { title: string; body: string; whatsapp: string; call: string };
   notFound: { code: string; title: string; body: string; back: string };
+  error: { title: string; body: string; retry: string };
 };
 
 export type LocaleMeta = {
