@@ -37,7 +37,7 @@ export function TapToChatWidget() {
               rel="noopener noreferrer"
               className="btn-primary !h-10 !text-[13px]"
             >
-              <MessageCircle className="h-4 w-4" /> Message on WhatsApp
+              <MessageCircle className="h-4 w-4" /> {site.whatsappNumber ? "WhatsApp " + site.whatsappNumber : "Message on WhatsApp"}
             </a>
             <a href={site.phoneHref} className="btn-secondary !h-10 !text-[13px]">
               <Phone className="h-4 w-4" /> {site.phone}

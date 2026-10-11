@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { socialIconMap } from "@/components/SocialIcons";
 import { Logo } from "@/components/Logo";
 import { SubscribeForm } from "@/components/SubscribeForm";
-import { footerLinks, site } from "@/lib/site";
+import { footerLinks, site, socials } from "@/lib/site";
 import { pages } from "@/lib/pages";
 
 export function Footer() {
@@ -46,13 +47,35 @@ export function Footer() {
               </li>
             </ul>
 
-            <Link
-              href="/contact"
-              className="mt-6 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-slate-300 transition hover:border-white/40 hover:text-white"
-              aria-label="Company profile"
-            >
-              <Linkedin className="h-4 w-4" />
-            </Link>
+            <ul className="mt-6 flex items-center gap-2.5">
+              {socials.map((social) => {
+                const Icon = socialIconMap[social.id];
+                return (
+                  <li key={social.id}>
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${site.shortName} on ${social.label}`}
+                      title={social.label}
+                      className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-slate-300 transition hover:-translate-y-0.5 hover:border-ember-400 hover:text-ember-300"
+                    >
+                      <Icon className="h-4 w-4" />
+                    </a>
+                  </li>
+                );
+              })}
+              <li>
+                <a
+                  href={`mailto:${site.email}`}
+                  aria-label={`Email ${site.email}`}
+                  title={site.email}
+                  className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-slate-300 transition hover:-translate-y-0.5 hover:border-ember-400 hover:text-ember-300"
+                >
+                  <Mail className="h-4 w-4" />
+                </a>
+              </li>
+            </ul>
           </div>
 
           <div className="grid gap-10 sm:grid-cols-3">

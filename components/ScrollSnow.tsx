@@ -142,7 +142,7 @@ export function ScrollSnow() {
 
         ctx.beginPath();
         ctx.fillStyle = `rgba(255, 255, 255, ${flake.alpha})`;
-        ctx.shadowColor = "rgba(148, 201, 236, 0.85)";
+        ctx.shadowColor = "rgba(169, 189, 209, 0.9)";
         ctx.shadowBlur = flake.settled ? 8 : 5;
         ctx.arc(flake.x, flake.y, flake.settled ? flake.r * 1.15 : flake.r, 0, Math.PI * 2);
         ctx.fill();

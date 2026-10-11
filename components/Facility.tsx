@@ -96,7 +96,7 @@ export function Facility() {
               style={{ "--reveal-delay": `${i * 60}ms` } as React.CSSProperties}
               className={i > 0 ? "lg:border-l lg:border-slate-200 lg:pl-8" : ""}
             >
-              <p className="font-display text-[24px] font-bold leading-none tracking-tight text-ink-900 tabular-nums">
+              <p className="font-display text-[24px] font-bold leading-none tracking-tight text-ink-900 tabular-nums numeric">
                 {stat.value}
               </p>
               <p className="mt-2 text-[13px] font-semibold text-ink-800">{stat.label}</p>

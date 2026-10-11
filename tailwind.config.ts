@@ -25,22 +25,23 @@ const config: Config = {
           600: "#A8481E",
           700: "#8A3413",
         },
-        /* primary accent: restrained corporate blue */
+        /* brand ramp: the navy of the logo wordmark, with the light, cool
+           tints that give the site its cold-storage air */
         ice: {
-          50: "#F3F8FD",
-          100: "#E5F1FA",
-          200: "#C7E2F5",
-          300: "#94C9EC",
-          400: "#57A8DE",
-          500: "#2A89C8",
-          600: "#1470AC",
-          700: "#0E5C8F",
-          800: "#0C4A73",
-          900: "#0A3A5A",
+          50: "#F4F7FA",
+          100: "#E9EFF5",
+          200: "#D3DFEA",
+          300: "#A9BDD1",
+          400: "#6E8AA6",
+          500: "#45658A",
+          600: "#1B3A63",
+          700: "#16304F",
+          800: "#102441",
+          900: "#0A1B33",
         },
       },
       fontFamily: {
-        display: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+        display: ["Source Serif 4", "Georgia", "Times New Roman", "serif"],
         sans: ["Inter", "system-ui", "sans-serif"],
       },
       fontSize: {

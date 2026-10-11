@@ -70,7 +70,7 @@ export function Chain() {
                   </p>
 
                   <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3">
-                    <span className="text-[13px] font-semibold tabular-nums text-ice-700">
+                    <span className="text-[13px] font-semibold tabular-nums text-ice-700 numeric">
                       {step.temp}
                     </span>
                     <span className="text-[12.5px] text-slate-400">{step.duration}</span>

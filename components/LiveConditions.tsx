@@ -54,7 +54,7 @@ export function LiveConditions({
       <div className="px-5 py-4">
         <div className="flex items-end justify-between">
           <div>
-            <p className="font-display text-[34px] font-bold leading-none tracking-tight text-ink-900 tabular-nums">
+            <p className="font-display text-[34px] font-bold leading-none tracking-tight text-ink-900 tabular-nums numeric">
               {reading.toFixed(1)}
               <span className="ml-1 align-top text-[16px] font-semibold text-slate-400">°C</span>
             </p>
@@ -76,11 +76,11 @@ export function LiveConditions({
             style={{ left: `${pct(band[0])}%`, right: `${100 - pct(band[1])}%` }}
           />
           <span
-            className="absolute -top-1 h-3.5 w-[3px] rounded-full bg-ice-700 transition-[left] duration-[1400ms] ease-out"
+            className="absolute -top-1 h-3.5 w-[3px] rounded-full bg-ice-600 transition-[left] duration-[1400ms] ease-out"
             style={{ left: `calc(${pct(reading)}% - 1.5px)` }}
           />
         </div>
-        <div className="mt-2 flex justify-between text-[10.5px] font-medium tabular-nums text-slate-400">
+        <div className="mt-2 flex justify-between text-[10.5px] font-medium tabular-nums text-slate-400 numeric">
           <span>{SCALE_MIN} °C</span>
           <span>{setPoint} °C set point</span>
           <span>{SCALE_MAX} °C</span>

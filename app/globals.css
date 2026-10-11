@@ -17,9 +17,11 @@
   }
 
   body {
-    @apply bg-white font-sans text-ink-600 antialiased;
-    @apply text-slate-600;
-    background-image: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+    @apply bg-white font-sans text-slate-600 antialiased;
+    background-image:
+      radial-gradient(90% 55% at 6% -6%, rgba(27, 58, 99, 0.07), transparent 58%),
+      radial-gradient(70% 45% at 100% 0%, rgba(168, 72, 30, 0.05), transparent 60%),
+      linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
   }
 
   section[id],
@@ -36,12 +38,12 @@
   }
 
   ::selection {
-    background: rgba(20, 112, 172, 0.18);
-    color: #0b1f33;
+    background: rgba(168, 72, 30, 0.18);
+    color: #1b3a63;
   }
 
   :focus-visible {
-    outline: 2px solid #1470ac;
+    outline: 2px solid #1b3a63;
     outline-offset: 2px;
     border-radius: 3px;
   }
@@ -84,6 +86,12 @@
   .brand-rule {
     @apply h-[2px] w-10 rounded-full;
     background: linear-gradient(90deg, #1B3A63, #A8481E);
+  }
+
+  /* numbers read cleaner in the sans face even when headings are serif */
+  .numeric {
+    font-family: Inter, system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
   }
 
   .label-center::before {
@@ -141,7 +149,7 @@
   }
 
   .stat-value {
-    @apply font-display text-[28px] font-bold leading-none tracking-tight text-ink-900 tabular-nums;
+    @apply numeric text-[28px] font-bold leading-none tracking-tight text-ink-900;
   }
 
   .stat-label {
@@ -282,9 +290,9 @@
 .smoke-plume--cool {
   background: radial-gradient(
     closest-side,
-    rgba(233, 244, 253, 0.95),
-    rgba(196, 224, 245, 0.45) 48%,
-    rgba(196, 224, 245, 0) 76%
+    rgba(238, 243, 248, 0.95),
+    rgba(211, 223, 234, 0.45) 48%,
+    rgba(211, 223, 234, 0) 76%
   );
 }
 
@@ -354,11 +362,11 @@
 }
 
 .kenburns-right {
-  animation: kenburnsRight 3.6s ease-out forwards;
+  animation: kenburnsRight 4.6s ease-out forwards;
 }
 
 .kenburns-left {
-  animation: kenburnsLeft 3.6s ease-out forwards;
+  animation: kenburnsLeft 4.6s ease-out forwards;
 }
 
 /* slide indicator fill */
@@ -386,12 +394,16 @@
 }
 
 .on-light :is(h1, h2, h3, h4):hover {
-  color: #2A89C8;
+  color: #1B3A63;
+}
+
+.on-light :is(p, li, blockquote, dt, dd):hover {
+  color: #A8481E;
 }
 
 /* declared after .on-light so nested dark surfaces win */
 .on-dark :is(h1, h2, h3, h4, p, dt, dd, blockquote, li):hover {
-  color: #94C9EC;
+  color: #A9BDD1;
 }
 
 .on-dark .text-hover-static:hover {
@@ -412,7 +424,7 @@
 .group:focus-visible .tile-label {
   opacity: 1;
   transform: translateY(0);
-  color: #C7E2F5;
+  color: #A9BDD1;
 }
 
 .tile-scrim {

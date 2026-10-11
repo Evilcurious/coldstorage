@@ -15,8 +15,10 @@ export const site = {
   location: "Uuayrij Industrial Area, Baghdad",
   phone: "+964 770 450 2200",
   phoneHref: "tel:+9647704502200",
-  whatsapp: "https://wa.me/9647704502200",
+  whatsapp:
+    "https://api.whatsapp.com/send/?phone=9647768677775&text&type=phone_number&app_absent=0",
   email: "commercial@tahseenjaber.com",
+  whatsappNumber: "+964 776 867 7775",
   hours: "Open 24 hours, 365 days",
   founded: 2014,
 } as const;
@@ -257,7 +259,7 @@ export const zones: Zone[] = [
     label: "Deep frozen",
     temp: "−25 °C",
     numeric: -25,
-    accent: "#1470AC",
+    accent: "#1B3A63",
     body: "Our coldest rooms, with nitrogen-backed backup compressors and twice-hourly probe checks.",
     uses: ["Frozen meat & poultry", "Seafood", "Ice cream", "Long-hold produce"],
     image: "/images/seafood-pallets.jpg",
@@ -273,7 +275,7 @@ export const zones: Zone[] = [
     label: "Chilled",
     temp: "0 °C",
     numeric: 0,
-    accent: "#2A89C8",
+    accent: "#35618F",
     body: "For fresh produce and dairy needing air movement, humidity control and daily rotation.",
     uses: ["Dairy & eggs", "Fresh produce", "Chilled meat", "Bakery inputs"],
     image: "/images/hero-facility.jpg",
@@ -289,7 +291,7 @@ export const zones: Zone[] = [
     label: "Pharmaceutical",
     temp: "2–8 °C",
     numeric: 5,
-    accent: "#57A8DE",
+    accent: "#6E8AA6",
     body: "Validated rooms with calibrated loggers, escalation procedures and exportable records.",
     uses: ["Pharmaceuticals", "Medical devices", "Cosmetics", "Seeds & cultures"],
     image: "/images/pharma-coldroom.jpg",
@@ -441,6 +443,25 @@ export const faqs = [
     a: "Chilled Flex and Deep Freeze carry no long-term commitment. Pharma Assured requires a short qualification period for each new product family.",
   },
 ];
+
+/** Social channels, in the order they appear in the header. */
+export const socials = [
+  {
+    id: "facebook",
+    label: "Facebook",
+    href: "https://www.facebook.com/Tahseenjaber.Coldstorage?mibextid=wwXIfr&rdid=326uZ0kFUuFoyAfF&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19xUcfxzZj%2F%3Fmibextid%3DwwXIfr#",
+  },
+  {
+    id: "instagram",
+    label: "Instagram",
+    href: "https://www.instagram.com/tahseenjaber.coldstorage?obrf=cHBvdGg3Njl6cHFn",
+  },
+  {
+    id: "whatsapp",
+    label: "WhatsApp",
+    href: "https://api.whatsapp.com/send/?phone=9647768677775&text&type=phone_number&app_absent=0",
+  },
+] as const;
 
 export const footerLinks = [
   {

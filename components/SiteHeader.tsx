@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, Mail, MapPin, Menu, Phone, X } from "lucide-react";
+import { socialIconMap } from "@/components/SocialIcons";
 import { Logo } from "@/components/Logo";
 import { pages } from "@/lib/pages";
-import { site } from "@/lib/site";
+import { site, socials } from "@/lib/site";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -48,21 +49,53 @@ export function SiteHeader() {
         }`}
       >
         <div className="shell flex h-9 items-center justify-between text-[12px]">
-          <div className={`flex items-center gap-6 ${onDark ? "text-white/75" : "text-slate-300"}`}>
+          <div className={`flex items-center gap-5 ${onDark ? "text-white/75" : "text-slate-300"}`}>
             <span className="inline-flex items-center gap-2">
-              <MapPin className="h-3.5 w-3.5 text-ice-300" />
+              <MapPin className="h-3.5 w-3.5 text-ember-400" />
               {site.location}
             </span>
-            <span className="hidden lg:inline-flex items-center gap-2">
-              <Mail className="h-3.5 w-3.5 text-ice-300" />
-              <a href={`mailto:${site.email}`} className="transition hover:text-white">
-                {site.email}
-              </a>
-            </span>
+
+            {/* mail: icon only */}
+            <a
+              href={`mailto:${site.email}`}
+              aria-label={`Email ${site.email}`}
+              title={site.email}
+              className="inline-flex items-center justify-center transition hover:text-white"
+            >
+              <Mail className="h-4 w-4" />
+            </a>
           </div>
-          <div className="flex items-center gap-5">
+
+          <div className="flex items-center gap-4">
+            {/* social channels */}
+            <ul className="flex items-center gap-1">
+              {socials.map((social) => {
+                const Icon = socialIconMap[social.id];
+                return (
+                  <li key={social.id}>
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${site.shortName} on ${social.label}`}
+                      title={social.label}
+                      className={`grid h-6 w-6 place-items-center rounded-md transition ${
+                        onDark
+                          ? "text-white/70 hover:bg-white/10 hover:text-white"
+                          : "text-slate-300 hover:bg-white/10 hover:text-white"
+                      }`}
+                    >
+                      <Icon className="h-4 w-4" />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <span aria-hidden className="h-4 w-px bg-white/20" />
+
             <span
-              className={`hidden items-center gap-2 sm:inline-flex ${
+              className={`hidden items-center gap-2 xl:inline-flex ${
                 onDark ? "text-white/75" : "text-slate-300"
               }`}
             >
@@ -72,6 +105,7 @@ export function SiteHeader() {
               </span>
               Accepting consignments 24/7
             </span>
+
             <a
               href={site.phoneHref}
               className="inline-flex items-center gap-2 font-semibold text-white transition hover:text-ice-200"
@@ -194,6 +228,31 @@ export function SiteHeader() {
             </Link>
             <a href={site.phoneHref} className="btn-secondary w-full">
               <Phone className="h-4 w-4" /> {site.phone}
+            </a>
+          </div>
+
+          <div className="mt-3 flex items-center gap-2 px-3 pb-1">
+            {socials.map((social) => {
+              const Icon = socialIconMap[social.id];
+              return (
+                <a
+                  key={social.id}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${site.shortName} on ${social.label}`}
+                  className="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 text-slate-500 transition hover:border-ice-300 hover:text-ice-700"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              );
+            })}
+            <a
+              href={`mailto:${site.email}`}
+              aria-label={`Email ${site.email}`}
+              className="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 text-slate-500 transition hover:border-ice-300 hover:text-ice-700"
+            >
+              <Mail className="h-4 w-4" />
             </a>
           </div>
         </nav>

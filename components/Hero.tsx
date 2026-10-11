@@ -6,7 +6,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Phone } from "lucide-react";
 import { PanelSmoke, SmokeTexture } from "@/components/Smoke";
 import { heroSlides, site } from "@/lib/site";
 
-const SLIDE_MS = 3000;
+const SLIDE_MS = 4000;
 
 export function Hero() {
   const [index, setIndex] = useState(0);
@@ -165,7 +165,7 @@ export function Hero() {
               <span className="text-[12.5px] font-semibold uppercase tracking-[0.16em] text-white">
                 {active.label}
               </span>
-              <span className="text-[12.5px] font-medium tabular-nums text-ice-200">
+              <span className="numeric text-[12.5px] font-medium text-ice-200">
                 {active.temp}
               </span>
               <span className="hidden text-[12.5px] text-slate-300 sm:inline">{active.detail}</span>
@@ -202,7 +202,7 @@ export function Hero() {
                   />
                 </button>
               ))}
-              <span className="ml-2 font-display text-[12px] font-semibold tabular-nums text-white/70">
+              <span className="numeric ml-2 text-[12px] font-semibold text-white/70">
                 {String(index + 1).padStart(2, "0")}
                 <span className="text-white/40"> / {String(total).padStart(2, "0")}</span>
               </span>

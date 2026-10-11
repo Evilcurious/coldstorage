@@ -93,14 +93,14 @@ export function Zones() {
               style={{ left: `calc(${pct(active.numeric)}% - 1.5px)` }}
             />
             <span
-              className="absolute -top-9 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink-900 px-2.5 py-1 font-display text-[11.5px] font-bold tabular-nums text-white transition-[left] duration-700 ease-out"
+              className="absolute -top-9 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink-900 px-2.5 py-1 font-display text-[11.5px] font-bold tabular-nums text-white transition-[left] duration-700 ease-out numeric"
               style={{ left: `${pct(active.numeric)}%` }}
             >
               {active.temp}
             </span>
           </div>
 
-          <div className="relative mt-3 h-4 text-[11px] font-medium tabular-nums text-slate-400">
+          <div className="relative mt-3 h-4 text-[11px] font-medium tabular-nums text-slate-400 numeric">
             {[-30, -20, -10, 0, 10, 20, 25].map((tick) => (
               <span
                 key={tick}
@@ -150,7 +150,7 @@ export function Zones() {
               {active.specs.map((spec) => (
                 <div key={spec.label} className="table-row">
                   <dt className="text-[13px] text-slate-500">{spec.label}</dt>
-                  <dd className="text-[13.5px] font-semibold tabular-nums text-ink-900">
+                  <dd className="text-[13.5px] font-semibold tabular-nums text-ink-900 numeric">
                     {spec.value}
                   </dd>
                 </div>

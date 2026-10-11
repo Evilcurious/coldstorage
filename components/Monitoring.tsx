@@ -26,7 +26,7 @@ const rooms: Room[] = [
     base: -25,
     spread: 0.6,
     band: [-27, -23],
-    accent: "#1470AC",
+    accent: "#1B3A63",
   },
   {
     id: "chiller",
@@ -35,7 +35,7 @@ const rooms: Room[] = [
     base: 0,
     spread: 0.9,
     band: [-2, 2],
-    accent: "#2A89C8",
+    accent: "#35618F",
   },
   {
     id: "pharma",
@@ -44,7 +44,7 @@ const rooms: Room[] = [
     base: 5,
     spread: 0.5,
     band: [4, 6],
-    accent: "#57A8DE",
+    accent: "#6E8AA6",
   },
 ];
 
@@ -174,8 +174,8 @@ export function Monitoring() {
                   width={W - PAD.left - PAD.right}
                   height={Math.max(bandBottom - bandTop, 2)}
                   rx="4"
-                  fill="rgba(20,112,172,0.07)"
-                  stroke="rgba(20,112,172,0.22)"
+                  fill="rgba(168,72,30,0.07)"
+                  stroke="rgba(168,72,30,0.28)"
                   strokeDasharray="4 6"
                 />
 
@@ -186,14 +186,14 @@ export function Monitoring() {
                       x2={W - PAD.right}
                       y1={yFor(t, min, max)}
                       y2={yFor(t, min, max)}
-                      stroke="rgba(11,31,51,0.07)"
+                      stroke="rgba(27,58,99,0.10)"
                       strokeWidth="1"
                     />
                     <text
                       x={PAD.left - 10}
                       y={yFor(t, min, max) + 4}
                       textAnchor="end"
-                      className="fill-slate-400 text-[10.5px] font-medium tabular-nums"
+                      className="fill-slate-400 text-[10.5px] font-medium tabular-nums numeric"
                     >
                       {t.toFixed(0)}°
                     </text>
@@ -246,7 +246,7 @@ export function Monitoring() {
                   <dt className="text-[11px] font-medium uppercase tracking-[0.12em] text-slate-400">
                     {item.label}
                   </dt>
-                  <dd className="mt-1.5 font-display text-[16px] font-bold tabular-nums text-ink-900">
+                  <dd className="mt-1.5 font-display text-[16px] font-bold tabular-nums text-ink-900 numeric">
                     {item.value}
                   </dd>
                 </div>
@@ -274,7 +274,7 @@ export function Monitoring() {
                   <li key={event.event} className="px-5 py-3.5">
                     <div className="flex items-center justify-between gap-3">
                       <p className="text-[13px] font-semibold text-ink-900">{event.event}</p>
-                      <span className="shrink-0 text-[11.5px] font-medium tabular-nums text-slate-400">
+                      <span className="shrink-0 text-[11.5px] font-medium tabular-nums text-slate-400 numeric">
                         {event.time}
                       </span>
                     </div>

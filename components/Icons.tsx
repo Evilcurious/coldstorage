@@ -6,8 +6,8 @@ export function SnowflakeMark({ className = "", ...props }: SVGProps<SVGSVGEleme
     <svg viewBox="0 0 48 48" fill="none" className={className} {...props}>
       <defs>
         <linearGradient id="markFill" x1="4" y1="4" x2="44" y2="44">
-          <stop offset="0%" stopColor="#2A89C8" />
-          <stop offset="100%" stopColor="#0E5C8F" />
+          <stop offset="0%" stopColor="#1B3A63" />
+          <stop offset="100%" stopColor="#A8481E" />
         </linearGradient>
       </defs>
       <rect x="1" y="1" width="46" height="46" rx="10" fill="url(#markFill)" />

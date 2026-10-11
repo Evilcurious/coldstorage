@@ -32,7 +32,7 @@ function Ticker({ value, prefix = "$" }: { value: number; prefix?: string }) {
   }, [value]);
 
   return (
-    <span className="tabular-nums">
+    <span className="tabular-nums numeric">
       {prefix}
       {Math.round(display).toLocaleString("en-US")}
     </span>
@@ -157,7 +157,7 @@ export function Pricing() {
                   <label htmlFor="volume" className="text-[13px] font-semibold text-ink-800">
                     Pallet positions required
                   </label>
-                  <span className="font-display text-[20px] font-bold tabular-nums text-ink-900">
+                  <span className="font-display text-[20px] font-bold tabular-nums text-ink-900 numeric">
                     {volume}
                   </span>
                 </div>
@@ -171,10 +171,10 @@ export function Pricing() {
                   onChange={(e) => setVolume(Number(e.target.value))}
                   className="mt-4 h-1.5 w-full cursor-pointer appearance-none rounded-full outline-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white [&::-webkit-slider-thumb]:bg-ice-600 [&::-webkit-slider-thumb]:shadow-card"
                   style={{
-                    background: `linear-gradient(90deg, #1470ac ${fill}%, #e2e8f0 ${fill}%)`,
+                    background: `linear-gradient(90deg, #1B3A63 ${fill}%, #e2e8f0 ${fill}%)`,
                   }}
                 />
-                <div className="mt-2 flex justify-between text-[11.5px] font-medium tabular-nums text-slate-400">
+                <div className="mt-2 flex justify-between text-[11.5px] font-medium tabular-nums text-slate-400 numeric">
                   <span>20</span>
                   <span>800</span>
                 </div>
@@ -192,13 +192,13 @@ export function Pricing() {
                 <dt className="text-[13px] text-slate-500">
                   Storage · {volume} pallets × ${RATE}
                 </dt>
-                <dd className="text-[13.5px] font-semibold tabular-nums text-ink-900">
+                <dd className="text-[13.5px] font-semibold tabular-nums text-ink-900 numeric">
                   <Ticker value={volume * RATE} />
                 </dd>
               </div>
               <div className="mt-3 flex items-center justify-between">
                 <dt className="text-[13px] text-slate-500">Handling & FEFO rotation</dt>
-                <dd className="text-[13.5px] font-semibold tabular-nums text-ink-900">
+                <dd className="text-[13.5px] font-semibold tabular-nums text-ink-900 numeric">
                   <Ticker value={handling} />
                 </dd>
               </div>
