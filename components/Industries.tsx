@@ -1,30 +1,29 @@
-import { SectionHeading } from "@/components/SectionHeading";
 import { industries } from "@/lib/site";
 
+/** Sectors served — a compact single strip, no prose. */
 export function Industries() {
   return (
-    <section className="section">
-      <div className="shell">
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          <SectionHeading
-            eyebrow="Sectors served"
-            title="Storage for producers, importers and distributors"
-            body="We work with food manufacturers, importers, retail distribution and regulated healthcare suppliers. Cargo is segregated by regime and, where required, by product family."
-          />
-
-          <ul className="grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
+    <section className="border-y border-slate-200 bg-white">
+      <div className="shell py-9">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:gap-10">
+          <p
+            className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400"
+            data-reveal
+          >
+            Sectors served
+          </p>
+          <div className="flex flex-wrap gap-2">
             {industries.map((item, i) => (
-              <li
+              <span
                 key={item}
-                data-reveal
-                style={{ "--reveal-delay": `${(i % 3) * 60}ms` } as React.CSSProperties}
-                className="flex items-center gap-3 border-b border-slate-200 py-3.5"
+                data-reveal="scale"
+                style={{ "--reveal-delay": `${(i % 6) * 40}ms` } as React.CSSProperties}
+                className="rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1.5 text-[12.5px] font-medium text-slate-600 transition-colors duration-200 hover:border-ice-200 hover:bg-ice-50 hover:text-ice-700"
               >
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-ice-500" />
-                <span className="text-[13.5px] font-medium text-ink-800">{item}</span>
-              </li>
+                {item}
+              </span>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </section>

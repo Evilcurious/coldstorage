@@ -13,7 +13,7 @@ export function SiteHeader() {
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      setScrolled(y > 8);
+      setScrolled(y > 60);
       const height = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(height > 0 ? Math.min(y / height, 1) : 0);
     };
@@ -29,12 +29,22 @@ export function SiteHeader() {
     };
   }, [open]);
 
+  const onDark = !scrolled;
+
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       {/* utility bar */}
-      <div className="hidden bg-ink-900 text-white md:block">
+      <div
+        className={`hidden transition-colors duration-300 md:block ${
+          onDark ? "border-b border-white/10 bg-transparent" : "bg-ink-950"
+        }`}
+      >
         <div className="shell flex h-9 items-center justify-between text-[12px]">
-          <div className="flex items-center gap-6 text-slate-300">
+          <div
+            className={`flex items-center gap-6 ${
+              onDark ? "text-white/75" : "text-slate-300"
+            }`}
+          >
             <span className="inline-flex items-center gap-2">
               <MapPin className="h-3.5 w-3.5 text-ice-300" />
               {site.location}
@@ -47,7 +57,11 @@ export function SiteHeader() {
             </span>
           </div>
           <div className="flex items-center gap-5">
-            <span className="inline-flex items-center gap-2 text-slate-300">
+            <span
+              className={`inline-flex items-center gap-2 ${
+                onDark ? "text-white/75" : "text-slate-300"
+              }`}
+            >
               <span className="relative flex h-1.5 w-1.5">
                 <span className="animate-pulse-ring absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
@@ -67,18 +81,28 @@ export function SiteHeader() {
 
       {/* main bar */}
       <div
-        className={`border-b bg-white/95 backdrop-blur transition-all duration-300 ${
-          scrolled ? "border-slate-200 shadow-card" : "border-transparent"
+        className={`border-b backdrop-blur transition-colors duration-300 ${
+          onDark
+            ? "border-white/10 bg-gradient-to-b from-ink-950/70 to-transparent"
+            : "border-slate-200 bg-white/95 shadow-card"
         }`}
       >
         <div className="shell flex h-[68px] items-center justify-between gap-8">
           <a href="#top" className="flex shrink-0 items-center gap-3">
             <SnowflakeMark className="h-9 w-9" />
             <span className="leading-tight">
-              <span className="block font-display text-[15px] font-bold tracking-tight text-ink-900">
+              <span
+                className={`block font-display text-[15px] font-bold tracking-tight transition-colors ${
+                  onDark ? "text-white" : "text-ink-900"
+                }`}
+              >
                 {site.shortName}
               </span>
-              <span className="block text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">
+              <span
+                className={`block text-[10px] font-semibold uppercase tracking-[0.18em] transition-colors ${
+                  onDark ? "text-white/60" : "text-slate-400"
+                }`}
+              >
                 Cold Storage
               </span>
             </span>
@@ -89,10 +113,16 @@ export function SiteHeader() {
               <a
                 key={item.href}
                 href={item.href}
-                className="group relative py-2 text-[13.5px] font-medium text-slate-600 transition-colors hover:text-ink-900"
+                className={`group relative py-2 text-[13.5px] font-medium transition-colors ${
+                  onDark ? "text-white/80 hover:text-white" : "text-slate-600 hover:text-ink-900"
+                }`}
               >
                 {item.label}
-                <span className="absolute inset-x-0 -bottom-px h-[2px] origin-left scale-x-0 bg-ice-600 transition-transform duration-300 group-hover:scale-x-100" />
+                <span
+                  className={`absolute inset-x-0 -bottom-px h-[2px] origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100 ${
+                    onDark ? "bg-white" : "bg-ice-600"
+                  }`}
+                />
               </a>
             ))}
           </nav>
@@ -100,12 +130,13 @@ export function SiteHeader() {
           <div className="flex items-center gap-3">
             <a
               href="#contact"
-              className="hidden text-[13.5px] font-semibold text-ink-800 transition hover:text-ice-700 xl:inline-flex"
+              className={`btn hidden !h-10 sm:inline-flex ${
+                onDark
+                  ? "border border-white/40 text-white hover:border-white/80 hover:bg-white/10"
+                  : "bg-ice-600 text-white hover:bg-ice-700"
+              }`}
             >
               Request a quotation
-            </a>
-            <a href="#contact" className="btn-primary hidden !h-10 sm:inline-flex">
-              Book a site visit
               <ArrowRight className="h-4 w-4" />
             </a>
             <button
@@ -113,17 +144,22 @@ export function SiteHeader() {
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-300 text-ink-800 transition hover:bg-slate-50 lg:hidden"
+              className={`inline-flex h-10 w-10 items-center justify-center rounded-lg border transition lg:hidden ${
+                onDark
+                  ? "border-white/30 text-white hover:bg-white/10"
+                  : "border-slate-300 text-ink-800 hover:bg-slate-50"
+              }`}
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
 
-        {/* reading progress */}
         <div className="relative h-[2px] w-full">
           <span
-            className="absolute left-0 top-0 h-full bg-ice-600 transition-[width] duration-150 ease-out"
+            className={`absolute left-0 top-0 h-full transition-[width] duration-150 ease-out ${
+              onDark ? "bg-white/70" : "bg-ice-600"
+            }`}
             style={{ width: `${progress * 100}%` }}
           />
         </div>
@@ -148,7 +184,7 @@ export function SiteHeader() {
           ))}
           <div className="mt-3 grid gap-2.5">
             <a href="#contact" onClick={() => setOpen(false)} className="btn-primary w-full">
-              Book a site visit
+              Request a quotation
             </a>
             <a href={site.phoneHref} className="btn-secondary w-full">
               <Phone className="h-4 w-4" /> {site.phone}

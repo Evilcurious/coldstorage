@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
+import { PanelSmoke, SmokeTexture } from "@/components/Smoke";
 import { zones } from "@/lib/site";
 
 const SCALE_MIN = -30;
@@ -22,7 +23,7 @@ export function Zones() {
         <SectionHeading
           eyebrow="Temperature regimes"
           title="Independently controlled rooms for every product family"
-          body="Each regime has its own refrigeration circuit, alarm set points and calibrated sensors, so an event in one room cannot affect the cargo in another."
+          body="Each regime runs on its own refrigeration circuit, alarm set points and calibrated sensors."
         />
 
         {/* selector */}
@@ -134,7 +135,9 @@ export function Zones() {
                 sizes="(min-width: 1024px) 52vw, 100vw"
                 className="object-cover"
               />
-              <span className="absolute left-4 top-4 rounded-md bg-white/95 px-2.5 py-1.5 text-2xs font-semibold uppercase tracking-[0.12em] text-ink-800 backdrop-blur">
+              <SmokeTexture opacity={0.34} seed={40 + active.numeric} />
+              <PanelSmoke variant="floor" intensity={0.75} className="bottom-0 top-auto h-2/3" />
+              <span className="absolute left-4 top-4 rounded-md bg-white/95 px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-800 backdrop-blur">
                 {active.label} · {active.temp}
               </span>
             </div>

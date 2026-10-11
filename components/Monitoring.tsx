@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ArrowRight, FileCheck2, Radio, ShieldCheck } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { LiveConditions } from "@/components/LiveConditions";
+import { PanelSmoke, SmokeTexture } from "@/components/Smoke";
 import { buildSeries } from "@/lib/rand";
 
 type Room = {
@@ -124,7 +125,7 @@ export function Monitoring() {
         <SectionHeading
           eyebrow="Monitoring & compliance"
           title="Continuous monitoring with records you can hand to an auditor"
-          body="1,204 calibrated sensors report every 30 seconds. Detected deviations escalate to an on-call engineer within 60 seconds, and every event is retained against the consignments it affected."
+          body="1,204 calibrated sensors report every 30 seconds and deviations escalate to an on-call engineer within a minute."
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
@@ -307,6 +308,8 @@ export function Monitoring() {
             sizes="100vw"
             className="object-cover opacity-25"
           />
+          <SmokeTexture opacity={0.3} seed={17} />
+          <PanelSmoke intensity={0.7} />
           <div className="relative flex flex-col gap-6 px-7 py-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
             <div className="max-w-2xl">
               <span className="inline-flex items-center gap-2 text-2xs font-semibold uppercase tracking-[0.18em] text-ice-300">

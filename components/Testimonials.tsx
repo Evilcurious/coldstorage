@@ -8,7 +8,7 @@ export function Testimonials() {
         <SectionHeading
           eyebrow="Client experience"
           title="What clients report after their first season"
-          body="Long-hold storage is judged on what did not happen: no soft product, no unexplained deviation, no missing paperwork."
+          body="Long-hold storage is judged on what did not happen."
         />
 
         <div className="mt-12 grid gap-5 lg:grid-cols-3">

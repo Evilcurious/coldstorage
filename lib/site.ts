@@ -1,6 +1,6 @@
 /**
  * Single source of truth for brand, contact and commercial copy.
- * Change the values here to re-brand the whole site.
+ * Copy is kept deliberately short — the site leans on photography.
  */
 
 export const site = {
@@ -8,7 +8,7 @@ export const site = {
   shortName: "Tahseen Jaber",
   tagline: "Precision cold chain infrastructure",
   description:
-    "Temperature-controlled warehousing and cold-chain logistics in Baghdad: blast freezing to −25 °C, validated 2–8 °C pharmaceutical rooms and 24/7 monitored operations.",
+    "Temperature-controlled warehousing in Baghdad: blast freezing to −25 °C, validated 2–8 °C pharmaceutical rooms and monitored cold-chain operations, 24 hours a day.",
   location: "Uuayrij Industrial Area, Baghdad",
   phone: "+964 770 450 2200",
   phoneHref: "tel:+9647704502200",
@@ -19,42 +19,142 @@ export const site = {
 } as const;
 
 export const nav = [
+  { label: "Facility", href: "#gallery" },
   { label: "Capabilities", href: "#services" },
-  { label: "Temperature regimes", href: "#zones" },
-  { label: "Infrastructure", href: "#facility" },
+  { label: "Regimes", href: "#zones" },
   { label: "Monitoring", href: "#monitoring" },
   { label: "Commercial", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Contact", href: "#contact" },
 ] as const;
 
-export type HeroStat = { value: number; suffix: string; label: string };
+/* ------------------------------------------------------------------ *
+ *  Hero slideshow
+ * ------------------------------------------------------------------ */
+export type HeroSlide = {
+  src: string;
+  alt: string;
+  label: string;
+  temp: string;
+  detail: string;
+};
 
-export const heroStats: HeroStat[] = [
+export const heroSlides: HeroSlide[] = [
+  {
+    src: "/images/hero-facility.jpg",
+    alt: "Racked pallet positions inside a temperature-controlled cold storage room",
+    label: "Frozen storage",
+    temp: "−25 °C",
+    detail: "18,000 pallet positions",
+  },
+  {
+    src: "/images/cold-corridor.jpg",
+    alt: "Cold vapour rolling along an insulated corridor between cold rooms",
+    label: "Insulated transfer",
+    temp: "No warm air",
+    detail: "Dock to room without interruption",
+  },
+  {
+    src: "/images/forklift-cold.jpg",
+    alt: "Electric forklift moving a pallet through a frozen storage aisle",
+    label: "Aisle operations",
+    temp: "−22 °C",
+    detail: "Narrow-aisle racking",
+  },
+  {
+    src: "/images/blast-freezer.jpg",
+    alt: "Frosted evaporator fans inside a blast freezing room",
+    label: "Blast freezing",
+    temp: "−25 °C",
+    detail: "Six hour freeze cycle",
+  },
+  {
+    src: "/images/loading-dock.jpg",
+    alt: "Refrigerated trailers backed into the facility loading docks",
+    label: "Refrigerated docks",
+    temp: "−18 °C",
+    detail: "Sealed dock shelters",
+  },
+];
+
+export const heroStats = [
   { value: 18000, suffix: "", label: "Pallet positions" },
   { value: 25, suffix: " °C", label: "Coldest room" },
   { value: 99.98, suffix: "%", label: "Temperature uptime" },
-  { value: 24, suffix: "/7", label: "Monitored operations" },
+  { value: 24, suffix: "/7", label: "Monitored" },
 ];
 
-export const certifications = [
+/* ------------------------------------------------------------------ *
+ *  Facility gallery
+ * ------------------------------------------------------------------ */
+export const gallery = [
   {
-    name: "ISO 22000:2018",
-    detail: "Food safety management system, independently audited",
+    src: "/images/cold-corridor.jpg",
+    alt: "Cold vapour drifting through an insulated corridor",
+    caption: "Transfer corridor",
+    detail: "Sealed, insulated, −18 °C",
+    span: "2x2",
   },
   {
-    name: "HACCP",
-    detail: "Hazard analysis and critical control point programme",
+    src: "/images/frost-macro.jpg",
+    alt: "Ice crystals forming on chilled pipework",
+    caption: "Frost control",
+    detail: "Overnight defrost cycles",
+    span: "1x2",
   },
   {
-    name: "GDP compliant",
-    detail: "Good distribution practice for pharmaceutical cargo",
+    src: "/images/seafood-pallets.jpg",
+    alt: "Frozen seafood cartons on pallets under frost",
+    caption: "Deep frozen cargo",
+    detail: "−25 °C hard freeze",
+    span: "1x1",
   },
   {
-    name: "Halal handling",
-    detail: "Segregated storage and handling lines on request",
+    src: "/images/technician-panel.jpg",
+    alt: "Technician inspecting a refrigeration control panel",
+    caption: "Plant inspection",
+    detail: "Scheduled twice daily",
+    span: "1x1",
+  },
+  {
+    src: "/images/exterior-dusk.jpg",
+    alt: "Cold storage facility exterior at dusk",
+    caption: "Dispatch at blue hour",
+    detail: "Six refrigerated docks",
+    span: "2x1",
+  },
+  {
+    src: "/images/tablet-check.jpg",
+    alt: "Gloved hands checking a temperature dashboard on a tablet",
+    caption: "Temperature checks",
+    detail: "1,204 sensors",
+    span: "1x1",
+  },
+  {
+    src: "/images/pharma-coldroom.jpg",
+    alt: "Validated pharmaceutical cold room with monitoring equipment",
+    caption: "Pharmaceutical rooms",
+    detail: "Validated 2–8 °C",
+    span: "1x1",
+  },
+  {
+    src: "/images/frozen-racking.jpg",
+    alt: "Frost on racking inside a frozen storage room",
+    caption: "Long-hold frozen storage",
+    detail: "Up to 24 months",
+    span: "2x1",
+  },
+  {
+    src: "/images/control-room.jpg",
+    alt: "Cold-chain monitoring station with temperature displays",
+    caption: "Monitoring station",
+    detail: "Events logged continuously",
+    span: "2x1",
   },
 ] as const;
 
+/* ------------------------------------------------------------------ *
+ *  Process, services, regimes
+ * ------------------------------------------------------------------ */
 export type Step = {
   id: string;
   title: string;
@@ -67,10 +167,10 @@ export type Step = {
 export const chain: Step[] = [
   {
     id: "receive",
-    title: "Receiving & intake",
+    title: "Receiving",
     temp: "+4 °C",
-    duration: "Dock-to-room in 0 min",
-    body: "Inbound vehicles back directly onto six refrigerated docks. Cargo is weighed, scanned and core-probed before it leaves the trailer.",
+    duration: "No ambient exposure",
+    body: "Trailers seal to six refrigerated docks and product is core-probed before unloading.",
     icon: "truck",
   },
   {
@@ -78,23 +178,23 @@ export const chain: Step[] = [
     title: "Blast freezing",
     temp: "−25 °C",
     duration: "6 hour cycle",
-    body: "High-velocity air blast freezes product through its thermal core, protecting texture, colour and moisture loss on thaw.",
+    body: "High-velocity air freezes product through its centre, protecting texture and moisture.",
     icon: "snowflake",
   },
   {
     id: "store",
-    title: "Deep frozen storage",
+    title: "Frozen storage",
     temp: "−22 °C",
     duration: "Up to 24 months",
-    body: "Narrow-aisle racking in independently insulated rooms, each served by its own redundant refrigeration circuit.",
+    body: "Narrow-aisle racking in insulated rooms, each on its own redundant circuit.",
     icon: "thermometer",
   },
   {
     id: "dispatch",
-    title: "Picking & dispatch",
+    title: "Dispatch",
     temp: "−18 °C",
     duration: "45 minute turnaround",
-    body: "FEFO picking under cold-safe lighting, loaded into pre-cooled trailers with sealed temperature loggers on every consignment.",
+    body: "FEFO picking into pre-cooled trailers with sealed temperature loggers.",
     icon: "package",
   },
 ];
@@ -102,6 +202,7 @@ export const chain: Step[] = [
 export type Service = {
   title: string;
   body: string;
+  image: string;
   icon: "snowflake" | "package" | "thermometer" | "clipboard" | "truck" | "shield";
   meta: string;
 };
@@ -109,39 +210,45 @@ export type Service = {
 export const services: Service[] = [
   {
     title: "Blast freezing",
-    body: "Rapid −25 °C hard freeze for fresh produce, poultry, red meat and seafood, with an unbroken cold chain from intake to pallet.",
+    body: "Rapid −25 °C hard freeze from intake to pallet.",
+    image: "/images/blast-freezer.jpg",
     icon: "snowflake",
-    meta: "From −25 °C",
+    meta: "−25 °C",
   },
   {
     title: "Frozen & chilled storage",
-    body: "18,000 pallet positions across four temperature regimes, with narrow-aisle access and per-pallet temperature history.",
+    body: "18,000 pallet positions across four regimes.",
+    image: "/images/frozen-racking.jpg",
     icon: "package",
     meta: "Four regimes",
   },
   {
     title: "Pharmaceutical cold rooms",
-    body: "Validated 2–8 °C rooms with continuous mapping, alarmed excursion limits and audit-ready documentation for regulated cargo.",
+    body: "Validated 2–8 °C rooms with mapped sensors.",
+    image: "/images/pharma-coldroom.jpg",
     icon: "thermometer",
-    meta: "2–8 °C validated",
+    meta: "2–8 °C",
   },
   {
     title: "Inventory management",
-    body: "Barcoded pallet tracking, real-time stock visibility and FEFO rotation, with monthly reconciliation against your own records.",
+    body: "Barcoded pallets, live stock data, FEFO rotation.",
+    image: "/images/tablet-check.jpg",
     icon: "clipboard",
-    meta: "Live stock data",
+    meta: "Live data",
   },
   {
     title: "Refrigerated distribution",
-    body: "Pre-cooled trailers with dual temperature recorders covering city and interstate delivery windows on fixed schedules.",
+    body: "Pre-cooled trailers with dual recorders.",
+    image: "/images/loading-dock.jpg",
     icon: "truck",
     meta: "Nationwide",
   },
   {
     title: "Cold-chain advisory",
-    body: "Room design, refrigeration sizing and packaging studies for producers establishing frozen export programmes for the first time.",
+    body: "Room design, refrigeration sizing and packaging studies.",
+    image: "/images/technician-panel.jpg",
     icon: "shield",
-    meta: "Engineering support",
+    meta: "Engineering",
   },
 ];
 
@@ -164,9 +271,9 @@ export const zones: Zone[] = [
     temp: "−25 °C",
     numeric: -25,
     accent: "#1470AC",
-    body: "Our coldest rooms hold hard-frozen cargo for extended periods, with nitrogen-backed backup compressors and twice-hourly probe checks.",
+    body: "Our coldest rooms, with nitrogen-backed backup compressors and twice-hourly probe checks.",
     uses: ["Frozen meat & poultry", "Seafood", "Ice cream", "Long-hold produce"],
-    image: "/images/frozen-racking.jpg",
+    image: "/images/seafood-pallets.jpg",
     specs: [
       { label: "Set point", value: "−25.0 °C" },
       { label: "Permitted deviation", value: "±1.0 °C" },
@@ -180,7 +287,7 @@ export const zones: Zone[] = [
     temp: "0 °C",
     numeric: 0,
     accent: "#2A89C8",
-    body: "A gently chilled regime for fresh produce and dairy requiring air movement, controlled humidity and daily rotation.",
+    body: "For fresh produce and dairy needing air movement, humidity control and daily rotation.",
     uses: ["Dairy & eggs", "Fresh produce", "Chilled meat", "Bakery inputs"],
     image: "/images/hero-facility.jpg",
     specs: [
@@ -196,7 +303,7 @@ export const zones: Zone[] = [
     temp: "2–8 °C",
     numeric: 5,
     accent: "#57A8DE",
-    body: "Validated rooms for regulated product, with calibrated loggers, escalation procedures and exportable records for inspections.",
+    body: "Validated rooms with calibrated loggers, escalation procedures and exportable records.",
     uses: ["Pharmaceuticals", "Medical devices", "Cosmetics", "Seeds & cultures"],
     image: "/images/pharma-coldroom.jpg",
     specs: [
@@ -215,24 +322,16 @@ export const facilityStats = [
   { value: "12", label: "Validated cold rooms", detail: "independently mapped" },
 ];
 
+/** Three infrastructure facts — headline and figure only. */
 export const capabilities = [
-  {
-    title: "Redundant refrigeration",
-    body: "N+1 compressors and dual feeders, with a standby generator sized to hold every room at set point for 72 hours.",
-    stat: "72 h autonomy",
-  },
-  {
-    title: "Documented temperature history",
-    body: "Every room, door and pallet event is timestamped and exportable in a format your auditors can read.",
-    stat: "2,880 samples / room / day",
-  },
-  {
-    title: "Efficient plant operation",
-    body: "Heat reclaim, floating head pressure and CO₂-ready systems reduce energy per pallet stored year on year.",
-    stat: "18 % less kWh / pallet",
-  },
+  { title: "Redundant refrigeration", stat: "72 h autonomy" },
+  { title: "Documented temperature history", stat: "2,880 samples / room / day" },
+  { title: "Efficient plant operation", stat: "18 % less kWh / pallet" },
 ];
 
+/* ------------------------------------------------------------------ *
+ *  Commercial
+ * ------------------------------------------------------------------ */
 export type Plan = {
   name: string;
   blurb: string;
@@ -245,35 +344,35 @@ export type Plan = {
 export const plans: Plan[] = [
   {
     name: "Chilled Flex",
-    blurb: "Short-hold chilled capacity for fresh and seasonal volume.",
+    blurb: "Short-hold chilled capacity.",
     pallet: 34,
     tonne: 52,
     features: [
       "Chilled 0 °C rooms",
       "Per-pallet temperature log",
-      "Monthly stock reconciliation",
+      "Monthly reconciliation",
       "Client stock portal",
       "No long-term commitment",
     ],
   },
   {
     name: "Deep Freeze",
-    blurb: "Long-hold frozen storage, our most widely used agreement.",
+    blurb: "Long-hold frozen storage.",
     pallet: 26,
     tonne: 41,
     featured: true,
     features: [
-      "Frozen −22 °C storage & blast freezing",
+      "Frozen −22 °C & blast freezing",
       "FEFO rotation included",
       "Named account manager",
-      "24/7 emergency intake line",
+      "24/7 emergency intake",
       "Automated excursion alerts",
       "Quarterly cold-chain review",
     ],
   },
   {
     name: "Pharma Assured",
-    blurb: "Validated capacity for regulated and specialty cargo.",
+    blurb: "Validated regulated storage.",
     pallet: 68,
     tonne: 96,
     features: [
@@ -293,7 +392,7 @@ export const industries = [
   "Dairy",
   "Fresh produce",
   "Pharmaceuticals",
-  "Bakery & confectionery",
+  "Bakery",
   "Food service",
   "Retail distribution",
   "Ice cream",
@@ -301,22 +400,29 @@ export const industries = [
   "Import & export",
 ];
 
+export const certifications = [
+  { name: "ISO 22000:2018", detail: "Food safety management" },
+  { name: "HACCP", detail: "Critical control point programme" },
+  { name: "GDP compliant", detail: "Pharmaceutical distribution" },
+  { name: "Halal handling", detail: "Segregated lines on request" },
+] as const;
+
 export const testimonials = [
   {
     quote:
-      "We moved 400 tonnes of frozen poultry through their blast freezers in a single season. Nothing arrived soft, and their stock reports reconciled to the kilo.",
+      "400 tonnes of frozen poultry in one season and nothing arrived soft. Their stock reports reconciled to the kilo.",
     name: "National food distributor",
-    role: "Frozen poultry, 400 t in season",
+    role: "Frozen poultry",
   },
   {
     quote:
-      "The 2–8 °C rooms came with full mapping documentation, which is precisely what our audit required. Excursion alerts reach us before our own team notices.",
+      "Full mapping documentation came with the 2–8 °C rooms — exactly what our audit required.",
     name: "Pharmaceutical wholesaler",
-    role: "Qualified person, import & distribution",
+    role: "Qualified person",
   },
   {
     quote:
-      "Twenty-two months of continuous storage for our export programme, with the same account manager throughout. Predictable, cold and uneventful.",
+      "Twenty-two months of continuous storage with the same account manager. Predictable and uneventful.",
     name: "Frozen export producer",
     role: "Operations director",
   },
@@ -325,27 +431,27 @@ export const testimonials = [
 export const faqs = [
   {
     q: "How quickly can you accept a new consignment?",
-    a: "Emergency intake is available 24 hours a day. Send the product type, pallet count and target temperature and we can normally reserve a dock and a room the same day.",
+    a: "Emergency intake runs 24 hours a day. Send the product type, pallet count and target temperature and we can normally reserve a dock and a room the same day.",
   },
   {
     q: "Is blast freezing available as a standalone service?",
-    a: "Yes. Many clients use us purely for the −25 °C hard freeze and then collect their own product for export. Blast freezing is billed per tonne of product rather than per pallet position.",
+    a: "Yes. Many clients use us purely for the −25 °C hard freeze and collect the product themselves. It is billed per tonne rather than per pallet position.",
   },
   {
-    q: "Who owns and maintains the temperature records?",
-    a: "You do. Room, door and pallet temperatures are logged continuously, and the full history is available on request in a format your auditors can read.",
+    q: "Who owns the temperature records?",
+    a: "You do. Room, door and pallet temperatures are logged continuously and the full history is available on request in an auditor-readable format.",
   },
   {
     q: "What happens during a power failure?",
-    a: "Dual feeders and a redundant standby generator carry the load automatically. Rooms hold set point within a tested 72-hour autonomy window, and alarms escalate to on-call engineers within seconds.",
+    a: "Dual feeders and a redundant standby generator carry the load automatically, holding set point within a tested 72-hour autonomy window.",
   },
   {
-    q: "Can you store pharmaceuticals and food in the same facility?",
-    a: "Yes, in fully segregated rooms with separate access routes and independent documentation, so regulated product never shares a cold chain with food-grade cargo.",
+    q: "Can pharmaceuticals and food share the facility?",
+    a: "They share the campus, never the cold chain: segregated rooms, separate access routes and independent documentation.",
   },
   {
     q: "Is there a minimum storage period?",
-    a: "Chilled Flex and Deep Freeze agreements carry no long-term commitment. Pharma Assured requires a short qualification period, because validated rooms must be re-mapped for each new product family.",
+    a: "Chilled Flex and Deep Freeze carry no long-term commitment. Pharma Assured requires a short qualification period for each new product family.",
   },
 ];
 
@@ -355,19 +461,19 @@ export const footerLinks = [
     links: [
       { label: "Blast freezing", href: "#services" },
       { label: "Frozen & chilled storage", href: "#services" },
-      { label: "Pharmaceutical cold rooms", href: "#zones" },
+      { label: "Pharmaceutical rooms", href: "#zones" },
       { label: "Inventory management", href: "#services" },
-      { label: "Refrigerated distribution", href: "#services" },
+      { label: "Distribution", href: "#services" },
     ],
   },
   {
-    heading: "Operations",
+    heading: "Facility",
     links: [
+      { label: "Gallery", href: "#gallery" },
       { label: "Temperature regimes", href: "#zones" },
-      { label: "Monitoring & compliance", href: "#monitoring" },
-      { label: "Infrastructure", href: "#facility" },
+      { label: "Monitoring", href: "#monitoring" },
+      { label: "Compliance", href: "#compliance" },
       { label: "Commercial terms", href: "#pricing" },
-      { label: "FAQ", href: "#faq" },
     ],
   },
   {
@@ -376,7 +482,7 @@ export const footerLinks = [
       { label: "Contact", href: "#contact" },
       { label: "Book a site visit", href: "#contact" },
       { label: "Careers", href: "#contact" },
-      { label: "Compliance & certificates", href: "#monitoring" },
+      { label: "FAQ", href: "#faq" },
       { label: "Request a quotation", href: "#contact" },
     ],
   },

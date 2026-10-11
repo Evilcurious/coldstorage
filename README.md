@@ -21,21 +21,51 @@ npm run build && npm start
 | Section | Purpose |
 | --- | --- |
 | Utility bar + header | address and email, 24/7 acceptance status, intake phone, scroll progress |
-| Hero | positioning statement, headline metrics, facility photograph, live conditions panel |
+| Hero | full-bleed five-image slideshow with smoke and minimal copy |
 | Compliance strip | ISO 22000, HACCP, GDP and Halal handling credentials |
-| Cold chain process | four documented stages with temperature and cycle time for each |
-| Capabilities | six services including blast freezing, pharma rooms and distribution |
+| Facility gallery | nine-tile image mosaic with short captions |
+| Cold chain process | four stages, one line of copy each, with temperature and cycle time |
+| Capabilities | six photographic service cards, one line each |
 | Temperature regimes | interactive −25 °C / 0 °C / 2–8 °C selector plotted on one operating scale |
-| Infrastructure | facility photography, redundancy and documentation capabilities, plant metrics |
+| Infrastructure | facility photography, three headline infrastructure facts, plant metrics |
 | Monitoring & compliance | 24-hour temperature trace, live readout, event log, client data access |
+| Sectors | twelve customer categories as a single chip strip |
 | Commercial terms | per-pallet / per-tonne rates, agreement comparison, indicative cost estimator |
-| Sectors | twelve customer categories served |
-| Client experience | three outcome-led references |
+| Client experience | three one-line references |
 | FAQ | six operational and commercial questions |
 | Contact | commercial contact channels and a structured enquiry form, on a dark band |
 | Footer | navigation, capacity updates, legal line |
 
+Copy is intentionally short: most sections lead with a photograph and carry a single
+supporting line.
+
 A discreet contact button for the operations desk floats in the bottom-right corner.
+
+## Hero slideshow
+
+The hero is a full-viewport image slideshow rather than a text block:
+
+- **Five slides** (`hero-facility`, `cold-corridor`, `forklift-cold`, `blast-freezer`,
+  `loading-dock`) with minimal text: a short label, the regime temperature and one detail line.
+- **Alternating travel direction** — slides travel right-to-left, then left-to-right, on
+  every automatic change, with a slow Ken Burns drift inside each frame.
+- **Controls:** progress indicators that fill over the slide duration, previous/next
+  buttons, arrow-key-free hover pause, and touch swipe on mobile.
+- The header and utility bar are transparent over the slideshow and switch to a white
+  bar with dark text once you scroll past the hero.
+
+## Smoke system
+
+`components/Smoke.tsx` provides three layers:
+
+| Export | Use |
+| --- | --- |
+| `SiteSmoke` | fixed, site-wide cold vapour — five slow plumes drifting above every section |
+| `PanelSmoke` | local vapour for the hero, gallery and photographic panels (`variant="floor"` adds rolling ground mist) |
+| `SmokeTexture` | SVG `feTurbulence` vapour texture; `animated` is enabled only in the hero so the noise animation stays cheap |
+
+The plumes animate with transforms only (blurred rasters are reused), and the turbulence
+filter is rendered at low resolution and stretched.
 
 ## Motion policy
 

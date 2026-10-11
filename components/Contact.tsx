@@ -12,6 +12,7 @@ import {
   Send,
 } from "lucide-react";
 import { site } from "@/lib/site";
+import { PanelSmoke, SmokeTexture } from "@/components/Smoke";
 
 const cargoTypes = [
   "Frozen food / meat / poultry",
@@ -53,6 +54,8 @@ export function Contact() {
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-grid-faint bg-grid opacity-[0.35] [mask-image:radial-gradient(70%_60%_at_30%_0%,black,transparent)]"
       />
+      <PanelSmoke className="z-0" intensity={0.85} />
+      <SmokeTexture className="top-auto h-[60%]" opacity={0.3} seed={31} />
 
       <div className="shell relative py-16 sm:py-20 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
@@ -63,8 +66,8 @@ export function Contact() {
               Talk to our commercial team
             </h2>
             <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-slate-300">
-              Send the details of your consignment and we will come back with available capacity, a
-              temperature plan and indicative pricing — normally within one working day.
+              Send your consignment details and we will respond with capacity, a temperature plan
+              and indicative pricing.
             </p>
 
             <dl className="mt-10 divide-y divide-white/10 border-y border-white/10">

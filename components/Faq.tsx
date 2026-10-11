@@ -16,7 +16,7 @@ export function Faq() {
             <SectionHeading
               eyebrow="Frequently asked"
               title="Questions asked before the first consignment"
-              body="If your question is not covered here, our commercial desk answers directly — no call centre, no automated queue."
+              body="If your question is not covered here, our commercial desk answers directly."
             />
 
             <div data-reveal className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-5">

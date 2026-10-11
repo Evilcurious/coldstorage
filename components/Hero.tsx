@@ -1,104 +1,232 @@
+"use client";
+
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowRight, CalendarCheck, Phone } from "lucide-react";
-import { CountUp } from "@/components/CountUp";
-import { LiveConditions } from "@/components/LiveConditions";
-import { Snowfall } from "@/components/Snowfall";
-import { heroStats, site } from "@/lib/site";
+import { ArrowRight, ChevronLeft, ChevronRight, Phone } from "lucide-react";
+import { PanelSmoke, SmokeTexture } from "@/components/Smoke";
+import { heroSlides, site } from "@/lib/site";
+
+const SLIDE_MS = 6400;
 
 export function Hero() {
+  const [index, setIndex] = useState(0);
+  const [previous, setPrevious] = useState(0);
+  const [direction, setDirection] = useState<1 | -1>(1);
+  const [paused, setPaused] = useState(false);
+  const touchX = useRef<number | null>(null);
+  const pausedRef = useRef(false);
+  const elapsed = useRef(0);
+
+  const total = heroSlides.length;
+  const active = heroSlides[index];
+
+  const goTo = useCallback(
+    (next: number, dir: 1 | -1) => {
+      elapsed.current = 0;
+      setPrevious(index);
+      setDirection(dir);
+      setIndex(((next % total) + total) % total);
+    },
+    [index, total],
+  );
+
+  const indexRef = useRef(index);
+  useEffect(() => {
+    indexRef.current = index;
+    pausedRef.current = paused;
+  }, [index, paused]);
+
+  /* alternate the travel direction on every automatic change */
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const tick = 120;
+    const id = window.setInterval(() => {
+      if (pausedRef.current) return;
+      elapsed.current += tick;
+      if (elapsed.current >= SLIDE_MS) {
+        const current = indexRef.current;
+        goTo(current + 1, current % 2 === 0 ? 1 : -1);
+      }
+    }, tick);
+    return () => window.clearInterval(id);
+  }, [goTo]);
+
+  const slideStyle = (i: number): React.CSSProperties => {
+    const isActive = i === index;
+    const isLeaving = i === previous && previous !== index;
+    const shift = isActive ? 0 : isLeaving ? -direction : direction;
+    return {
+      transform: `translate3d(${shift * 100}%, 0, 0) scale(${isActive ? 1 : 1.03})`,
+      opacity: isActive ? 1 : 0,
+      zIndex: isActive ? 2 : isLeaving ? 1 : 0,
+    };
+  };
+
   return (
-    <section id="top" className="relative overflow-hidden pt-[104px] lg:pt-[150px]">
+    <section id="top" className="relative z-20 isolate overflow-hidden bg-ink-950">
+      {/* ---------- slides ---------- */}
       <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-grid-faint bg-grid [mask-image:radial-gradient(72%_58%_at_50%_0%,black,transparent)]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-40 -top-40 h-[420px] w-[420px] rounded-full bg-ice-100/70 blur-3xl"
-      />
+        className="relative h-[100svh] min-h-[560px] w-full overflow-hidden"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocusCapture={() => setPaused(true)}
+        onBlurCapture={() => setPaused(false)}
+        onTouchStart={(e) => {
+          touchX.current = e.touches[0]?.clientX ?? null;
+        }}
+        onTouchEnd={(e) => {
+          const start = touchX.current;
+          const end = e.changedTouches[0]?.clientX ?? null;
+          if (start === null || end === null) return;
+          const delta = end - start;
+          if (Math.abs(delta) < 48) return;
+          goTo(index + (delta < 0 ? 1 : -1), delta < 0 ? 1 : -1);
+        }}
+      >
+        {heroSlides.map((slide, i) => (
+          <div
+            key={slide.src}
+            className="hero-slide absolute inset-0"
+            style={slideStyle(i)}
+            aria-hidden={i !== index}
+          >
+            <div
+              className={`absolute inset-0 ${
+                i === index ? (direction === 1 ? "kenburns-right" : "kenburns-left") : ""
+              }`}
+            >
+              <Image
+                src={slide.src}
+                alt={slide.alt}
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        ))}
 
-      <div className="shell relative pb-16 lg:pb-20">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_1fr] lg:gap-16">
-          {/* copy */}
-          <div className="enter">
-            <span className="label">Cold chain infrastructure · Baghdad</span>
+        {/* ---------- overlays: scrim, smoke, texture ---------- */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-[3] bg-gradient-to-r from-ink-950/85 via-ink-950/45 to-ink-950/15"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-[3] bg-gradient-to-t from-ink-950/85 via-transparent to-ink-950/60"
+        />
+        <PanelSmoke className="z-[4]" variant="both" intensity={1.05} />
+        <SmokeTexture
+          className="z-[4] bottom-0 top-auto h-[58%]"
+          opacity={0.42}
+          seed={11}
+          scale={1.1}
+          animated
+        />
 
-            <h1 className="mt-5 font-display text-[34px] font-bold leading-[1.1] tracking-tight text-ink-900 sm:text-[44px] lg:text-[50px]">
-              Precision cold storage for food, pharmaceutical and specialty cargo
+        {/* ---------- content ---------- */}
+        <div className="shell relative z-10 flex h-full flex-col justify-end pb-16 pt-[132px] sm:justify-center sm:pb-24">
+          <div className="max-w-2xl">
+            <span className="inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-ice-200">
+              <span className="h-px w-8 bg-ice-300/70" />
+              {site.location}
+            </span>
+
+            <h1 className="mt-5 font-display text-[38px] font-bold leading-[1.05] text-white sm:text-[54px] lg:text-[62px]">
+              Keep the cold chain
+              <span className="block text-ice-200">unbroken</span>
             </h1>
 
-            <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-slate-600">
-              {site.name} operates 18,000 pallet positions across four temperature regimes —
-              blast freezing to −25 °C, validated 2–8 °C pharmaceutical rooms and 24/7 monitored
-              operations at the Uuayrij Industrial Area.
+            <p className="mt-5 max-w-md text-[15.5px] leading-relaxed text-slate-200">
+              Blast freezing, deep frozen storage and validated pharmaceutical cold rooms —
+              monitored around the clock in Baghdad.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a href="#contact" className="btn-primary">
+              <a
+                href="#contact"
+                className="btn h-[46px] bg-white px-6 text-ink-900 hover:-translate-y-px hover:bg-slate-100"
+              >
                 Request a quotation
                 <ArrowRight className="h-4 w-4" />
               </a>
-              <a href="#zones" className="btn-secondary">
-                <CalendarCheck className="h-4 w-4 text-ice-600" />
-                View temperature regimes
-              </a>
               <a
                 href={site.phoneHref}
-                className="ml-1 hidden items-center gap-2 text-[13.5px] font-semibold text-ink-800 transition hover:text-ice-700 sm:inline-flex"
+                className="btn h-[46px] border border-white/35 px-6 text-white hover:border-white/70 hover:bg-white/10"
               >
-                <Phone className="h-4 w-4 text-ice-600" />
+                <Phone className="h-4 w-4" />
                 {site.phone}
               </a>
             </div>
 
-            {/* headline metrics */}
-            <dl className="mt-12 grid grid-cols-2 gap-y-8 border-t border-slate-200 pt-8 sm:grid-cols-4">
-              {heroStats.map((stat, i) => (
-                <div
-                  key={stat.label}
-                  className={i > 0 ? "sm:border-l sm:border-slate-200 sm:pl-6" : ""}
-                >
-                  <dd className="font-display text-[26px] font-bold leading-none tracking-tight text-ink-900 tabular-nums">
-                    {stat.label === "Coldest room" ? "−" : ""}
-                    <CountUp
-                      value={stat.value}
-                      suffix={stat.suffix}
-                      decimals={Number.isInteger(stat.value) ? 0 : 2}
-                    />
-                  </dd>
-                  <dt className="mt-2 text-[12px] font-medium uppercase tracking-[0.12em] text-slate-400">
-                    {stat.label}
-                  </dt>
-                </div>
-              ))}
-            </dl>
+            {/* slide caption + live temperature */}
+            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/15 pt-5">
+              <span className="text-[12.5px] font-semibold uppercase tracking-[0.16em] text-white">
+                {active.label}
+              </span>
+              <span className="text-[12.5px] font-medium tabular-nums text-ice-200">
+                {active.temp}
+              </span>
+              <span className="hidden text-[12.5px] text-slate-300 sm:inline">{active.detail}</span>
+            </div>
           </div>
+        </div>
 
-          {/* visual */}
-          <div className="enter relative [animation-delay:120ms]">
-            <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-panel">
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
-                <div className="animate-drift absolute inset-0">
-                  <Image
-                    src="/images/hero-facility.jpg"
-                    alt="Racked pallet positions inside a temperature-controlled cold storage room"
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 46vw, 100vw"
-                    className="object-cover"
+        {/* ---------- controls ---------- */}
+        <div className="absolute inset-x-0 bottom-0 z-10">
+          <div className="shell flex items-center justify-between gap-6 pb-6">
+            {/* indicators */}
+            <div className="flex items-center gap-2.5" role="tablist" aria-label="Facility slides">
+              {heroSlides.map((slide, i) => (
+                <button
+                  key={slide.src}
+                  type="button"
+                  role="tab"
+                  aria-selected={i === index}
+                  aria-label={`Show ${slide.label}`}
+                  onClick={() => goTo(i, i > index ? 1 : -1)}
+                  className="group relative h-[3px] w-10 overflow-hidden rounded-full bg-white/30 sm:w-14"
+                >
+                  <span
+                    className={`block h-full w-full rounded-full bg-white ${
+                      i === index ? "slide-progress" : "scale-x-0"
+                    }`}
+                    key={`${i}-${index}`}
+                    style={
+                      {
+                        "--slide-ms": `${SLIDE_MS}ms`,
+                        animationPlayState: paused ? "paused" : "running",
+                      } as React.CSSProperties
+                    }
                   />
-                </div>
-                <Snowfall count={7} seed={5} speed={0.7} />
-                <span className="absolute right-4 top-4 rounded-md bg-ink-900/85 px-2.5 py-1.5 text-2xs font-semibold uppercase tracking-[0.12em] text-white backdrop-blur">
-                  Frozen storage · Aisle B
-                </span>
-              </div>
+                </button>
+              ))}
+              <span className="ml-2 font-display text-[12px] font-semibold tabular-nums text-white/70">
+                {String(index + 1).padStart(2, "0")}
+                <span className="text-white/40"> / {String(total).padStart(2, "0")}</span>
+              </span>
             </div>
 
-            <LiveConditions
-              className="mx-auto -mt-8 w-[330px] max-w-full lg:absolute lg:-bottom-12 lg:-left-12 lg:mt-0"
-              room="Deep freeze · Room 04"
-            />
+            {/* arrows */}
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => goTo(index - 1, -1)}
+                aria-label="Previous slide"
+                className="grid h-10 w-10 place-items-center rounded-full border border-white/30 text-white transition hover:border-white/70 hover:bg-white/10"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => goTo(index + 1, 1)}
+                aria-label="Next slide"
+                className="grid h-10 w-10 place-items-center rounded-full border border-white/30 text-white transition hover:border-white/70 hover:bg-white/10"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -55,7 +55,7 @@ export function Pricing() {
         <SectionHeading
           eyebrow="Commercial terms"
           title="Storage billed on space, handling billed on movement"
-          body="We quote both components up front, so your landed cost per kilo stays predictable. Rates below are indicative and confirmed against your volume, regime and rotation pattern."
+          body="Both components quoted up front, so your landed cost per kilo stays predictable."
           aside={
             <div className="inline-flex gap-1 rounded-lg border border-slate-200 bg-white p-1 shadow-card">
               {(["pallet", "tonne"] as Basis[]).map((option) => (
