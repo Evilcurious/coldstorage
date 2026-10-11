@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { Snowflake } from "lucide-react";
 
 type SectionHeadingProps = {
   eyebrow: string;
@@ -7,36 +6,42 @@ type SectionHeadingProps = {
   body?: ReactNode;
   align?: "left" | "center";
   className?: string;
+  /** optional right-hand slot (link or button) shown on wide screens */
+  aside?: ReactNode;
 };
 
 export function SectionHeading({
   eyebrow,
   title,
   body,
-  align = "center",
+  align = "left",
   className = "",
+  aside,
 }: SectionHeadingProps) {
   const centered = align === "center";
+
   return (
     <div
-      data-reveal
-      className={`${centered ? "mx-auto max-w-2xl text-center" : "max-w-2xl"} ${className}`}
+      className={`flex flex-col gap-6 ${
+        centered
+          ? "items-center text-center"
+          : "lg:flex-row lg:items-end lg:justify-between"
+      } ${className}`}
     >
-      <span className="eyebrow">
-        <Snowflake className="h-3.5 w-3.5 text-ice-500" />
-        {eyebrow}
-      </span>
-      <h2 className="mt-5 font-display text-[30px] font-extrabold leading-[1.12] tracking-tight text-ink-900 sm:text-[38px] lg:text-[42px]">
-        {title}
-      </h2>
-      {body ? (
-        <p
-          className={`mt-4 text-[16px] leading-relaxed text-ink-500 ${
-            centered ? "mx-auto" : ""
-          }`}
-        >
-          {body}
-        </p>
+      <div className={`${centered ? "max-w-2xl" : "max-w-2xl"} `} data-reveal>
+        <span className={`label ${centered ? "label-center" : ""}`}>{eyebrow}</span>
+        <h2 className="mt-4 font-display text-[27px] font-bold leading-[1.18] text-ink-900 sm:text-[34px] lg:text-[38px]">
+          {title}
+        </h2>
+        {body ? (
+          <p className="mt-4 text-[15.5px] leading-relaxed text-slate-600">{body}</p>
+        ) : null}
+      </div>
+
+      {aside ? (
+        <div className="shrink-0" data-reveal>
+          {aside}
+        </div>
       ) : null}
     </div>
   );

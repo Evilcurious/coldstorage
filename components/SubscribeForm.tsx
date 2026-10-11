@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 
-/** Footer newsletter capture. Client-side only so the footer can stay static. */
+/** Footer capacity-updates capture. */
 export function SubscribeForm() {
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
@@ -28,21 +28,15 @@ export function SubscribeForm() {
         }}
         placeholder="you@company.com"
         aria-label="Email address"
-        className="w-full rounded-2xl border border-frost-400 bg-white/90 px-4 py-3 text-[13.5px] outline-none transition focus:border-ice-400"
+        className="h-11 w-full rounded-lg border border-white/15 bg-white/5 px-3.5 text-[13.5px] text-white transition placeholder:text-slate-500 focus:border-ice-400 focus:outline-none focus:ring-2 focus:ring-ice-500/20"
       />
-      <button
-        type="submit"
-        className="btn-primary shrink-0 !px-5 !py-3"
-        aria-live="polite"
-      >
+      <button type="submit" className="btn shrink-0 bg-white text-ink-900 hover:bg-slate-100">
         {done ? (
           <>
             Subscribed <Check className="h-4 w-4" />
           </>
         ) : (
-          <>
-            Subscribe <ArrowRight className="h-4 w-4" />
-          </>
+          "Subscribe"
         )}
       </button>
     </form>

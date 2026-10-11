@@ -10,43 +10,32 @@ type Flake = {
   delay: number;
   drift: number;
   opacity: number;
-  ring: boolean;
 };
 
 function buildFlakes(count: number, seed: number): Flake[] {
   const rand = mulberry32(seed);
-  return Array.from({ length: count }, () => {
-    const size = 2 + rand() * 4.5;
-    return {
-      left: rand() * 100,
-      size,
-      duration: 11 + rand() * 16,
-      delay: -rand() * 22,
-      drift: (rand() - 0.5) * 90,
-      opacity: 0.28 + rand() * 0.5,
-      ring: rand() > 0.72,
-    };
-  });
+  return Array.from({ length: count }, () => ({
+    left: rand() * 100,
+    size: 1.5 + rand() * 2.5,
+    duration: 22 + rand() * 20,
+    delay: -rand() * 26,
+    drift: (rand() - 0.5) * 50,
+    opacity: 0.18 + rand() * 0.3,
+  }));
 }
 
 type SnowfallProps = {
   count?: number;
   seed?: number;
   className?: string;
-  /** warp the layer to feel slower/faster */
   speed?: number;
 };
 
 /**
- * Light, decorative snowfall. Renders only inside a positioned, overflow-hidden
- * parent. Purely presentational: hidden from assistive tech, non-interactive.
+ * Very restrained snowfall — a few slow flakes, used inside photographic panels
+ * only. Presentational: hidden from assistive technology, non-interactive.
  */
-export function Snowfall({
-  count = 14,
-  seed = 7,
-  className = "",
-  speed = 1,
-}: SnowfallProps) {
+export function Snowfall({ count = 8, seed = 7, className = "", speed = 1 }: SnowfallProps) {
   const flakes = useMemo(() => buildFlakes(count, seed), [count, seed]);
 
   return (
@@ -57,7 +46,7 @@ export function Snowfall({
       {flakes.map((flake, i) => (
         <span
           key={i}
-          className="animate-snowfall absolute top-0 block"
+          className="animate-snowfall absolute top-0 block rounded-full bg-white"
           style={
             {
               left: `${flake.left}%`,
@@ -69,13 +58,7 @@ export function Snowfall({
               "--flake-opacity": flake.opacity,
             } as React.CSSProperties
           }
-        >
-          {flake.ring ? (
-            <span className="block h-full w-full rounded-full border border-white/90 bg-white/30 shadow-[0_0_6px_rgba(142,210,248,0.9)]" />
-          ) : (
-            <span className="block h-full w-full rounded-full bg-white shadow-[0_0_8px_rgba(142,210,248,0.85)]" />
-          )}
-        </span>
+        />
       ))}
     </div>
   );

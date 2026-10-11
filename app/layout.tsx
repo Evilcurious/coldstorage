@@ -4,7 +4,6 @@ import "@fontsource/inter/500.css";
 import "@fontsource/inter/600.css";
 import "@fontsource/plus-jakarta-sans/600.css";
 import "@fontsource/plus-jakarta-sans/700.css";
-import "@fontsource/plus-jakarta-sans/800.css";
 import "./globals.css";
 import { RevealOnScroll } from "@/components/RevealOnScroll";
 import { site } from "@/lib/site";
@@ -12,7 +11,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   metadataBase: new URL("https://tahseenjabercold.com"),
   title: {
-    default: `${site.name} — ${site.tagline}`,
+    default: `${site.name} | ${site.tagline}`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -21,12 +20,12 @@ export const metadata: Metadata = {
     "cold chain",
     "blast freezing",
     "frozen warehousing",
-    "pharma cold room",
+    "pharmaceutical cold room",
     "temperature controlled logistics",
     "Baghdad cold storage",
   ],
   openGraph: {
-    title: `${site.name} — ${site.tagline}`,
+    title: `${site.name} | ${site.tagline}`,
     description: site.description,
     type: "website",
     locale: "en_US",
@@ -35,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — ${site.tagline}`,
+    title: `${site.name} | ${site.tagline}`,
     description: site.description,
     images: ["/images/hero-facility.jpg"],
   },
@@ -43,7 +42,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#2e9be6",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
@@ -65,31 +64,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     },
     amenityFeature: [
       { "@type": "LocationFeatureSpecification", name: "Blast freezing", value: "-25 °C" },
-      { "@type": "LocationFeatureSpecification", name: "Validated pharma cold rooms", value: "2-8 °C" },
+      { "@type": "LocationFeatureSpecification", name: "Validated pharmaceutical storage", value: "2-8 °C" },
+      { "@type": "LocationFeatureSpecification", name: "Chilled storage", value: "0 °C" },
     ],
   };
 
   return (
     <html lang="en">
-      <body className="font-sans">
+      <body>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-5 focus:py-2 focus:text-sm focus:font-semibold focus:text-ice-700 focus:shadow-lift"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-5 focus:py-2.5 focus:text-[13px] focus:font-semibold focus:text-ice-700 focus:shadow-panel"
         >
           Skip to content
         </a>
-
-        {/* ambient cold-storage atmosphere: drifting mist + slow snow */}
-        <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-          <div className="mist-layer animate-mist absolute inset-x-[-10%] bottom-[-15%] h-[60vh]" />
-          <div className="animate-drift absolute -left-24 top-24 h-72 w-72 rounded-full bg-ice-300/25 blur-3xl" />
-          <div className="animate-drift absolute -right-20 top-[55%] h-80 w-80 rounded-full bg-frost-400/30 blur-3xl [animation-delay:-8s]" />
-        </div>
-
         <RevealOnScroll />
         {children}
       </body>

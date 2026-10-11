@@ -9,127 +9,86 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        frost: {
-          50: "#f7fbff",
-          100: "#eff7ff",
-          200: "#e0efff",
-          300: "#cbe5fa",
-          400: "#a9d4f4",
-          500: "#7fbeeb",
-        },
-        ice: {
-          300: "#8ed2f8",
-          400: "#57b7ef",
-          500: "#2e9be6",
-          600: "#1b7cc4",
-          700: "#155f98",
-        },
+        /* deep navy — used for headings and dark bands */
         ink: {
-          900: "#0a2540",
-          800: "#123252",
-          700: "#1c4667",
-          600: "#2f5b7d",
-          500: "#4a6b87",
-          400: "#6e8aa3",
-          300: "#9bb2c6",
-          200: "#c2d3e1",
+          950: "#07182A",
+          900: "#0B1F33",
+          800: "#12304A",
+          700: "#1B4260",
+          600: "#26557A",
+        },
+        /* primary accent: restrained corporate blue */
+        ice: {
+          50: "#F3F8FD",
+          100: "#E5F1FA",
+          200: "#C7E2F5",
+          300: "#94C9EC",
+          400: "#57A8DE",
+          500: "#2A89C8",
+          600: "#1470AC",
+          700: "#0E5C8F",
+          800: "#0C4A73",
+          900: "#0A3A5A",
         },
       },
       fontFamily: {
         display: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
         sans: ["Inter", "system-ui", "sans-serif"],
       },
+      fontSize: {
+        "2xs": ["11px", { lineHeight: "16px" }],
+      },
       boxShadow: {
-        soft: "0 1px 2px rgba(10,37,64,0.04), 0 8px 24px -12px rgba(10,37,64,0.14)",
-        lift: "0 2px 4px rgba(10,37,64,0.05), 0 24px 48px -20px rgba(10,37,64,0.25)",
-        frost: "0 0 0 1px rgba(255,255,255,0.7) inset, 0 20px 60px -30px rgba(46,155,230,0.55)",
-        glow: "0 18px 40px -18px rgba(46,155,230,0.65)",
-        inner: "inset 0 1px 0 rgba(255,255,255,0.9)",
+        card: "0 1px 2px rgba(11,31,51,0.04), 0 1px 3px rgba(11,31,51,0.06)",
+        "card-hover":
+          "0 4px 8px -2px rgba(11,31,51,0.08), 0 16px 32px -16px rgba(11,31,51,0.18)",
+        panel: "0 24px 48px -32px rgba(11,31,51,0.35)",
+        inset: "inset 0 1px 0 rgba(255,255,255,0.08)",
       },
       backgroundImage: {
-        "ice-fade":
-          "linear-gradient(180deg, #ffffff 0%, #f7fbff 38%, #eaf4ff 100%)",
-        "ice-sheen":
-          "linear-gradient(110deg, rgba(255,255,255,0) 20%, rgba(255,255,255,0.85) 50%, rgba(255,255,255,0) 80%)",
-        "ice-grid":
-          "linear-gradient(to right, rgba(46,155,230,0.09) 1px, transparent 1px), linear-gradient(to bottom, rgba(46,155,230,0.09) 1px, transparent 1px)",
-        "brand-grad":
-          "linear-gradient(135deg, #57b7ef 0%, #2e9be6 45%, #1b7cc4 100%)",
-        "frost-grad":
-          "radial-gradient(120% 90% at 12% 0%, rgba(87,183,239,0.20), transparent 55%), radial-gradient(90% 80% at 92% 8%, rgba(169,212,244,0.35), transparent 60%)",
+        "air-fade":
+          "linear-gradient(180deg, #ffffff 0%, #f8fbfe 45%, #f1f7fc 100%)",
+        "ice-line":
+          "linear-gradient(90deg, rgba(20,112,172,0) 0%, rgba(20,112,172,0.35) 50%, rgba(20,112,172,0) 100%)",
+        "grid-faint":
+          "linear-gradient(to right, rgba(11,31,51,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(11,31,51,0.045) 1px, transparent 1px)",
       },
       backgroundSize: {
-        grid: "42px 42px",
+        grid: "56px 56px",
       },
       keyframes: {
-        floatSlow: {
-          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
-          "50%": { transform: "translateY(-14px) rotate(1.5deg)" },
-        },
-        floatFast: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-8px)" },
-        },
         drift: {
-          "0%": { transform: "translate3d(-4%, 0, 0) scale(1.05)" },
-          "50%": { transform: "translate3d(4%, -2%, 0) scale(1.12)" },
-          "100%": { transform: "translate3d(-4%, 0, 0) scale(1.05)" },
-        },
-        spinSlow: {
-          to: { transform: "rotate(360deg)" },
+          "0%, 100%": { transform: "scale(1.04) translate3d(-1%, 0, 0)" },
+          "50%": { transform: "scale(1.07) translate3d(1%, -1%, 0)" },
         },
         pulseRing: {
-          "0%": { transform: "scale(0.85)", opacity: "0.55" },
-          "100%": { transform: "scale(1.65)", opacity: "0" },
+          "0%": { transform: "scale(1)", opacity: "0.5" },
+          "100%": { transform: "scale(2.2)", opacity: "0" },
         },
-        frostBreathe: {
-          "0%, 100%": { opacity: "0.5", transform: "scale(1)" },
-          "50%": { opacity: "0.85", transform: "scale(1.04)" },
-        },
-        sheen: {
-          "0%": { transform: "translateX(-120%) skewX(-14deg)" },
-          "100%": { transform: "translateX(220%) skewX(-14deg)" },
-        },
-        lineFlow: {
+        flow: {
           "0%": { backgroundPosition: "0% 50%" },
           "100%": { backgroundPosition: "200% 50%" },
-        },
-        riseFall: {
-          "0%, 100%": { transform: "translateY(6px)", opacity: "0.35" },
-          "50%": { transform: "translateY(-6px)", opacity: "0.9" },
-        },
-        scan: {
-          "0%": { transform: "translateY(-6%)", opacity: "0" },
-          "35%": { opacity: "0.9" },
-          "100%": { transform: "translateY(320%)", opacity: "0" },
         },
         marquee: {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
-        needle: {
-          "0%, 100%": { transform: "rotate(-4deg)" },
-          "50%": { transform: "rotate(4deg)" },
+        floaty: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-6px)" },
         },
-        shimmerText: {
-          "0%": { backgroundPosition: "0% 50%" },
-          "100%": { backgroundPosition: "-200% 50%" },
+        needle: {
+          "0%, 100%": { transform: "rotate(-2.5deg)" },
+          "50%": { transform: "rotate(2.5deg)" },
         },
       },
       animation: {
-        "float-slow": "floatSlow 7s ease-in-out infinite",
-        "float-fast": "floatFast 4.5s ease-in-out infinite",
-        drift: "drift 26s ease-in-out infinite",
-        "spin-slow": "spinSlow 26s linear infinite",
-        "pulse-ring": "pulseRing 2.6s ease-out infinite",
-        "frost-breathe": "frostBreathe 9s ease-in-out infinite",
-        sheen: "sheen 3.4s ease-in-out infinite",
-        lineflow: "lineFlow 2.6s linear infinite",
-        "rise-fall": "riseFall 3.6s ease-in-out infinite",
-        scan: "scan 4.2s ease-in-out infinite",
-        marquee: "marquee 38s linear infinite",
-        needle: "needle 3.2s ease-in-out infinite",
-        "shimmer-text": "shimmerText 6s linear infinite",
+        drift: "drift 34s ease-in-out infinite",
+        "pulse-ring": "pulseRing 2.4s ease-out infinite",
+        lineflow: "flow 3.2s linear infinite",
+        marquee: "marquee 46s linear infinite",
+        floaty: "floaty 6s ease-in-out infinite",
+        needle: "needle 5s ease-in-out infinite",
       },
     },
   },
