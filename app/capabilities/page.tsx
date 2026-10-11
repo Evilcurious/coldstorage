@@ -2,23 +2,25 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Services } from "@/components/Services";
 import { Chain } from "@/components/Chain";
+import { Testimonials } from "@/components/Testimonials";
 import { PageOutro } from "@/components/PageOutro";
-import { pageBySlug } from "@/lib/pages";
+import { en } from "@/lib/i18n/en";
 
-const page = pageBySlug("/capabilities");
+const copy = en.pages.capabilities;
 
 export const metadata: Metadata = {
-  title: page.label,
-  description: page.blurb,
+  title: copy.label,
+  description: copy.blurb,
 };
 
 export default function CapabilitiesPage() {
   return (
     <main id="main">
-      <PageHero page={page} />
+      <PageHero slug="capabilities" />
       <Services />
       <Chain />
-      <PageOutro current={page} />
+      <Testimonials />
+      <PageOutro current="capabilities" />
     </main>
   );
 }

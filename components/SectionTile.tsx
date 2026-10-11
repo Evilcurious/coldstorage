@@ -1,11 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import type { SitePage } from "@/lib/pages";
 import { SmokeTexture } from "@/components/Smoke";
+import { useI18n } from "@/components/LanguageProvider";
+import { pageTiles, type PageSlug } from "@/lib/media";
 
 type SectionTileProps = {
-  page: SitePage;
+  slug: PageSlug;
   /** grid placement passed in by the parent */
   className?: string;
   index?: number;
@@ -16,23 +19,27 @@ type SectionTileProps = {
 
 /**
  * Photograph-only tile. Nothing is written over the image until the pointer
- * arrives, at which point the label fades in in light blue.
+ * arrives, at which point the label fades in.
  */
 export function SectionTile({
-  page,
+  slug,
   className = "",
   index = 0,
   sizes = "(min-width: 1024px) 33vw, 100vw",
   alwaysLabel = false,
 }: SectionTileProps) {
+  const { content } = useI18n();
+  const tile = pageTiles[slug];
+  const label = content.pages[slug].label;
+
   return (
     <Link
-      href={page.slug}
+      href={`/${slug}`}
       className={`group relative block overflow-hidden rounded-xl border border-white/10 bg-ink-950 ${className}`}
     >
       <Image
-        src={page.tile.src}
-        alt={page.tile.alt}
+        src={tile.src}
+        alt={tile.alt}
         fill
         sizes={sizes}
         className="tile-image object-cover"
@@ -48,11 +55,11 @@ export function SectionTile({
       />
 
       <span
-        className={`tile-label absolute bottom-5 left-5 flex items-center gap-2 font-display text-[15px] font-bold text-white sm:text-[17px] ${
+        className={`tile-label absolute bottom-5 start-5 flex items-center gap-2 font-display text-[15px] font-bold text-white sm:text-[17px] ${
           alwaysLabel ? "!opacity-100 !translate-y-0" : ""
         }`}
       >
-        {page.label}
+        {label}
         <ArrowUpRight className="h-4 w-4" />
       </span>
     </Link>

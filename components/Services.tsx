@@ -1,34 +1,40 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
-import { services } from "@/lib/site";
+import { useI18n } from "@/components/LanguageProvider";
+import { serviceMedia } from "@/lib/media";
 
 /** Capabilities as photographic cards — one line of copy each. */
 export function Services() {
+  const { content } = useI18n();
+
   return (
     <section id="services" className="section border-y border-slate-200 bg-slate-50/70">
       <div className="shell">
         <SectionHeading
-          eyebrow="Capabilities"
-          title="Six services covering the full cold chain"
+          eyebrow={content.services.eyebrow}
+          title={content.services.title}
           aside={
-            <a href="/contact" className="btn-secondary">
-              Discuss your requirement
-            </a>
+            <Link href="/contact" className="btn-secondary">
+              {content.ui.discuss}
+            </Link>
           }
         />
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, i) => (
+          {content.services.items.map((service, i) => (
             <article
-              key={service.title}
+              key={service.key}
               data-reveal
               style={{ "--reveal-delay": `${(i % 3) * 70}ms` } as React.CSSProperties}
               className="card group overflow-hidden"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden">
                 <Image
-                  src={service.image}
+                  src={serviceMedia[service.key]}
                   alt={service.title}
                   fill
                   sizes="(min-width: 1024px) 33vw, 100vw"
@@ -38,7 +44,7 @@ export function Services() {
                   aria-hidden
                   className="absolute inset-0 bg-gradient-to-t from-ink-950/55 via-transparent to-transparent"
                 />
-                <span className="absolute left-4 top-4 rounded-md bg-white/92 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-ink-800 backdrop-blur">
+                <span className="absolute start-4 top-4 rounded-md bg-white/92 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-ink-800 backdrop-blur">
                   {service.meta}
                 </span>
               </div>
@@ -52,7 +58,7 @@ export function Services() {
                     {service.body}
                   </p>
                 </div>
-                <ArrowUpRight className="mt-1 h-4 w-4 shrink-0 text-slate-300 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-ice-600" />
+                <ArrowUpRight className="mt-1 h-4 w-4 shrink-0 text-slate-300 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:text-ember-600 rtl:group-hover:-translate-x-0.5" />
               </div>
             </article>
           ))}

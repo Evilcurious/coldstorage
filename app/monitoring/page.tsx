@@ -4,23 +4,23 @@ import { Monitoring } from "@/components/Monitoring";
 import { Compliance } from "@/components/Compliance";
 import { Faq } from "@/components/Faq";
 import { PageOutro } from "@/components/PageOutro";
-import { pageBySlug } from "@/lib/pages";
+import { en } from "@/lib/i18n/en";
 
-const page = pageBySlug("/monitoring");
+const copy = en.pages.monitoring;
 
 export const metadata: Metadata = {
-  title: page.label,
-  description: page.blurb,
+  title: copy.label,
+  description: copy.blurb,
 };
 
 export default function MonitoringPage() {
   return (
     <main id="main">
-      <PageHero page={page} />
+      <PageHero slug="monitoring" />
       <Monitoring />
       <Compliance />
       <Faq />
-      <PageOutro current={page} />
+      <PageOutro current="monitoring" />
     </main>
   );
 }

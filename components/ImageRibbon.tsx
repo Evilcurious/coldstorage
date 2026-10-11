@@ -1,30 +1,28 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { SmokeTexture } from "@/components/Smoke";
-
-const strips = [
-  { src: "/images/hero-facility.jpg", alt: "Racked pallet positions in a cold room", href: "/facility" },
-  { src: "/images/forklift-cold.jpg", alt: "Forklift working a frozen aisle", href: "/capabilities" },
-  { src: "/images/frost-macro.jpg", alt: "Ice crystals on chilled pipework", href: "/regimes" },
-  { src: "/images/technician-panel.jpg", alt: "Technician at a control panel", href: "/monitoring" },
-  { src: "/images/loading-dock.jpg", alt: "Refrigerated trailers at the docks", href: "/commercial" },
-];
+import { useI18n } from "@/components/LanguageProvider";
+import { pageTiles, ribbonMedia } from "@/lib/media";
 
 /** Full-bleed photograph ribbon — no copy, each frame links to its section. */
 export function ImageRibbon() {
+  const { content } = useI18n();
+
   return (
-    <section aria-label="Facility photography" className="border-y border-slate-200 bg-white">
+    <section aria-label={content.brand.legalName} className="border-y border-slate-200 bg-white">
       <div className="grid grid-cols-2 gap-px bg-slate-200 sm:grid-cols-3 lg:grid-cols-5">
-        {strips.map((strip, i) => (
+        {ribbonMedia.map((strip, i) => (
           <Link
             key={strip.src}
-            href={strip.href}
+            href={`/${strip.slug}`}
             className="group relative block aspect-[4/5] overflow-hidden bg-ink-950 sm:aspect-[3/4]"
-            aria-label={`Open section ${strip.href.replace("/", "")}`}
+            aria-label={content.pages[strip.slug].label}
           >
             <Image
               src={strip.src}
-              alt={strip.alt}
+              alt={pageTiles[strip.slug].alt}
               fill
               sizes="(min-width: 1024px) 20vw, 50vw"
               className="tile-image object-cover"

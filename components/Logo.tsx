@@ -80,7 +80,7 @@ export function Logo({ className = "", tone = "dark" }: LogoProps) {
       <BrandMark className="h-full w-auto shrink-0" />
       <span className="flex flex-col justify-center leading-none">
         <span
-          className={`font-display text-[14px] font-extrabold uppercase leading-none tracking-[0.02em] sm:text-[15.5px] ${navy}`}
+          className={`font-display text-[13px] font-extrabold uppercase leading-none tracking-[0.02em] sm:text-[15.5px] ${navy}`}
         >
           {site.wordmark}
         </span>

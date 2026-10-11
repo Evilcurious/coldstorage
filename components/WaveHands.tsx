@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
+import { useI18n } from "@/components/LanguageProvider";
 
 /** A small gloved hand, cuff in brand rust, drawn as vector art. */
 function Hand({ className = "", tone = "navy" }: { className?: string; tone?: "navy" | "rust" }) {
@@ -42,6 +43,7 @@ function Hand({ className = "", tone = "navy" }: { className?: string; tone?: "n
  * Deliberately small, waves gently, and can be dismissed for the session.
  */
 export function WaveHands() {
+  const { content } = useI18n();
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(true);
   const [greeting, setGreeting] = useState(false);
@@ -85,15 +87,15 @@ export function WaveHands() {
   if (dismissed || !visible) return null;
 
   return (
-    <div className="enter fixed bottom-4 left-4 z-40 sm:bottom-6 sm:left-6">
+    <div className="enter fixed bottom-4 start-4 z-40 sm:bottom-6 sm:start-6">
       <div className="relative flex items-end gap-1">
         {/* hello bubble */}
         <span
-          className={`absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-semibold text-ink-900 shadow-card transition-all duration-500 ${
+          className={`absolute -top-3 start-1/2 -translate-x-1/2 whitespace-nowrap rtl:translate-x-1/2 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-semibold text-ink-900 shadow-card transition-all duration-500 ${
             greeting ? "translate-y-0 opacity-100" : "-translate-y-1 opacity-0"
           }`}
         >
-          Hello
+          {content.ui.hello}
         </span>
 
         {/* first hand */}
@@ -112,8 +114,8 @@ export function WaveHands() {
             window.sessionStorage.setItem("tj-hands-hidden", "1");
             setDismissed(true);
           }}
-          aria-label="Hide the waving hands"
-          className="absolute -right-2 -top-6 grid h-6 w-6 place-items-center rounded-full border border-slate-200 bg-white text-slate-400 shadow-card transition hover:text-ink-900"
+          aria-label={content.ui.hideHands}
+          className="absolute -end-2 -top-6 grid h-6 w-6 place-items-center rounded-full border border-slate-200 bg-white text-slate-400 shadow-card transition hover:text-ink-900"
         >
           <X className="h-3 w-3" />
         </button>

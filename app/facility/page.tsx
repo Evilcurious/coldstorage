@@ -3,22 +3,22 @@ import { PageHero } from "@/components/PageHero";
 import { Gallery } from "@/components/Gallery";
 import { Facility } from "@/components/Facility";
 import { PageOutro } from "@/components/PageOutro";
-import { pageBySlug } from "@/lib/pages";
+import { en } from "@/lib/i18n/en";
 
-const page = pageBySlug("/facility");
+const copy = en.pages.facility;
 
 export const metadata: Metadata = {
-  title: page.label,
-  description: page.blurb,
+  title: copy.label,
+  description: copy.blurb,
 };
 
 export default function FacilityPage() {
   return (
     <main id="main">
-      <PageHero page={page} />
+      <PageHero slug="facility" />
       <Gallery />
       <Facility />
-      <PageOutro current={page} />
+      <PageOutro current="facility" />
     </main>
   );
 }

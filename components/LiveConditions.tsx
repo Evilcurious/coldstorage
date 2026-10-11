@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { CheckCircle2 } from "lucide-react";
+import { useI18n } from "@/components/LanguageProvider";
 
 const SCALE_MIN = -30;
 const SCALE_MAX = -20;
 
 type LiveConditionsProps = {
-  room?: string;
+  room: string;
   /** set point in °C */
   setPoint?: number;
   /** allowed band in °C */
@@ -21,11 +22,12 @@ type LiveConditionsProps = {
  * live, without becoming noisy.
  */
 export function LiveConditions({
-  room = "Deep freeze · Room 04",
+  room,
   setPoint = -25,
   band = [-27, -23],
   className = "",
 }: LiveConditionsProps) {
+  const { content } = useI18n();
   const [reading, setReading] = useState(setPoint);
 
   useEffect(() => {
@@ -41,31 +43,31 @@ export function LiveConditions({
 
   return (
     <div className={`panel overflow-hidden ${className}`}>
-      <div className="flex items-center justify-between border-b border-slate-100 px-5 py-3">
-        <span className="text-2xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+      <div className="flex items-center justify-between gap-3 border-b border-slate-100 px-5 py-3">
+        <span className="truncate text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">
           {room}
         </span>
-        <span className="inline-flex items-center gap-1.5 text-[11.5px] font-semibold text-emerald-600">
+        <span className="inline-flex shrink-0 items-center gap-1.5 text-[11.5px] font-semibold text-emerald-600">
           <CheckCircle2 className="h-3.5 w-3.5" />
-          Within range
+          {content.ui.withinRange}
         </span>
       </div>
 
       <div className="px-5 py-4">
-        <div className="flex items-end justify-between">
+        <div className="flex items-end justify-between gap-4">
           <div>
-            <p className="font-display text-[34px] font-bold leading-none tracking-tight text-ink-900 tabular-nums numeric">
+            <p className="numeric font-display text-[32px] font-bold leading-none tracking-tight text-ink-900 sm:text-[34px]">
               {reading.toFixed(1)}
-              <span className="ml-1 align-top text-[16px] font-semibold text-slate-400">°C</span>
+              <span className="ms-1 align-top text-[16px] font-semibold text-slate-400">°C</span>
             </p>
-            <p className="mt-2 text-[12px] text-slate-500">
-              Set point {setPoint.toFixed(1)} °C · band {band[0]} to {band[1]} °C
+            <p className="numeric mt-2 text-[12px] text-slate-500">
+              {content.ui.setPoint} {setPoint.toFixed(1)} °C · {content.ui.band} {band[0]} / {band[1]} °C
             </p>
           </div>
-          <p className="text-right text-[11.5px] leading-relaxed text-slate-400">
-            Verified
+          <p className="shrink-0 text-end text-[11.5px] leading-relaxed text-slate-400">
+            {content.ui.verified}
             <br />
-            <span className="font-semibold text-slate-500">30 s ago</span>
+            <span className="numeric font-semibold text-slate-500">30 s</span>
           </p>
         </div>
 
@@ -76,13 +78,13 @@ export function LiveConditions({
             style={{ left: `${pct(band[0])}%`, right: `${100 - pct(band[1])}%` }}
           />
           <span
-            className="absolute -top-1 h-3.5 w-[3px] rounded-full bg-ice-600 transition-[left] duration-[1400ms] ease-out"
+            className="absolute -top-1 h-3.5 w-[3px] rounded-full bg-ember-600 transition-[left] duration-[1400ms] ease-out"
             style={{ left: `calc(${pct(reading)}% - 1.5px)` }}
           />
         </div>
-        <div className="mt-2 flex justify-between text-[10.5px] font-medium tabular-nums text-slate-400 numeric">
+        <div className="numeric mt-2 flex justify-between gap-2 text-[10.5px] font-medium text-slate-400">
           <span>{SCALE_MIN} °C</span>
-          <span>{setPoint} °C set point</span>
+          <span>{setPoint} °C</span>
           <span>{SCALE_MAX} °C</span>
         </div>
       </div>

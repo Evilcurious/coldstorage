@@ -72,6 +72,37 @@
     @apply py-12 sm:py-14;
   }
 
+  /* viewport-height boxes: svh where supported, vh as the fallback */
+  .hero-box {
+    min-height: 100vh;
+  }
+
+  .page-hero-box {
+    min-height: 66vh;
+  }
+
+  @supports (min-height: 1svh) {
+    .hero-box {
+      min-height: 100svh;
+    }
+
+    .page-hero-box {
+      min-height: 62svh;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .page-hero-box {
+      min-height: 58vh;
+    }
+
+    @supports (min-height: 1svh) {
+      .page-hero-box {
+        min-height: 58svh;
+      }
+    }
+  }
+
   /* small uppercase label with a leading rule */
   .label {
     @apply inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-ink-900;
@@ -384,17 +415,21 @@
   animation: slideProgress var(--slide-ms, 6200ms) linear forwards;
 }
 
+[dir="rtl"] .slide-progress {
+  transform-origin: right center;
+}
+
 
 /* ------------------------------------------------------------------ *
- *  Text behaviour: white → light blue on dark surfaces,
- *  ink → accent blue on light surfaces
+ *  Text behaviour: pointing at any text warms it to the brand rust —
+ *  deep rust on light surfaces, lit rust on dark surfaces.
  * ------------------------------------------------------------------ */
 :is(h1, h2, h3, h4, p, dt, dd, blockquote, li, span) {
   transition: color 320ms var(--ease-out-soft);
 }
 
 .on-light :is(h1, h2, h3, h4):hover {
-  color: #1B3A63;
+  color: #A8481E;
 }
 
 .on-light :is(p, li, blockquote, dt, dd):hover {
@@ -403,7 +438,7 @@
 
 /* declared after .on-light so nested dark surfaces win */
 .on-dark :is(h1, h2, h3, h4, p, dt, dd, blockquote, li):hover {
-  color: #A9BDD1;
+  color: #C4683F;
 }
 
 .on-dark .text-hover-static:hover {
@@ -424,7 +459,7 @@
 .group:focus-visible .tile-label {
   opacity: 1;
   transform: translateY(0);
-  color: #A9BDD1;
+  color: #C4683F;
 }
 
 .tile-scrim {

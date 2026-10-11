@@ -1,18 +1,22 @@
+"use client";
+
 import { SectionHeading } from "@/components/SectionHeading";
-import { testimonials } from "@/lib/site";
+import { useI18n } from "@/components/LanguageProvider";
 
 export function Testimonials() {
+  const { content } = useI18n();
+
   return (
     <section className="section border-y border-slate-200 bg-slate-50/70">
       <div className="shell">
         <SectionHeading
-          eyebrow="Client experience"
-          title="What clients report after their first season"
-          body="Long-hold storage is judged on what did not happen."
+          eyebrow={content.testimonials.eyebrow}
+          title={content.testimonials.title}
+          body={content.testimonials.body}
         />
 
         <div className="mt-12 grid gap-5 lg:grid-cols-3">
-          {testimonials.map((item, i) => (
+          {content.testimonials.items.map((item, i) => (
             <figure
               key={item.name}
               data-reveal

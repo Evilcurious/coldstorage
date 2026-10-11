@@ -1,5 +1,7 @@
+"use client";
+
 import { SectionTile } from "@/components/SectionTile";
-import { pages } from "@/lib/pages";
+import { useI18n } from "@/components/LanguageProvider";
 
 /* grid placement per tile, filling a 6-column / 3-row mosaic */
 const layout = [
@@ -13,19 +15,22 @@ const layout = [
 
 /** Home page index: the whole site as photographs, labelled only on hover. */
 export function ExploreGrid() {
+  const { content } = useI18n();
+  const items = content.nav;
+
   return (
     <section className="section">
       <div className="shell">
-        <div className="grid auto-rows-[168px] grid-cols-2 gap-3 sm:auto-rows-[190px] lg:auto-rows-[204px] lg:grid-cols-6">
-          {pages.map((page, i) => (
+        <div className="grid auto-rows-[132px] grid-cols-2 gap-3 sm:auto-rows-[176px] lg:auto-rows-[204px] lg:grid-cols-6">
+          {items.map((item, i) => (
             <div
-              key={page.slug}
+              key={item.slug}
               data-reveal="scale"
               style={{ "--reveal-delay": `${(i % 3) * 70}ms` } as React.CSSProperties}
-              className={layout[i]}
+              className={`${layout[i] ?? ""} min-w-0`}
             >
               <SectionTile
-                page={page}
+                slug={item.slug}
                 index={i}
                 className="h-full w-full"
                 sizes="(min-width: 1024px) 34vw, 100vw"
