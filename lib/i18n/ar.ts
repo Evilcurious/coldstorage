@@ -383,7 +383,7 @@ export const ar: Dict = {
       { label: "خط الاستلام · 24 ساعة", value: "+964 770 450 2200" },
       { label: "المكتب التجاري", value: "commercial@tahseenjaber.com" },
       { label: "واتساب", value: "+964 776 867 7775" },
-      { label: "المنشأة", value: "المنطقة الصناعية عويريج، بغداد" },
+      { label: "الموقع", value: "Tahseen Jaber Cold Storage, Uuayrij Industrial area, Baghdad, Iraq" },
     ],
     form: {
       title: "طلب تخزين",

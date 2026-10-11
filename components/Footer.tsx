@@ -44,9 +44,17 @@ export function Footer() {
                   {site.email}
                 </a>
               </li>
-              <li className="flex items-start gap-3 text-[13.5px] text-slate-300">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-ice-400" />
-                {content.hero.eyebrow}
+              <li>
+                <a
+                  href={site.maps}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 text-[13.5px] text-slate-300 transition hover:text-ember-300"
+                  title={`${content.contact.channels[3]?.label ?? "Location"}: ${site.address}`}
+                >
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-ice-400" />
+                  {site.address}
+                </a>
               </li>
             </ul>
 

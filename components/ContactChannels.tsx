@@ -35,15 +35,16 @@ export function ContactIconRow({
         const Icon = iconMap[channel.id];
         const label = content.contact.channels[i]?.label ?? channel.id;
         const glyph = <Icon className="h-4 w-4" aria-hidden />;
+        const external = channel.id === "whatsapp" || channel.id === "location";
 
         return channel.href ? (
           <a
             key={channel.id}
             href={channel.href}
-            target={channel.id === "whatsapp" ? "_blank" : undefined}
-            rel={channel.id === "whatsapp" ? "noopener noreferrer" : undefined}
-            aria-label={label}
-            title={`${label} · ${channel.value}`}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener noreferrer" : undefined}
+            aria-label={`${label}: ${channel.value}`}
+            title={`${label}: ${channel.value}`}
             className={`grid h-10 w-10 place-items-center rounded-lg border transition ${shell}`}
           >
             {glyph}
@@ -51,8 +52,8 @@ export function ContactIconRow({
         ) : (
           <span
             key={channel.id}
-            aria-label={label}
-            title={`${label} · ${channel.value}`}
+            aria-label={`${label}: ${channel.value}`}
+            title={`${label}: ${channel.value}`}
             className={`grid h-10 w-10 place-items-center rounded-lg border ${shell}`}
           >
             {glyph}

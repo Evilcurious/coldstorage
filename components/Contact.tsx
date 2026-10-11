@@ -40,7 +40,7 @@ export function Contact() {
     { href: site.phoneHref, value: site.phone, external: false },
     { href: `mailto:${site.email}`, value: site.email, external: false },
     { href: site.whatsapp, value: site.whatsappNumber, external: true },
-    { href: undefined, value: site.location, external: false },
+    { href: site.maps, value: site.address, external: true },
   ];
 
   return (

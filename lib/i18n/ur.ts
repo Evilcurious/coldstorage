@@ -384,7 +384,7 @@ export const ur: Dict = {
       { label: "انٹیک لائن · چوبیس گھنٹے", value: "+964 770 450 2200" },
       { label: "کمرشل ڈیسک", value: "commercial@tahseenjaber.com" },
       { label: "واٹس ایپ", value: "+964 776 867 7775" },
-      { label: "کارخانہ", value: "ایویریج صنعتی علاقہ، بغداد" },
+      { label: "مقام", value: "Tahseen Jaber Cold Storage, Uuayrij Industrial area, Baghdad, Iraq" },
     ],
     form: {
       title: "ذخیرے کی انکوائری",

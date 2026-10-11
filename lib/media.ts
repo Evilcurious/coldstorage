@@ -60,15 +60,6 @@ export const galleryTiles = [
 ] as const;
 export type GalleryKey = (typeof galleryTiles)[number]["key"];
 
-/* ---------------- photographic ribbon on the home page ---------------- */
-export const ribbonMedia = [
-  { src: "/images/hero-facility.jpg", slug: "facility" as PageSlug },
-  { src: "/images/forklift-cold.jpg", slug: "capabilities" as PageSlug },
-  { src: "/images/frost-macro.jpg", slug: "regimes" as PageSlug },
-  { src: "/images/technician-panel.jpg", slug: "monitoring" as PageSlug },
-  { src: "/images/loading-dock.jpg", slug: "contact" as PageSlug },
-] as const;
-
 /* ---------------- services ---------------- */
 export const serviceMedia = {
   blast: "/images/blast-freezer.jpg",
