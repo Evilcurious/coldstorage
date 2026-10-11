@@ -1,139 +1,183 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ArrowRight, ShieldCheck, ThermometerSnowflake } from "lucide-react";
-import { useQuote } from "./QuoteContext";
-
-const CHAMBERS = [
-  { id: "A1", temp: -22.1, status: "Optimal" },
-  { id: "A2", temp: -20.4, status: "Optimal" },
-  { id: "B1", temp: 3.2, status: "Optimal" },
-  { id: "B4", temp: 5.1, status: "Optimal" },
-  { id: "C2", temp: -18.6, status: "Optimal" },
-  { id: "PH-1", temp: 4.8, status: "GDP Hold" },
-  { id: "BF-3", temp: -38.0, status: "Blast Cycle" },
-  { id: "D1", temp: 12.4, status: "Ambient Cool" },
-];
+import {
+  ArrowRight,
+  CheckCircle2,
+  ChevronDown,
+  Snowflake,
+  Sparkles,
+  ThermometerSnowflake,
+} from "lucide-react";
+import { CountUp } from "@/components/CountUp";
+import { FrostCrystal } from "@/components/Icons";
+import { Snowfall } from "@/components/Snowfall";
+import { TempGauge } from "@/components/TempGauge";
+import { heroStats, site } from "@/lib/site";
 
 export function Hero() {
-  const { setOpen } = useQuote();
-  const [temp, setTemp] = useState(-20.4);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setTemp((t) => {
-        const next = t + (Math.random() - 0.5) * 0.12;
-        return Math.min(-20.05, Math.max(-20.85, next));
-      });
-    }, 1800);
-    return () => clearInterval(id);
-  }, []);
-
   return (
-    <section id="top" className="relative min-h-[100svh] overflow-hidden">
-      <div className="absolute inset-0">
-        <Image
-          src="/images/hero-warehouse.jpg"
-          alt="Automated high-bay cold storage warehouse with robotic pallet systems"
-          fill
-          priority
-          className="object-cover animate-kenburns"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-950/70 via-navy-950/55 to-navy-950" />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-950/80 via-navy-950/30 to-transparent" />
-        <div className="absolute inset-0 bg-grid opacity-40" />
-        <div className="bg-noise absolute inset-0" />
-      </div>
+    <section id="top" className="relative overflow-hidden pb-16 pt-[92px] sm:pb-20 lg:pb-28 lg:pt-[132px]">
+      {/* frosted grid + soft ice blooms */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-ice-grid bg-grid opacity-60 [mask-image:radial-gradient(70%_60%_at_50%_20%,black,transparent)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-24 -top-24 h-[420px] w-[420px] rounded-full bg-frost-300/50 blur-3xl"
+      />
 
-      <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-4 pb-28 pt-28 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-ice-400/25 bg-navy-950/40 px-3 py-1.5 backdrop-blur-md">
-            <span className="live-dot" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-ice-200">
-              Baghdad campus online
-            </span>
-          </div>
+      {/* snowfall drifting across the whole hero, above the blue wash */}
+      <Snowfall count={12} seed={5} speed={0.55} />
 
-          <p className="mb-4 font-display text-sm tracking-[0.28em] text-ice-300">
-            تحسين جابر للخزن البارد
-          </p>
+      <div className="shell relative grid items-center gap-14 lg:grid-cols-[1.02fr_1fr] lg:gap-16">
+        {/* ---------------- copy ---------------- */}
+        <div className="enter">
+          <span className="eyebrow">
+            <Snowflake className="h-3.5 w-3.5 text-ice-500" />
+            {site.location.split(",").pop()?.trim()} · Cold chain since {site.founded}
+          </span>
 
-          <h1 className="heading-display text-4xl leading-[1.05] sm:text-5xl lg:text-6xl xl:text-[4.25rem]">
-            Next-Generation Cold Chain &amp; Logistics Infrastructure
+          <h1 className="mt-6 font-display text-[40px] font-extrabold leading-[1.03] tracking-tight text-ink-900 sm:text-[54px] lg:text-[62px]">
+            Cold storage that
+            <br className="hidden sm:block" />{" "}
+            <span className="animate-shimmer-text gradient-text">never lets the</span>{" "}
+            temperature slip.
           </h1>
 
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
-            Precision temperature control from{" "}
-            <span className="font-semibold text-ice-300">−25°C to +15°C</span> for
-            food, pharmaceutical, and high-care cargo. HACCP-aligned chambers,
-            redundant power, and chain-of-custody visibility across Iraq&apos;s
-            premier cold storage campus.
+          <p className="mt-6 max-w-xl text-[16.5px] leading-relaxed text-ink-500">
+            Blast freezing, deep frozen storage and validated pharma cold rooms under one
+            white-cold roof — with every pallet, door and compressor watched by our{" "}
+            <span className="font-semibold text-ice-700">ColdSense</span> monitoring network,
+            twenty-four hours a day.
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <button type="button" className="btn-primary" onClick={() => setOpen(true)}>
-              Request Storage Quote
-              <ArrowRight className="h-4 w-4" />
-            </button>
-            <a href="#facilities" className="btn-ghost">
-              Explore Facilities
+          <div className="mt-8 flex flex-wrap items-center gap-3.5">
+            <a href="#contact" className="btn-primary group">
+              Book a facility tour
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+            <a href="#chain" className="btn-ghost group">
+              <ThermometerSnowflake className="h-4 w-4 text-ice-500" />
+              See how the cold chain works
             </a>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-4 text-xs text-slate-400">
-            <span className="inline-flex items-center gap-2">
-              <ThermometerSnowflake className="h-4 w-4 text-ice-400" />
-              Multi-zone −25°C / 0–4°C / +15°C
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-ice-400" />
-              Food &amp; pharma safety protocols
-            </span>
-          </div>
-        </div>
+          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2.5 text-[13.5px] font-medium text-ink-500">
+            {[
+              "No warm-air transfer",
+              "Same-day emergency intake",
+              "Audit-ready temperature logs",
+            ].map((item) => (
+              <li key={item} className="inline-flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-ice-500" />
+                {item}
+              </li>
+            ))}
+          </ul>
 
-        <div className="mt-12 max-w-xl">
-          <div className="glass flex flex-wrap items-center gap-x-5 gap-y-2 rounded-2xl px-5 py-4">
-            <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-300">
-              <span className="live-dot" />
-              Live
-            </span>
-            <p className="font-display text-sm text-white sm:text-base">
-              Facility Temp:{" "}
-              <span className="text-ice-300 tabular-nums">
-                {temp.toFixed(1)}°C
-              </span>
-              <span className="mx-2 text-slate-600">|</span>
-              Status:{" "}
-              <span className="text-emerald-300">Optimal</span>
-            </p>
-            <p className="w-full text-[11px] text-slate-400 sm:w-auto">
-              Dual-feed power · Humidity 78–84% · All 24 chambers reporting
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="absolute inset-x-0 bottom-0 border-t border-white/10 bg-navy-950/70 backdrop-blur-md">
-        <div className="overflow-hidden py-3">
-          <div className="ticker-track flex w-max gap-10 pr-10">
-            {[...CHAMBERS, ...CHAMBERS].map((c, i) => (
-              <div
-                key={`${c.id}-${i}`}
-                className="flex items-center gap-3 whitespace-nowrap text-xs text-slate-300"
-              >
-                <span className="rounded bg-ice-400/10 px-1.5 py-0.5 font-mono text-[10px] text-ice-300">
-                  {c.id}
-                </span>
-                <span className="tabular-nums text-white">{c.temp.toFixed(1)}°C</span>
-                <span className="text-emerald-400">{c.status}</span>
+          {/* live stat strip */}
+          <dl className="card mt-10 grid grid-cols-2 gap-y-5 rounded-3xl px-6 py-6 sm:grid-cols-4 sm:gap-x-4">
+            {heroStats.map((stat) => (
+              <div key={stat.label} className="relative sm:px-2">
+                <dt className="sr-only">{stat.label}</dt>
+                <dd className="font-display text-[26px] font-extrabold tracking-tight text-ink-900 tabular-nums">
+                  <CountUp
+                    value={stat.value}
+                    suffix={stat.suffix}
+                    decimals={Number.isInteger(stat.value) ? 0 : 2}
+                  />
+                </dd>
+                <dd className="mt-1 text-[11.5px] font-medium uppercase tracking-[0.12em] text-ink-400">
+                  {stat.label}
+                </dd>
               </div>
             ))}
+          </dl>
+        </div>
+
+        {/* ---------------- visual ---------------- */}
+        <div className="enter relative [animation-delay:180ms]">
+          <div className="relative">
+            {/* halo */}
+            <div
+              aria-hidden
+              className="animate-frost-breathe absolute -inset-6 rounded-[46px] bg-gradient-to-br from-frost-300/70 via-white/40 to-ice-300/50 blur-2xl"
+            />
+
+            <div className="relative overflow-hidden rounded-[36px] border border-white/70 bg-white shadow-lift">
+              <div className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[5/4.4]">
+                <div className="animate-drift absolute inset-0">
+                  <Image
+                    src="/images/hero-facility.jpg"
+                    alt="Bright white cold storage aisle with racked pallets under cool blue lighting"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 46vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                {/* cold wash + legibility gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-white/85 via-white/10 to-ice-300/25" />
+
+                {/* scanning frost line */}
+                <div
+                  aria-hidden
+                  className="animate-scan absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-transparent via-white/45 to-transparent"
+                />
+
+                <Snowfall count={11} seed={21} speed={1.25} />
+
+                {/* rotating crystal watermark */}
+                <FrostCrystal
+                  aria-hidden
+                  className="animate-spin-slow pointer-events-none absolute -right-14 -top-14 h-56 w-56 text-white/70"
+                />
+
+                {/* top badges */}
+                <div className="absolute left-5 top-5 flex flex-wrap gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-ice-700 shadow-soft backdrop-blur">
+                    <Snowflake className="h-3.5 w-3.5" /> 12 rooms at set point
+                  </span>
+                </div>
+                <div className="absolute right-5 top-5">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-ink-900/80 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-frost-200 backdrop-blur">
+                    <Sparkles className="h-3.5 w-3.5 text-ice-300" /> ColdSense · 1,204 sensors
+                  </span>
+                </div>
+
+                {/* bottom caption */}
+                <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4">
+                  <div>
+                    <p className="font-display text-[15px] font-bold text-ink-900">
+                      Uuayrij facility · Aisle B
+                    </p>
+                    <p className="text-[12px] text-ink-500">
+                      −22 °C holding room · narrow-aisle racking
+                    </p>
+                  </div>
+                  <span className="hidden rounded-full border border-frost-400 bg-white/90 px-3 py-1.5 text-[11px] font-semibold text-ice-700 shadow-soft sm:inline-flex">
+                    18,000 pallet positions
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* floating live gauge */}
+            <TempGauge
+              value={-25}
+              className="animate-float-slow mx-auto -mt-10 w-[300px] max-w-full lg:absolute lg:-bottom-12 lg:-left-14 lg:mt-0 lg:w-[318px]"
+            />
           </div>
         </div>
       </div>
+
+      <a
+        href="#chain"
+        className="mx-auto mt-16 hidden w-fit flex-col items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-ink-300 transition hover:text-ice-500 lg:flex"
+      >
+        Scroll
+        <ChevronDown className="h-4 w-4 animate-float-fast" />
+      </a>
     </section>
   );
 }

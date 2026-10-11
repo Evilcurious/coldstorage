@@ -1,33 +1,37 @@
-import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
-import { TrustBar } from "@/components/TrustBar";
-import { Solutions } from "@/components/Solutions";
-import { Calculator } from "@/components/Calculator";
-import { WhyChooseUs } from "@/components/WhyChooseUs";
-import { Industries } from "@/components/Industries";
+import { Chain } from "@/components/Chain";
+import { Services } from "@/components/Services";
+import { Zones } from "@/components/Zones";
 import { Facility } from "@/components/Facility";
+import { Monitoring } from "@/components/Monitoring";
+import { Pricing } from "@/components/Pricing";
+import { Industries } from "@/components/Industries";
+import { Testimonials } from "@/components/Testimonials";
+import { Faq } from "@/components/Faq";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
-import { WhatsAppWidget } from "@/components/WhatsAppWidget";
-import { QuoteModal } from "@/components/QuoteModal";
+import { SiteHeader } from "@/components/SiteHeader";
+import { TapToChatWidget } from "@/components/WhatsAppWidget";
 
-export default function HomePage() {
+export default function Home() {
   return (
     <>
-      <Navbar />
+      <SiteHeader />
       <main id="main">
         <Hero />
-        <TrustBar />
-        <Solutions />
-        <Calculator />
-        <WhyChooseUs />
-        <Industries />
+        <Chain />
+        <Services />
+        <Zones />
         <Facility />
+        <Monitoring />
+        <Pricing />
+        <Industries />
+        <Testimonials />
+        <Faq />
         <Contact />
       </main>
       <Footer />
-      <WhatsAppWidget />
-      <QuoteModal />
+      <TapToChatWidget />
     </>
   );
 }

@@ -1,139 +1,125 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
-import { MapPin, Phone, Mail, Clock, Navigation } from "lucide-react";
-import { COMPANY } from "@/lib/constants";
+import { Leaf, ShieldCheck, SquareStack, Zap } from "lucide-react";
+import { SectionHeading } from "@/components/SectionHeading";
+import { FrostRule } from "@/components/Icons";
+import { Snowfall } from "@/components/Snowfall";
+import { facilityStats, features } from "@/lib/site";
 
-const PINS = [
-  {
-    id: "hq",
-    label: "Headquarters Campus",
-    x: "62%",
-    y: "46%",
-    detail: "Uuayrij Industrial Area — 24 chambers, blast tunnels, GDP suite.",
-  },
-  {
-    id: "docks",
-    label: "Reefer Dock Complex",
-    x: "54%",
-    y: "58%",
-    detail: "12 temperature-segregated docks · calibrated trailer checks.",
-  },
-  {
-    id: "gate",
-    label: "Secure Gatehouse",
-    x: "44%",
-    y: "38%",
-    detail: "Biometric mantrap · 24/7 security command.",
-  },
-];
+const featureIcons = {
+  bolt: Zap,
+  shield: ShieldCheck,
+  gauge: SquareStack,
+  leaf: Leaf,
+} as const;
 
 export function Facility() {
-  const [active, setActive] = useState(PINS[0].id);
-  const pin = PINS.find((p) => p.id === active) ?? PINS[0];
-
   return (
-    <section id="facilities" className="relative py-24 sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl">
-          <p className="section-kicker">Global Facility Map</p>
-          <h2 className="heading-display mt-4 text-3xl sm:text-4xl lg:text-5xl">
-            Uuayrij Industrial Area, Baghdad.
-          </h2>
-          <p className="mt-4 text-slate-400">
-            A purpose-built cold chain campus positioned on Baghdad&apos;s southern industrial corridor — minutes from national highway access, engineered for 24/7 inbound and export flows.
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-6 lg:grid-cols-12">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 lg:col-span-7">
-            <Image
-              src="/images/map-baghdad.jpg"
-              alt="Stylized operational map of Baghdad highlighting the Uuayrij industrial campus"
-              width={1600}
-              height={1000}
-              className="h-[420px] w-full object-cover sm:h-[520px]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-navy-950/20" />
-            {PINS.map((p) => (
-              <button
-                key={p.id}
-                type="button"
-                onClick={() => setActive(p.id)}
-                style={{ left: p.x, top: p.y }}
-                className="absolute -translate-x-1/2 -translate-y-1/2"
-                aria-label={p.label}
-                aria-pressed={active === p.id}
-              >
-                <span className="relative flex h-5 w-5 items-center justify-center">
-                  {active === p.id && (
-                    <span className="absolute h-10 w-10 rounded-full border border-ice-400/50 animate-pulseRing" />
-                  )}
-                  <span
-                    className={`h-3.5 w-3.5 rounded-full border-2 border-navy-950 ${
-                      active === p.id ? "bg-ice-300 shadow-glow" : "bg-ice-500"
-                    }`}
-                  />
-                </span>
-              </button>
-            ))}
-            <div className="absolute bottom-4 left-4 right-4 glass rounded-2xl p-4">
-              <p className="text-xs uppercase tracking-[0.2em] text-ice-400">
-                Selected pin
-              </p>
-              <p className="mt-1 font-display text-lg text-white">{pin.label}</p>
-              <p className="mt-1 text-sm text-slate-300">{pin.detail}</p>
+    <section id="facility" className="section">
+      <div className="shell">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-16">
+          {/* ---- image collage ---- */}
+          <div data-reveal="left" className="relative">
+            <div className="relative overflow-hidden rounded-[34px] border border-white/70 shadow-lift">
+              <div className="relative aspect-[5/4] w-full">
+                <Image
+                  src="/images/loading-dock.jpg"
+                  alt="Refrigerated trailers backed into the cold storage loading docks"
+                  fill
+                  sizes="(min-width: 1024px) 45vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink-900/55 via-transparent to-transparent" />
+                <Snowfall count={9} seed={66} speed={0.9} />
+                <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-ice-700 backdrop-blur">
+                  Six refrigerated docks
+                </div>
+              </div>
             </div>
+
+            {/* overlapping card */}
+            <div className="card animate-float-slow absolute -bottom-10 right-2 w-[62%] overflow-hidden rounded-3xl p-3 sm:-right-8 sm:w-[54%]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[20px]">
+                <Image
+                  src="/images/frozen-racking.jpg"
+                  alt="Frost on racking inside a frozen cold room"
+                  fill
+                  sizes="(min-width: 1024px) 25vw, 60vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink-900/60 to-transparent" />
+              </div>
+              <p className="px-2 pb-1 pt-3 text-[12.5px] font-semibold text-ink-800">
+                Frost-managed room surfaces
+              </p>
+              <p className="px-2 pb-1 text-[11.5px] text-ink-400">
+                Defrost cycles run overnight so ice never touches your packaging.
+              </p>
+            </div>
+
+            <span
+              aria-hidden
+              className="animate-spin-slow pointer-events-none absolute -left-10 -top-10 h-32 w-32 text-ice-300/60"
+            >
+              <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.4">
+                <circle cx="50" cy="50" r="30" strokeDasharray="4 8" />
+                <path d="M50 8v84M14 29l72 42M86 29L14 71" strokeLinecap="round" />
+              </svg>
+            </span>
           </div>
 
-          <div className="flex flex-col gap-4 lg:col-span-5">
-            <div className="relative overflow-hidden rounded-3xl border border-white/10">
-              <Image
-                src="/images/facility-exterior.jpg"
-                alt="Tahseen Jaber Cold Storage campus exterior at dusk"
-                width={1200}
-                height={800}
-                className="h-48 w-full object-cover"
-              />
+          {/* ---- copy + stats ---- */}
+          <div className="lg:pl-4">
+            <SectionHeading
+              align="left"
+              eyebrow="The facility"
+              title={
+                <>
+                  Built so the cold <span className="gradient-text">has nowhere to leak</span>
+                </>
+              }
+              body="Insulated panels, heated door frames, air curtains and insulated transfer tunnels keep every room at its set point — even when the doors are open and the docks are busy."
+            />
+
+            <div className="mt-8 grid gap-x-6 gap-y-5 sm:grid-cols-2">
+              {features.map((feature, i) => {
+                const Icon = featureIcons[feature.icon];
+                return (
+                  <div
+                    key={feature.title}
+                    data-reveal
+                    style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}
+                    className="group"
+                  >
+                    <span className="inline-grid h-10 w-10 place-items-center rounded-2xl border border-frost-300 bg-white text-ice-600 shadow-soft transition-all duration-500 group-hover:border-ice-400 group-hover:bg-brand-grad group-hover:text-white">
+                      <Icon className="h-[18px] w-[18px]" />
+                    </span>
+                    <h3 className="mt-3.5 font-display text-[15.5px] font-bold text-ink-900">
+                      {feature.title}
+                    </h3>
+                    <p className="mt-1.5 text-[13.5px] leading-relaxed text-ink-500">
+                      {feature.body}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
-            <div className="glass-strong flex-1 rounded-3xl p-6">
-              <h3 className="font-display text-xl text-white">Campus coordinates</h3>
-              <ul className="mt-5 space-y-4 text-sm text-slate-300">
-                <li className="flex gap-3">
-                  <MapPin className="mt-0.5 h-4 w-4 text-ice-400" />
-                  {COMPANY.address}
-                </li>
-                <li className="flex gap-3">
-                  <Phone className="mt-0.5 h-4 w-4 text-ice-400" />
-                  <a href={`tel:${COMPANY.phoneTel}`} className="hover:text-ice-200">
-                    {COMPANY.phoneDisplay}
-                  </a>
-                  <span className="text-slate-600">·</span>
-                  <a href={`tel:${COMPANY.landlineTel}`} className="hover:text-ice-200">
-                    {COMPANY.landlineDisplay}
-                  </a>
-                </li>
-                <li className="flex gap-3">
-                  <Mail className="mt-0.5 h-4 w-4 text-ice-400" />
-                  <a href={`mailto:${COMPANY.email}`} className="hover:text-ice-200">
-                    {COMPANY.email}
-                  </a>
-                </li>
-                <li className="flex gap-3">
-                  <Clock className="mt-0.5 h-4 w-4 text-ice-400" />
-                  {COMPANY.hours}
-                </li>
-              </ul>
-              <a
-                href="https://maps.google.com/?q=Uwairij+Industrial+Area+Baghdad"
-                target="_blank"
-                rel="noreferrer"
-                className="btn-ghost mt-6 w-full"
-              >
-                <Navigation className="h-4 w-4" />
-                Open in maps
-              </a>
+
+            <FrostRule className="mt-9" />
+
+            <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-4">
+              {facilityStats.map((stat, i) => (
+                <div
+                  key={stat.label}
+                  data-reveal="scale"
+                  style={{ "--reveal-delay": `${i * 80}ms` } as React.CSSProperties}
+                >
+                  <p className="font-display text-[24px] font-extrabold tracking-tight text-ink-900">
+                    {stat.value}
+                  </p>
+                  <p className="mt-1 text-[12.5px] font-semibold text-ice-700">{stat.label}</p>
+                  <p className="mt-0.5 text-[11.5px] text-ink-400">{stat.detail}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

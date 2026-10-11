@@ -1,39 +1,51 @@
-const INDUSTRIES = [
-  { t: "Protein & QSR", d: "Frozen meat, poultry, and restaurant networks." },
-  { t: "Pharma & Healthcare", d: "Vaccines, biologics, and GDP wholesale." },
-  { t: "Fresh Produce", d: "Import fruit, vegetables, and floral cargo." },
-  { t: "Dairy & Fats", d: "Milk solids, cheese, and temperature-sensitive fats." },
-  { t: "Retail & E-commerce", d: "Dark-store replenishment and promo holds." },
-  { t: "Import / Export", d: "Port-to-campus bonded cold chain." },
-];
+import { Snowflake } from "lucide-react";
+import { industries } from "@/lib/site";
 
+/** Two duplicated tracks scrolling in opposite directions, pausing on hover. */
 export function Industries() {
+  const one = industries.slice(0, Math.ceil(industries.length / 2));
+  const two = industries.slice(Math.ceil(industries.length / 2));
+
   return (
-    <section className="border-y border-white/10 bg-navy-900/40 py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="section-kicker">Sectors</p>
-            <h2 className="heading-display mt-4 text-3xl sm:text-4xl">
-              Built for the cargo that cannot fail.
-            </h2>
-          </div>
-          <p className="max-w-md text-sm text-slate-400">
-            Dedicated SOPs per commodity class — from deep-freeze protein to 2–8°C pharmaceutical.
-          </p>
-        </div>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {INDUSTRIES.map((i) => (
-            <div
-              key={i.t}
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-ice-400/30 hover:bg-ice-400/5"
-            >
-              <h3 className="font-display text-lg text-white">{i.t}</h3>
-              <p className="mt-2 text-sm text-slate-400">{i.d}</p>
-            </div>
-          ))}
-        </div>
+    <section className="relative overflow-hidden py-14">
+      <div className="shell">
+        <p
+          data-reveal
+          className="text-center text-[11.5px] font-semibold uppercase tracking-[0.22em] text-ink-300"
+        >
+          Storing for producers, importers and distributors across
+        </p>
+      </div>
+
+      <div className="group relative mt-7 space-y-4">
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent" />
+
+        <Marquee items={one} />
+        <Marquee items={two} reverse />
       </div>
     </section>
+  );
+}
+
+function Marquee({ items, reverse = false }: { items: string[]; reverse?: boolean }) {
+  const doubled = [...items, ...items];
+  return (
+    <div className="flex overflow-hidden">
+      <div
+        className="animate-marquee flex w-max shrink-0 items-center gap-3 pr-3 group-hover:[animation-play-state:paused]"
+        style={reverse ? { animationDirection: "reverse" } : undefined}
+      >
+        {doubled.map((item, i) => (
+          <span
+            key={`${item}-${i}`}
+            className="inline-flex shrink-0 items-center gap-2.5 rounded-full border border-frost-300 bg-white/75 px-5 py-3 text-[13.5px] font-medium text-ink-600 shadow-soft backdrop-blur transition-colors duration-300 hover:border-ice-300 hover:text-ice-700"
+          >
+            <Snowflake className="h-3.5 w-3.5 text-ice-400" />
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
   );
 }
