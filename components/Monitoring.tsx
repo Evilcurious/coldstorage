@@ -299,7 +299,7 @@ export function Monitoring() {
         {/* client access band */}
         <div
           data-reveal
-          className="relative mt-6 overflow-hidden rounded-xl border border-slate-200 bg-ink-900 shadow-panel"
+          className="on-dark relative mt-6 overflow-hidden rounded-xl border border-slate-200 bg-ink-900 shadow-panel"
         >
           <Image
             src="/images/control-room.jpg"
@@ -325,7 +325,7 @@ export function Monitoring() {
               </p>
             </div>
             <a
-              href="#contact"
+              href="/contact"
               className="btn shrink-0 bg-white text-ink-900 hover:bg-slate-100"
             >
               Request account access

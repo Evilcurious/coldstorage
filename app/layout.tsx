@@ -6,6 +6,10 @@ import "@fontsource/plus-jakarta-sans/600.css";
 import "@fontsource/plus-jakarta-sans/700.css";
 import "./globals.css";
 import { RevealOnScroll } from "@/components/RevealOnScroll";
+import { SiteSmoke } from "@/components/Smoke";
+import { SiteHeader } from "@/components/SiteHeader";
+import { Footer } from "@/components/Footer";
+import { TapToChatWidget } from "@/components/WhatsAppWidget";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -64,14 +68,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     },
     amenityFeature: [
       { "@type": "LocationFeatureSpecification", name: "Blast freezing", value: "-25 °C" },
-      { "@type": "LocationFeatureSpecification", name: "Validated pharmaceutical storage", value: "2-8 °C" },
+      {
+        "@type": "LocationFeatureSpecification",
+        name: "Validated pharmaceutical storage",
+        value: "2-8 °C",
+      },
       { "@type": "LocationFeatureSpecification", name: "Chilled storage", value: "0 °C" },
     ],
   };
 
   return (
     <html lang="en">
-      <body>
+      <body className="on-light">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -82,8 +90,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
+
+        <SiteSmoke />
+        <SiteHeader />
         <RevealOnScroll />
         {children}
+        <Footer />
+        <TapToChatWidget />
       </body>
     </html>
   );

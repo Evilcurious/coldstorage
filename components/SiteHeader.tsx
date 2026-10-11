@@ -1,11 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowRight, Mail, MapPin, Menu, Phone, X } from "lucide-react";
 import { SnowflakeMark } from "@/components/Icons";
-import { nav, site } from "@/lib/site";
+import { pages } from "@/lib/pages";
+import { site } from "@/lib/site";
 
 export function SiteHeader() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -23,28 +27,28 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [open]);
 
+  /* every page opens on a full-bleed photograph, so the bar starts transparent */
   const onDark = !scrolled;
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      {/* utility bar */}
       <div
         className={`hidden transition-colors duration-300 md:block ${
-          onDark ? "border-b border-white/10 bg-transparent" : "bg-ink-950"
+          onDark ? "border-b border-white/10 bg-transparent" : "border-b border-white/10 bg-ink-950"
         }`}
       >
         <div className="shell flex h-9 items-center justify-between text-[12px]">
-          <div
-            className={`flex items-center gap-6 ${
-              onDark ? "text-white/75" : "text-slate-300"
-            }`}
-          >
+          <div className={`flex items-center gap-6 ${onDark ? "text-white/75" : "text-slate-300"}`}>
             <span className="inline-flex items-center gap-2">
               <MapPin className="h-3.5 w-3.5 text-ice-300" />
               {site.location}
@@ -58,7 +62,7 @@ export function SiteHeader() {
           </div>
           <div className="flex items-center gap-5">
             <span
-              className={`inline-flex items-center gap-2 ${
+              className={`hidden items-center gap-2 sm:inline-flex ${
                 onDark ? "text-white/75" : "text-slate-300"
               }`}
             >
@@ -70,7 +74,7 @@ export function SiteHeader() {
             </span>
             <a
               href={site.phoneHref}
-              className="inline-flex items-center gap-2 font-semibold text-white transition hover:text-ice-300"
+              className="inline-flex items-center gap-2 font-semibold text-white transition hover:text-ice-200"
             >
               <Phone className="h-3.5 w-3.5" />
               {site.phone}
@@ -79,7 +83,6 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {/* main bar */}
       <div
         className={`border-b backdrop-blur transition-colors duration-300 ${
           onDark
@@ -87,8 +90,8 @@ export function SiteHeader() {
             : "border-slate-200 bg-white/95 shadow-card"
         }`}
       >
-        <div className="shell flex h-[68px] items-center justify-between gap-8">
-          <a href="#top" className="flex shrink-0 items-center gap-3">
+        <div className="shell flex h-[68px] items-center justify-between gap-6">
+          <Link href="/" className="flex shrink-0 items-center gap-3">
             <SnowflakeMark className="h-9 w-9" />
             <span className="leading-tight">
               <span
@@ -106,30 +109,34 @@ export function SiteHeader() {
                 Cold Storage
               </span>
             </span>
-          </a>
+          </Link>
 
-          <nav className="hidden items-center gap-6 lg:flex">
-            {nav.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className={`group relative py-2 text-[13.5px] font-medium transition-colors ${
-                  onDark ? "text-white/80 hover:text-white" : "text-slate-600 hover:text-ink-900"
-                }`}
-              >
-                {item.label}
-                <span
-                  className={`absolute inset-x-0 -bottom-px h-[2px] origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100 ${
-                    onDark ? "bg-white" : "bg-ice-600"
+          <nav className="hidden items-center gap-5 lg:flex">
+            {pages.map((page) => {
+              const isActive = pathname === page.slug;
+              return (
+                <Link
+                  key={page.slug}
+                  href={page.slug}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`group relative py-2 text-[13.5px] font-medium transition-colors ${
+                    onDark ? "text-white/80 hover:text-white" : "text-slate-600 hover:text-ink-900"
                   }`}
-                />
-              </a>
-            ))}
+                >
+                  {page.label}
+                  <span
+                    className={`absolute inset-x-0 -bottom-px h-[2px] origin-left transition-transform duration-300 group-hover:scale-x-100 ${
+                      isActive ? "scale-x-100" : "scale-x-0"
+                    } ${onDark ? "bg-white" : "bg-ice-600"}`}
+                  />
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="flex items-center gap-3">
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               className={`btn hidden !h-10 sm:inline-flex ${
                 onDark
                   ? "border border-white/40 text-white hover:border-white/80 hover:bg-white/10"
@@ -138,7 +145,7 @@ export function SiteHeader() {
             >
               Request a quotation
               <ArrowRight className="h-4 w-4" />
-            </a>
+            </Link>
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
@@ -165,27 +172,35 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {/* mobile drawer */}
       <div
         className={`overflow-hidden border-b border-slate-200 bg-white transition-[max-height,opacity] duration-300 lg:hidden ${
-          open ? "max-h-[560px] opacity-100" : "max-h-0 opacity-0"
+          open ? "max-h-[620px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <nav className="shell grid gap-0.5 py-4">
-          {nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-3 text-[15px] font-medium text-ink-800 transition hover:bg-slate-50"
+          <Link
+            href="/"
+            className={`rounded-lg px-3 py-3 text-[15px] font-medium transition hover:bg-slate-50 ${
+              pathname === "/" ? "text-ice-700" : "text-ink-800"
+            }`}
+          >
+            Home
+          </Link>
+          {pages.map((page) => (
+            <Link
+              key={page.slug}
+              href={page.slug}
+              className={`rounded-lg px-3 py-3 text-[15px] font-medium transition hover:bg-slate-50 ${
+                pathname === page.slug ? "text-ice-700" : "text-ink-800"
+              }`}
             >
-              {item.label}
-            </a>
+              {page.label}
+            </Link>
           ))}
           <div className="mt-3 grid gap-2.5">
-            <a href="#contact" onClick={() => setOpen(false)} className="btn-primary w-full">
+            <Link href="/contact" className="btn-primary w-full">
               Request a quotation
-            </a>
+            </Link>
             <a href={site.phoneHref} className="btn-secondary w-full">
               <Phone className="h-4 w-4" /> {site.phone}
             </a>

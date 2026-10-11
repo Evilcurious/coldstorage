@@ -12,7 +12,7 @@ export function Services() {
           eyebrow="Capabilities"
           title="Six services covering the full cold chain"
           aside={
-            <a href="#contact" className="btn-secondary">
+            <a href="/contact" className="btn-secondary">
               Discuss your requirement
             </a>
           }

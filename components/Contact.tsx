@@ -49,7 +49,7 @@ export function Contact() {
     setForm((prev) => ({ ...prev, [key]: value }));
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-ink-950">
+    <section id="contact" className="on-dark relative overflow-hidden bg-ink-950">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-grid-faint bg-grid opacity-[0.35] [mask-image:radial-gradient(70%_60%_at_30%_0%,black,transparent)]"

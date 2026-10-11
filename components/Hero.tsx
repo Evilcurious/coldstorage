@@ -6,7 +6,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Phone } from "lucide-react";
 import { PanelSmoke, SmokeTexture } from "@/components/Smoke";
 import { heroSlides, site } from "@/lib/site";
 
-const SLIDE_MS = 6400;
+const SLIDE_MS = 7000;
 
 export function Hero() {
   const [index, setIndex] = useState(0);
@@ -63,7 +63,7 @@ export function Hero() {
   };
 
   return (
-    <section id="top" className="relative z-20 isolate overflow-hidden bg-ink-950">
+    <section id="top" className="on-dark relative z-20 isolate overflow-hidden bg-ink-950">
       {/* ---------- slides ---------- */}
       <div
         className="relative h-[100svh] min-h-[560px] w-full overflow-hidden"
@@ -145,7 +145,7 @@ export function Hero() {
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
-                href="#contact"
+                href="/contact"
                 className="btn h-[46px] bg-white px-6 text-ink-900 hover:-translate-y-px hover:bg-slate-100"
               >
                 Request a quotation

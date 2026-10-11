@@ -18,15 +18,6 @@ export const site = {
   founded: 2014,
 } as const;
 
-export const nav = [
-  { label: "Facility", href: "#gallery" },
-  { label: "Capabilities", href: "#services" },
-  { label: "Regimes", href: "#zones" },
-  { label: "Monitoring", href: "#monitoring" },
-  { label: "Commercial", href: "#pricing" },
-  { label: "Contact", href: "#contact" },
-] as const;
-
 /* ------------------------------------------------------------------ *
  *  Hero slideshow
  * ------------------------------------------------------------------ */
@@ -74,13 +65,6 @@ export const heroSlides: HeroSlide[] = [
     temp: "−18 °C",
     detail: "Sealed dock shelters",
   },
-];
-
-export const heroStats = [
-  { value: 18000, suffix: "", label: "Pallet positions" },
-  { value: 25, suffix: " °C", label: "Coldest room" },
-  { value: 99.98, suffix: "%", label: "Temperature uptime" },
-  { value: 24, suffix: "/7", label: "Monitored" },
 ];
 
 /* ------------------------------------------------------------------ *
@@ -459,31 +443,31 @@ export const footerLinks = [
   {
     heading: "Capabilities",
     links: [
-      { label: "Blast freezing", href: "#services" },
-      { label: "Frozen & chilled storage", href: "#services" },
-      { label: "Pharmaceutical rooms", href: "#zones" },
-      { label: "Inventory management", href: "#services" },
-      { label: "Distribution", href: "#services" },
+      { label: "Blast freezing", href: "/capabilities" },
+      { label: "Frozen & chilled storage", href: "/capabilities" },
+      { label: "Pharmaceutical rooms", href: "/regimes" },
+      { label: "Inventory management", href: "/capabilities" },
+      { label: "Distribution", href: "/capabilities" },
     ],
   },
   {
     heading: "Facility",
     links: [
-      { label: "Gallery", href: "#gallery" },
-      { label: "Temperature regimes", href: "#zones" },
-      { label: "Monitoring", href: "#monitoring" },
-      { label: "Compliance", href: "#compliance" },
-      { label: "Commercial terms", href: "#pricing" },
+      { label: "Gallery", href: "/facility" },
+      { label: "Temperature regimes", href: "/regimes" },
+      { label: "Monitoring", href: "/monitoring" },
+      { label: "Compliance", href: "/monitoring" },
+      { label: "Commercial terms", href: "/commercial" },
     ],
   },
   {
     heading: "Company",
     links: [
-      { label: "Contact", href: "#contact" },
-      { label: "Book a site visit", href: "#contact" },
-      { label: "Careers", href: "#contact" },
-      { label: "FAQ", href: "#faq" },
-      { label: "Request a quotation", href: "#contact" },
+      { label: "Contact", href: "/contact" },
+      { label: "Book a site visit", href: "/contact" },
+      { label: "Careers", href: "/contact" },
+      { label: "FAQ", href: "/monitoring" },
+      { label: "Request a quotation", href: "/contact" },
     ],
   },
 ] as const;

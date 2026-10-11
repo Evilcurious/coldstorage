@@ -1,15 +1,17 @@
+import Link from "next/link";
 import { Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { SnowflakeMark } from "@/components/Icons";
 import { SubscribeForm } from "@/components/SubscribeForm";
 import { footerLinks, site } from "@/lib/site";
+import { pages } from "@/lib/pages";
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-ink-950 text-slate-400">
+    <footer className="on-dark border-t border-white/10 bg-ink-950 text-slate-400">
       <div className="shell py-14">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_2fr]">
           <div>
-            <a href="#top" className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3">
               <SnowflakeMark className="h-10 w-10" />
               <span className="leading-tight">
                 <span className="block font-display text-[15px] font-bold tracking-tight text-white">
@@ -19,7 +21,7 @@ export function Footer() {
                   Cold Storage
                 </span>
               </span>
-            </a>
+            </Link>
 
             <p className="mt-5 max-w-sm text-[13.5px] leading-relaxed text-slate-400">
               {site.description}
@@ -50,13 +52,13 @@ export function Footer() {
               </li>
             </ul>
 
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               className="mt-6 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-slate-300 transition hover:border-white/40 hover:text-white"
               aria-label="Company profile"
             >
               <Linkedin className="h-4 w-4" />
-            </a>
+            </Link>
           </div>
 
           <div className="grid gap-10 sm:grid-cols-3">
@@ -68,12 +70,12 @@ export function Footer() {
                 <ul className="mt-4 space-y-2.5">
                   {column.links.map((link) => (
                     <li key={link.label}>
-                      <a
+                      <Link
                         href={link.href}
-                        className="text-[13.5px] text-slate-400 transition hover:text-white"
+                        className="text-[13.5px] text-slate-400 transition hover:text-ice-200"
                       >
                         {link.label}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -100,15 +102,15 @@ export function Footer() {
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            <a href="#faq" className="transition hover:text-white">
+            <Link href="/monitoring" className="transition hover:text-ice-200">
               Terms of service
-            </a>
-            <a href="#faq" className="transition hover:text-white">
+            </Link>
+            <Link href="/monitoring" className="transition hover:text-ice-200">
               Privacy policy
-            </a>
-            <a href="#monitoring" className="transition hover:text-white">
+            </Link>
+            <Link href="/monitoring" className="transition hover:text-ice-200">
               Cold-chain policy
-            </a>
+            </Link>
             <span>Operating since {site.founded}</span>
           </div>
         </div>

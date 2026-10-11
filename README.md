@@ -16,37 +16,40 @@ npm run dev     # http://localhost:3000
 npm run build && npm start
 ```
 
-## Page structure
+## Site map
 
-| Section | Purpose |
+Every section has its own page, and the home page presents them as photographs only.
+
+| Route | Contents |
 | --- | --- |
-| Utility bar + header | address and email, 24/7 acceptance status, intake phone, scroll progress |
-| Hero | full-bleed five-image slideshow with smoke and minimal copy |
-| Compliance strip | ISO 22000, HACCP, GDP and Halal handling credentials |
-| Facility gallery | nine-tile image mosaic with short captions |
-| Cold chain process | four stages, one line of copy each, with temperature and cycle time |
-| Capabilities | six photographic service cards, one line each |
-| Temperature regimes | interactive −25 °C / 0 °C / 2–8 °C selector plotted on one operating scale |
-| Infrastructure | facility photography, three headline infrastructure facts, plant metrics |
-| Monitoring & compliance | 24-hour temperature trace, live readout, event log, client data access |
-| Sectors | twelve customer categories as a single chip strip |
-| Commercial terms | per-pallet / per-tonne rates, agreement comparison, indicative cost estimator |
-| Client experience | three one-line references |
-| FAQ | six operational and commercial questions |
-| Contact | commercial contact channels and a structured enquiry form, on a dark band |
-| Footer | navigation, capacity updates, legal line |
+| `/` | Full-bleed hero slideshow, then a six-tile image mosaic and a photograph ribbon — no body copy, labels appear on hover |
+| `/facility` | Facility gallery mosaic, infrastructure, plant metrics |
+| `/capabilities` | Six photographic service cards, four-stage cold chain process |
+| `/regimes` | Interactive −25 °C / 0 °C / 2–8 °C regime selector with spec tables, service list |
+| `/monitoring` | 24-hour temperature trace, live readout, event log, certifications, FAQ |
+| `/commercial` | Per-pallet / per-tonne pricing, cost estimator, sectors, references |
+| `/contact` | Commercial channels, structured enquiry form, FAQ |
 
-Copy is intentionally short: most sections lead with a photograph and carry a single
-supporting line.
+`lib/pages.ts` is the registry that drives the navigation, the home tiles, the page
+headers and the "continue through the facility" cross-links on every page.
 
-A discreet contact button for the operations desk floats in the bottom-right corner.
+## Text behaviour
+
+Text reacts to the pointer. On dark surfaces white type lifts to light blue
+(`#94C9EC`); on light surfaces ink type lifts to the accent blue (`#2A89C8`). The
+rules live in `app/globals.css` and are scoped by `.on-dark` / `.on-light` wrappers,
+so a dark band nested inside a light page still behaves correctly.
+
+Photographic tiles carry no text at rest — pointing at one fades its label in, in
+light blue, over a gradient scrim.
 
 ## Hero slideshow
 
 The hero is a full-viewport image slideshow rather than a text block:
 
 - **Five slides** (`hero-facility`, `cold-corridor`, `forklift-cold`, `blast-freezer`,
-  `loading-dock`) with minimal text: a short label, the regime temperature and one detail line.
+  `loading-dock`), auto-advancing every **7 seconds**, with minimal text: a short label, the
+  regime temperature and one detail line.
 - **Alternating travel direction** — slides travel right-to-left, then left-to-right, on
   every automatic change, with a slow Ken Burns drift inside each frame.
 - **Controls:** progress indicators that fill over the slide duration, previous/next
@@ -83,16 +86,21 @@ filter is rendered at low resolution and stretched.
 
 ```
 app/
-  layout.tsx      metadata, JSON-LD, reveal runtime
-  page.tsx        section composition
-  globals.css     design tokens, component classes (.card, .btn, .field, .label…), keyframes
+  layout.tsx      metadata, JSON-LD, header, footer, smoke, reveal runtime
+  page.tsx        home: hero + tile mosaic + photograph ribbon
+  facility/ capabilities/ regimes/ monitoring/ commercial/ contact/   section pages
+  globals.css     design tokens, component classes (.card, .btn, .field, .label…),
+                  text-hover rules, tile states, keyframes
   icon.svg        favicon
 components/
-  SiteHeader, Hero, LiveConditions, Compliance, Chain, Services, Zones, Facility,
-  Monitoring, Pricing, Industries, Testimonials, Faq, Contact, Footer,
-  SectionHeading, Snowfall, CountUp, SubscribeForm, RevealOnScroll, Icons, WhatsAppWidget
+  SiteHeader, Footer, Hero, PageHero, PageOutro, SectionTile, ExploreGrid,
+  ImageRibbon, LiveConditions, Compliance, Chain, Services, Zones, Facility,
+  Monitoring, Pricing, Industries, Testimonials, Faq, Contact, Gallery,
+  SectionHeading, Smoke, Snowfall, CountUp, SubscribeForm, RevealOnScroll,
+  Icons, WhatsAppWidget
 lib/
   site.ts         all copy, contact details, regimes, plans and FAQs
+  pages.ts        page registry driving navigation, tiles and cross-links
   rand.ts         deterministic PRNG for snow and temperature series
 public/images/    generated facility photography
 ```

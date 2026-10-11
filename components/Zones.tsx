@@ -171,7 +171,7 @@ export function Zones() {
             </div>
 
             <a
-              href="#contact"
+              href="/contact"
               className="mt-7 inline-flex items-center gap-2 text-[13.5px] font-semibold text-ice-700 transition hover:gap-3 hover:text-ice-800"
             >
               Check availability for this regime

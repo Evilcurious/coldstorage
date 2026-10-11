@@ -129,7 +129,7 @@ export function Pricing() {
                 </ul>
 
                 <a
-                  href="#contact"
+                  href="/contact"
                   className={`${plan.featured ? "btn-primary" : "btn-secondary"} mt-7 w-full`}
                 >
                   Request a quotation
@@ -214,7 +214,7 @@ export function Pricing() {
                 </dd>
               </div>
 
-              <a href="#contact" className="btn-primary mt-6 w-full">
+              <a href="/contact" className="btn-primary mt-6 w-full">
                 Request a formal quotation
               </a>
             </dl>

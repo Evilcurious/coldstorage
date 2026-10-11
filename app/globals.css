@@ -370,6 +370,64 @@
   animation: slideProgress var(--slide-ms, 6200ms) linear forwards;
 }
 
+
+/* ------------------------------------------------------------------ *
+ *  Text behaviour: white → light blue on dark surfaces,
+ *  ink → accent blue on light surfaces
+ * ------------------------------------------------------------------ */
+:is(h1, h2, h3, h4, p, dt, dd, blockquote, li, span) {
+  transition: color 320ms var(--ease-out-soft);
+}
+
+.on-light :is(h1, h2, h3, h4):hover {
+  color: #2A89C8;
+}
+
+/* declared after .on-light so nested dark surfaces win */
+.on-dark :is(h1, h2, h3, h4, p, dt, dd, blockquote, li):hover {
+  color: #94C9EC;
+}
+
+.on-dark .text-hover-static:hover {
+  color: inherit;
+}
+
+/* image tile: nothing but the photograph until you point at it */
+.tile-label {
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 420ms var(--ease-out-soft),
+    transform 420ms var(--ease-out-soft),
+    color 320ms var(--ease-out-soft);
+}
+
+.group:hover .tile-label,
+.group:focus-visible .tile-label {
+  opacity: 1;
+  transform: translateY(0);
+  color: #C7E2F5;
+}
+
+.tile-scrim {
+  opacity: 0;
+  transition: opacity 480ms var(--ease-out-soft);
+}
+
+.group:hover .tile-scrim,
+.group:focus-visible .tile-scrim {
+  opacity: 1;
+}
+
+.tile-image {
+  transition: transform 1500ms cubic-bezier(0.22, 0.68, 0.16, 1);
+}
+
+.group:hover .tile-image,
+.group:focus-visible .tile-image {
+  transform: scale(1.06);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }

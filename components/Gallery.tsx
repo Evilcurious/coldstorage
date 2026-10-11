@@ -25,7 +25,7 @@ export function Gallery() {
             </h2>
           </div>
           <a
-            href="#contact"
+            href="/contact"
             className="inline-flex items-center gap-2 text-[13.5px] font-semibold text-ice-700 transition hover:gap-3 hover:text-ice-800"
           >
             Arrange a site visit
@@ -55,7 +55,7 @@ export function Gallery() {
 
               {i === 0 || i === 4 ? <SmokeTexture opacity={0.32} seed={20 + i} /> : null}
 
-              <figcaption className="absolute inset-x-0 bottom-0 p-4">
+              <figcaption className="on-dark absolute inset-x-0 bottom-0 p-4">
                 <p className="text-[13.5px] font-semibold text-white">{item.caption}</p>
                 <p className="mt-0.5 text-[11.5px] text-slate-300 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   {item.detail}
