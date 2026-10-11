@@ -259,6 +259,104 @@
   animation: enterUp 0.7s var(--ease-out-soft) both;
 }
 
+/* ------------------------------------------------------------------ *
+ *  Route transitions — a frost veil covers the outgoing page, the new
+ *  one fades up behind it. Also plays on first load and on reload.
+ * ------------------------------------------------------------------ */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-enter {
+  animation: pageEnter 0.55s var(--ease-out-soft) both;
+}
+
+.route-veil {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes veilCover {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes veilClear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.route-veil[data-state="exit"] {
+  pointer-events: auto;
+  animation: veilCover 0.26s var(--ease-out-soft) both;
+}
+
+.route-veil[data-state="enter"] {
+  animation: veilClear 0.36s var(--ease-out-soft) both;
+}
+
+@keyframes routeBarCover {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(0.72);
+  }
+}
+
+@keyframes routeBarFinish {
+  from {
+    transform: scaleX(0.72);
+    opacity: 1;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+@keyframes routeMarkIn {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.route-bar {
+  transform-origin: 0 50%;
+}
+
+.route-bar[data-state="exit"] {
+  animation: routeBarCover 0.26s var(--ease-out-soft) both;
+}
+
+.route-bar[data-state="enter"] {
+  animation: routeBarFinish 0.4s var(--ease-out-soft) both;
+}
+
+.route-mark {
+  animation: routeMarkIn 0.42s var(--ease-out-soft) both;
+}
+
 @keyframes snowfall {
   0% {
     transform: translate3d(0, -10vh, 0);
@@ -589,5 +687,9 @@
   [data-reveal] {
     opacity: 1;
     transform: none;
+  }
+  .route-veil,
+  .route-bar {
+    display: none;
   }
 }

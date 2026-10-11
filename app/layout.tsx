@@ -6,6 +6,7 @@ import "@fontsource/source-serif-4/600.css";
 import "@fontsource/source-serif-4/700.css";
 import "./globals.css";
 import { RevealOnScroll } from "@/components/RevealOnScroll";
+import { RouteTransition } from "@/components/RouteTransition";
 import { SiteSmoke } from "@/components/Smoke";
 import { ScrollSnow } from "@/components/ScrollSnow";
 import { WaveHands } from "@/components/WaveHands";
@@ -107,7 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ScrollSnow />
           <SiteHeader />
           <RevealOnScroll />
-          {children}
+          <RouteTransition>{children}</RouteTransition>
           <Footer />
           <WaveHands />
           <TapToChatWidget />

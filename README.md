@@ -137,8 +137,8 @@ components/
   SiteHeader, Footer, Hero, PageHero, PageOutro, SectionTile, ExploreGrid,
   LiveConditions, Compliance, Chain, Services, Zones, Facility,
   Monitoring, Industries, Testimonials, Faq, Contact, ContactChannels, Gallery,
-  SectionHeading, Smoke, SubscribeForm, RevealOnScroll, Icons, WhatsAppWidget,
-  LanguageProvider, LanguageChanger, SkipLink
+  RouteTransition, SectionHeading, Smoke, SubscribeForm, RevealOnScroll, Icons,
+  WhatsAppWidget, LanguageProvider, LanguageChanger, SkipLink
 lib/
   i18n/           typed dictionaries (en, ur, ar) and the locale registry
   site.ts         non-translatable config: brand, numbers, e-mail, socials, contact channels
